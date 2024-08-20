@@ -15,7 +15,7 @@ signupForm!:FormGroup
 submittedLogin:boolean=false
 submittedSignup:boolean=false
 cities:any[]=[]
-regions:any
+region:any
 cap:any
 
 constructor(private toastr:ToastrService,private formsService:FormsService){}
@@ -74,4 +74,40 @@ if(this.signupForm.valid){
 this.toastr.error("Assicurati di compilare correttamente il form.")
 }
 }
+
+getRegionAndCapByCityName(cityId:number){
+if(cityId){
+  console.log(cityId)
+  let cityName:string=''
+  for(let c of this.cities){
+    if(c.id==cityId){
+cityName=c.name
+    }
+  }
+this.formsService.getRegionByCityName(cityName).subscribe({
+next:(region:any)=>{
+  this.region=region
+  this.formsService.getCapByRegionName(cityName).subscribe({
+    next:(cap:any)=>{
+      this.cap=cap
+      this.signupForm.controls['regione'].setValue(this.region[0].name)
+      this.signupForm.controls['cap'].setValue(this.cap[0].cap)
+      this.signupForm.updateValueAndValidity()
+    },
+    error:(error:any)=>{
+    this.toastr.error(error?.message||"C'è stato un problema nel recupero della regione.")
+    },
+    complete:()=>{}
+    })
+},
+error:(error:any)=>{
+this.toastr.error(error?.message||"C'è stato un problema nel recupero del cap.")
+},
+complete:()=>{}
+})
+}else{
+  this.toastr.error("Devi inserire una città.")
+}
+}
+
 }
