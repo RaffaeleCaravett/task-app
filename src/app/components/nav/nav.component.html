@@ -25,7 +25,9 @@
       <ng-template #logout>
         <div class="col-md-4" *ngIf="isUserAuthenticated else logout">
           <a routerLink="/forms" routerLinkActive="text-success">
-            Logout
+            <button class="btn" (click)="logOut()">
+              Logout
+            </button>
           </a>
         </div>
       </ng-template>

@@ -80,6 +80,17 @@
       "email": "raffaelecaravetta13@gmail.com",
       "password": "ihihih",
       "sex": "M"
+    },
+    {
+      "id": "a12b",
+      "nome": "Raffaele",
+      "cognome": "Caravetta",
+      "citta": "Cosenza",
+      "regione": "Calabria",
+      "cap": "87100",
+      "email": "raffaelecaravetta1@gmail.com",
+      "password": "ohohoh",
+      "sex": "M"
     }
   ]
 }

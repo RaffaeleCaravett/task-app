@@ -23,7 +23,6 @@ constructor(private toastr:ToastrService,private formsService:FormsService,priva
 
 ngOnInit(): void {
     this.section='login'
-
     this.loginForm=new FormGroup({
       email:new FormControl('',[Validators.required,Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)]),
       password:new FormControl('',[Validators.required,Validators.minLength(6)]),
@@ -60,6 +59,8 @@ let userLogin = {
 this.formsService.login(userLogin).subscribe({
   next:(data:any)=>{
     if(data&&data[0]){
+      localStorage.setItem('email',data[0].email)
+      localStorage.setItem('password',data[0].password)
    this.toastr.show("Login effettuato con successo.")
    this.formsService.authenticateUser(true)
    setTimeout(()=>{
@@ -100,18 +101,31 @@ let user = {
   password: this.signupForm.controls['password'].value,
   sex: this.signupForm.controls['sex'].value
 }
-this.formsService.register(user).subscribe({
+this.formsService.findUserByEmail(user.email).subscribe({
   next:(data:any)=>{
-   this.toastr.show("Complimenti! Ti sei registrato con successo.")
-   setTimeout(()=>{
-this.section='login'
-   },1000)
-  },
-  error:(error:any)=>{
-  this.toastr.error(error?.message||"C'è stato un problema nell'elaborazione della richiesta.")
-  },
-  complete:()=>{}
+    if(data&&data[0]){
+      this.toastr.error("Esiste già un'user con questa email in db.")
+    }else{
+      this.formsService.register(user).subscribe({
+        next:(data:any)=>{
+         this.toastr.show("Complimenti! Ti sei registrato con successo.")
+         setTimeout(()=>{
+      this.section='login'
+         },1000)
+        },
+        error:(error:any)=>{
+        this.toastr.error(error?.message||"C'è stato un problema nell'elaborazione della richiesta.")
+        },
+        complete:()=>{}
+      })
+    }
+   },
+   error:(error:any)=>{
+   this.toastr.error(error?.message||"C'è stato un problema nell'elaborazione della richiesta.")
+   },
+   complete:()=>{}
 })
+
 }else{
 this.toastr.error("Assicurati di compilare correttamente il form.")
 }

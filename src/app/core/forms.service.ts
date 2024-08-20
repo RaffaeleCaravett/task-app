@@ -39,4 +39,7 @@ return this.http.post(environment.API_URL+this.users,user)
 login(userLogin:any){
 return this.http.get(environment.API_URL+this.users+`?email=${userLogin.email}&password=${userLogin.password}`)
 }
+findUserByEmail(email:string){
+  return this.http.get(environment.API_URL+this.users+`?email=${email}`)
+}
 }
