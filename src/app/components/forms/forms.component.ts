@@ -10,6 +10,8 @@ export class FormsComponent implements OnInit{
 section:string=''
 loginForm!:FormGroup
 signupForm!:FormGroup
+submittedLogin:boolean=false
+
 ngOnInit(): void {
     this.section='login'
 
@@ -25,5 +27,19 @@ ngOnInit(): void {
       password:new FormControl('',[Validators.required,Validators.minLength(6)]),
       sex:new FormControl('',Validators.required)
     })
+}
+
+login(){
+
+}
+
+sectionChange(value:string){
+  if(value){
+this.section=value
+  }
+}
+
+register(){
+
 }
 }
