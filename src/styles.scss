@@ -2,5 +2,16 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import 'ngx-toastr/toastr';
 @import "~aos/dist/aos.css";
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0;  font-family: "Happy Monkey", system-ui; }
+.btn,a{
+  font-family: "Waiting for the Sunrise", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 25px;
+}
+a{
+  text-decoration: none;
+  color: black;
+}
