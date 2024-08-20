@@ -1,75 +1,85 @@
 {
-  "cities":[
+  "cities": [
     {
-      "id":1,
-      "name":"Roma",
-      "regione":"Lazio",
-      "cap":"03010"
+      "id": "1",
+      "name": "Roma",
+      "regione": "Lazio",
+      "cap": "03010"
     },
     {
-      "id":2,
-      "name":"Cosenza",
-      "regione":"Calabria",
-      "cap":"87100"
+      "id": "2",
+      "name": "Cosenza",
+      "regione": "Calabria",
+      "cap": "87100"
     },
     {
-      "id":1,
-      "name":"Milano",
-      "regione":"Lombardia",
-      "cap":"20001"
+      "id": "1",
+      "name": "Milano",
+      "regione": "Lombardia",
+      "cap": "20001"
     },
     {
-      "id":1,
-      "name":"Torino",
-      "regione":"Piemonte",
-      "cap":"15010 "
+      "id": "1",
+      "name": "Torino",
+      "regione": "Piemonte",
+      "cap": "15010 "
     }
   ],
-  "regions":[
+  "regions": [
     {
-      "id":1,
-      "name":"Lazio",
-      "citta":"Lazio"
+      "id": "1",
+      "name": "Lazio",
+      "citta": "Lazio"
     },
     {
-      "id":2,
-      "name":"Calabria",
-      "citta":"Cosenza"
+      "id": "2",
+      "name": "Calabria",
+      "citta": "Cosenza"
     },
     {
-      "id":1,
-      "name":"Lombardia",
-      "citta":"Milano"
+      "id": "1",
+      "name": "Lombardia",
+      "citta": "Milano"
     },
     {
-      "id":1,
-      "name":"Piemonte",
-      "citta":"Torino"
+      "id": "1",
+      "name": "Piemonte",
+      "citta": "Torino"
     }
   ],
-  "cap":[
+  "cap": [
     {
-      "id":1,
-      "citta":"Roma",
-      "cap":"03010"
+      "id": "1",
+      "citta": "Roma",
+      "cap": "03010"
     },
     {
-      "id":2,
-      "citta":"Cosenza",
-      "cap":"87100"
+      "id": "2",
+      "citta": "Cosenza",
+      "cap": "87100"
     },
     {
-      "id":1,
-      "citta":"Milano",
-      "cap":"20001"
+      "id": "1",
+      "citta": "Milano",
+      "cap": "20001"
     },
     {
-      "id":1,
-      "citta":"Torino",
-      "cap":"15010 "
+      "id": "1",
+      "citta": "Torino",
+      "cap": "15010 "
     }
   ],
-  "users":[
-
+  "users": [
+    {
+      "id": "9256",
+      "nome": "Raffaele",
+      "cognome": "Caravetta",
+      "citta": "Cosenza",
+      "regione": "Calabria",
+      "cap": "87100",
+      "email": "raffaelecaravetta13@gmail.com",
+      "password": "ihihih",
+      "sex": "M"
+    }
   ]
 }

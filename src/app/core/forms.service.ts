@@ -13,6 +13,7 @@ export class FormsService {
   private cities:string='cities'
   private regions:string='regions'
   private cap:string='cap'
+  private users:string='users'
 
   constructor(private http:HttpClient,private authGuard:AuthGuard) { }
 
@@ -32,5 +33,10 @@ authenticateUser(boolean:any){
   this.isAuthenticatedUser.next(boolean)
   this.authGuard.authenticateUser(boolean)
 }
-
+register(user:any){
+return this.http.post(environment.API_URL+this.users,user)
+}
+login(userLogin:any){
+return this.http.get(environment.API_URL+this.users+`?email=${userLogin.email}&password=${userLogin.password}`)
+}
 }

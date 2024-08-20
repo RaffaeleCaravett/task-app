@@ -69,7 +69,7 @@
                         <label class="py-3">Città</label>
                     <select type="text" class="form-select" formControlName="citta" (change)="getRegionAndCapByCityName(signupForm.controls['citta'].value)">
                     <option value=""></option>
-                    <option value="{{c.id}}" *ngFor="let c of cities">{{c.name}}</option>
+                    <option value="{{c.name}}" *ngFor="let c of cities">{{c.name}}</option>
                     </select>
                     <p class="text-danger" *ngIf="submittedSignup==true&&signupForm.controls['citta'].invalid">
                       Campo invalido, seleziona un valore.

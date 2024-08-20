@@ -69,21 +69,35 @@ this.submittedSignup=false
 register(){
   this.submittedSignup=true
 if(this.signupForm.valid){
-
+let user = {
+  nome: this.signupForm.controls['nome'].value,
+  cognome: this.signupForm.controls['cognome'].value,
+  citta: this.signupForm.controls['citta'].value,
+  regione: this.signupForm.controls['regione'].value,
+  cap: this.signupForm.controls['cap'].value,
+  email: this.signupForm.controls['email'].value,
+  password: this.signupForm.controls['password'].value,
+  sex: this.signupForm.controls['sex'].value
+}
+this.formsService.register(user).subscribe({
+  next:(data:any)=>{
+   this.toastr.show("Complimenti! Ti sei registrato con successo.")
+   setTimeout(()=>{
+this.section='login'
+   },1000)
+  },
+  error:(error:any)=>{
+  this.toastr.error(error?.message||"C'è stato un problema nell'elaborazione della richiesta.")
+  },
+  complete:()=>{}
+})
 }else{
 this.toastr.error("Assicurati di compilare correttamente il form.")
 }
 }
 
-getRegionAndCapByCityName(cityId:number){
-if(cityId){
-  console.log(cityId)
-  let cityName:string=''
-  for(let c of this.cities){
-    if(c.id==cityId){
-cityName=c.name
-    }
-  }
+getRegionAndCapByCityName(cityName:string){
+if(cityName){
 this.formsService.getRegionByCityName(cityName).subscribe({
 next:(region:any)=>{
   this.region=region
