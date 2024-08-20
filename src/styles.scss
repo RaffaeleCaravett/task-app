@@ -4,7 +4,8 @@
 @import "~aos/dist/aos.css";
 
 html, body { height: 100%; }
-* { margin: 0;  font-family: "Happy Monkey", system-ui;line-height: 1.05; }
+* { margin: 0;  font-family: "Happy Monkey", system-ui;line-height: 1.05;
+}
 .btn,a{
   font-family: "Waiting for the Sunrise", cursive;
   font-weight: 400;
@@ -15,4 +16,10 @@ a{
   text-decoration: none;
   color: black;
 }
-
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 100,
+}
