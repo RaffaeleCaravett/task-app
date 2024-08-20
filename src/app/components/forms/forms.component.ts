@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormsService } from 'src/app/core/forms.service';
 
@@ -18,7 +19,7 @@ cities:any[]=[]
 region:any
 cap:any
 
-constructor(private toastr:ToastrService,private formsService:FormsService){}
+constructor(private toastr:ToastrService,private formsService:FormsService,private router:Router){}
 
 ngOnInit(): void {
     this.section='login'
@@ -52,7 +53,27 @@ this.toastr.error(error?.message||"C'è stato un problema nell'elaborazione dei 
 login(){
   this.submittedLogin=true
 if(this.loginForm.valid){
-
+let userLogin = {
+  email:this.loginForm.controls['email'].value,
+  password:this.loginForm.controls['password'].value
+}
+this.formsService.login(userLogin).subscribe({
+  next:(data:any)=>{
+    if(data&&data[0]){
+   this.toastr.show("Login effettuato con successo.")
+   this.formsService.authenticateUser(true)
+   setTimeout(()=>{
+this.router.navigate(['/office'])
+   },1000)
+  }else{
+    this.toastr.error("Mi dispiace ma non abbiamo un user in db con le credenziali che hai inserito.")
+  }
+  },
+  error:(error:any)=>{
+  this.toastr.error(error?.message||"C'è stato un problema nell'elaborazione della richiesta.")
+  },
+  complete:()=>{}
+})
 }else{
 this.toastr.error("Assicurati di compilare correttamente il form.")
 }
@@ -123,5 +144,4 @@ complete:()=>{}
   this.toastr.error("Devi inserire una città.")
 }
 }
-
 }
