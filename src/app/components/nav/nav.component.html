@@ -9,11 +9,14 @@
           Home
         </a>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4" *ngIf="isUserAuthenticated else emptyCol4">
         <a routerLink="/office" routerLinkActive="text-success">
           Office
         </a>
       </div>
+      <ng-template #emptyCol4>
+        <div class="col-md-4"></div>
+      </ng-template>
       <div class="col-md-4" *ngIf="!isUserAuthenticated else logout">
         <a routerLink="/forms" routerLinkActive="text-success">
           Login

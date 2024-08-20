@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './core/auth.guard';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,10 @@ const routes: Routes = [
   {
     path:'forms',
     loadChildren: () => import('./components/forms/forms.module').then(m => m.FormsModule) },
-
+  {
+    path:'**',
+    component:NotFoundComponent
+  }
 ];
 
 @NgModule({
