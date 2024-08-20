@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-forms',
@@ -11,6 +12,9 @@ section:string=''
 loginForm!:FormGroup
 signupForm!:FormGroup
 submittedLogin:boolean=false
+submittedSignup:boolean=false
+
+constructor(private toastr:ToastrService){}
 
 ngOnInit(): void {
     this.section='login'
@@ -30,16 +34,28 @@ ngOnInit(): void {
 }
 
 login(){
+  this.submittedLogin=true
+if(this.loginForm.valid){
 
+}else{
+this.toastr.error("Assicurati di compilare correttamente il form.")
+}
 }
 
 sectionChange(value:string){
   if(value){
 this.section=value
+this.submittedLogin=false
+this.submittedSignup=false
   }
 }
 
 register(){
+  this.submittedSignup=true
+if(this.signupForm.valid){
 
+}else{
+this.toastr.error("Assicurati di compilare correttamente il form.")
+}
 }
 }

@@ -29,10 +29,10 @@
   <p class="text-danger" *ngIf="submittedLogin==true&&loginForm.controls['password'].invalid">
     Valore invalido, prova ad inserire almeno 6 caratteri.
   </p>
-  <button class="btn btn-dark w-75 m-auto my-3" (click)="login()">Login</button>
+  <button class="btn btn-dark w-75 m-auto my-3" type="button" (click)="login()">Login</button>
   <p>or</p>
   <hr>
-  <button class="btn" (click)="sectionChange('signup')">Register</button>
+  <button class="btn" (click)="sectionChange('signup')" type="button">Register</button>
   </div>
   </div>
 </form>
@@ -54,28 +54,28 @@
       <div class="col-md-12">
         <label class="py-3">Nome</label>
     <input type="text" class="form-control" formControlName="nome">
-    <p class="text-danger" *ngIf="submittedLogin==true&&loginForm.controls['nome'].invalid">
+    <p class="text-danger" *ngIf="submittedSignup==true&&signupForm.controls['nome'].invalid">
       Campo invalido, inserisci un valore.
     </p>
               </div>
               <div class="col-md-12">
                 <label class="py-3">Cognome</label>
             <input type="text" class="form-control" formControlName="cognome">
-            <p class="text-danger" *ngIf="submittedLogin==true&&loginForm.controls['cognome'].invalid">
+            <p class="text-danger" *ngIf="submittedSignup==true&&signupForm.controls['cognome'].invalid">
               Campo invalido, inserisci un valore.
             </p>
                       </div>
       <div class="col-md-12">
         <label class="py-3">Email</label>
     <input type="email" class="form-control" formControlName="email">
-    <p class="text-danger" *ngIf="submittedLogin==true&&loginForm.controls['email'].invalid">
+    <p class="text-danger" *ngIf="submittedSignup==true&&signupForm.controls['email'].invalid">
       Campo invalido, prova ad inserire un valore tipo 'a&#64;a.com'
     </p>
               </div>
               <div class="col-md-12">
     <label class="py-3">Password</label>
     <input type="password" class="form-control" formControlName="password">
-    <p class="text-danger" *ngIf="submittedLogin==true&&loginForm.controls['password'].invalid">
+    <p class="text-danger" *ngIf="submittedSignup==true&&signupForm.controls['password'].invalid">
       Valore invalido, prova ad inserire almeno 6 caratteri.
     </p>
     </div>
@@ -92,14 +92,14 @@
       </label>
     </div>
     <div class="col-md-12">
-      <p class="text-danger" *ngIf="submittedLogin==true&&loginForm.controls['sex'].invalid">
+      <p class="text-danger" *ngIf="submittedSignup==true&&signupForm.controls['sex'].invalid">
         Campo invalido, seleziona un valore.
       </p>
     </div>
-    <button class="btn btn-dark w-75 m-auto my-3" (click)="register()">Signup</button>
+    <button class="btn btn-dark w-75 m-auto my-3" (click)="register()" type="button">Signup</button>
     <p>or</p>
     <hr>
-    <button class="btn" (click)="sectionChange('login')">Login</button>
+    <button class="btn" (click)="sectionChange('login')" type="button">Login</button>
 
     </div>
   </form>
