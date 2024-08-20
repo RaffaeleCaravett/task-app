@@ -4,3 +4,11 @@ h1{
   font-style: normal;
   font-size: 40px;
 }
+.img-scale{
+  transition: 1s;
+  cursor: pointer;
+  &:hover{
+    transition: 1s;
+    scale: 1.3;
+  }
+}
