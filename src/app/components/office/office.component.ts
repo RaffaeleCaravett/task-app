@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-office',
@@ -12,7 +12,10 @@ taskForm!:FormGroup
   ngOnInit(): void {
     localStorage.setItem('location','/office')
 this.taskForm=new FormGroup({
-
+title:new FormControl('',Validators.required),
+description:new FormControl('',Validators.required),
+status:new FormControl('',Validators.required),
+userId:new FormControl('',Validators.required)
 })
   }
 }
