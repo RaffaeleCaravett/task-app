@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormsService } from 'src/app/core/forms.service';
+import { FormsService } from 'src/app/shared/services/forms.service';
 
 @Component({
   selector: 'app-nav',

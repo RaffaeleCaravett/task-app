@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { FormsService } from 'src/app/core/forms.service';
+import { FormsService } from 'src/app/shared/services/forms.service';
 
 @Component({
   selector: 'app-forms',
