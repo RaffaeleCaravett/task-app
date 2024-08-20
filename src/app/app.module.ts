@@ -7,12 +7,14 @@ import { NavComponent } from './components/nav/nav.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { ToastrModule, provideToastr } from 'ngx-toastr';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    FooterComponent
+    FooterComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

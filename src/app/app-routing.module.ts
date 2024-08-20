@@ -13,7 +13,7 @@ const routes: Routes = [
     loadChildren: () => import('./components/office/office.module').then(m => m.OfficeModule) ,canActivate:[AuthGuard]  },
   {
     path:'forms',
-    loadChildren: () => import('./components/forms/forms.module').then(m => m.FormsModule) ,canActivate:[AuthGuard]  },
+    loadChildren: () => import('./components/forms/forms.module').then(m => m.FormsModule) },
 
 ];
 
