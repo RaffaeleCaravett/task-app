@@ -9,6 +9,7 @@ import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-br
 import { ToastrModule, provideToastr } from 'ngx-toastr';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomeComponent } from './components/home/home.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { HomeComponent } from './components/home/home.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    HttpClientModule
   ],
  providers:[
     provideAnimations(),
