@@ -21,7 +21,7 @@ submittedSignup:boolean=false
 cities:cities[]=[]
 region!:regions[]
 cap!:cap[]
-
+isLoading:boolean=false
 constructor(private toastr:ToastrService,private formsService:FormsService,private router:Router,private officeService:OfficeService){}
 
 ngOnInit(): void {
@@ -86,9 +86,13 @@ this.toastr.error(environment.COMMON_ERROR_FORMS)
 
 sectionChange(value:string){
   if(value){
-this.section=value
-this.submittedLogin=false
-this.submittedSignup=false
+    this.isLoading=true
+    setTimeout(()=>{
+      this.isLoading=false
+      this.section=value
+      this.submittedLogin=false
+      this.submittedSignup=false
+    },2000)
   }
 }
 
@@ -113,9 +117,11 @@ this.formsService.findUserByEmail(user.email).subscribe({
       this.formsService.register(user).subscribe({
         next:(data:any)=>{
          this.toastr.show("Complimenti! Ti sei registrato con successo.")
+         this.isLoading=true
          setTimeout(()=>{
+          this.isLoading=false
       this.section='login'
-         },1000)
+         },1500)
         },
         error:(error:any)=>{
         this.toastr.error(error?.message||environment.COMMON_ERROR)

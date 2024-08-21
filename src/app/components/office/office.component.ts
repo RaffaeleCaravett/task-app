@@ -37,7 +37,7 @@ constructor(private officeService:OfficeService,private toastr:ToastrService){}
   ngOnInit(): void {
 
 this.user=this.officeService.getUser()
-
+console.log(this.user)
 localStorage.setItem('location','/office')
 
     this.taskForm=new FormGroup({
@@ -102,7 +102,7 @@ let task: Task ={
   title:this.taskForm.controls['title'].value,
   description:this.taskForm.controls['description'].value,
   status:this.taskForm.controls['status'].value,
-  user_id:this.user?.id
+  user:this.user?.id
 }
 this.officeService.getTasksByTitle(task.title).subscribe({
   next:(check:any)=>{
@@ -149,7 +149,7 @@ this.toastr.error("Hai già caricato un task con questo titolo!")
       this.tasksUnstarted=[]
       this.tasksInProgress=[]
       this.tasksCompleted=[]
-    this.officeService.getTasksByStatus('Unstarted',(size||2)*(page||1)-(size||2),(size||2)*(page||1),size||2,sort||'id',order||'asc').subscribe({
+    this.officeService.getTasksByStatus('Unstarted',this.user.id,(size||2)*(page||1)-(size||2),(size||2)*(page||1),size||2,sort||'id',order||'asc').subscribe({
       next:(tasks:any)=>{
         if(tasks&&tasks[0]){
         this.tasksUnstarted=tasks
@@ -160,7 +160,7 @@ this.toastr.error("Hai già caricato un task con questo titolo!")
       },
       complete:()=>{}
      })
-     this.officeService.getTasksByStatus('In Progress',(size||2)*(page||1)-(size||2),(size||2)*(page||1),size||2,sort||'id',order||'asc').subscribe({
+     this.officeService.getTasksByStatus('In Progress',this.user.id,(size||2)*(page||1)-(size||2),(size||2)*(page||1),size||2,sort||'id',order||'asc').subscribe({
       next:(tasks:any)=>{
         if(tasks&&tasks[0]){
         this.tasksInProgress=tasks
@@ -171,7 +171,7 @@ this.toastr.error("Hai già caricato un task con questo titolo!")
       },
       complete:()=>{}
      })
-     this.officeService.getTasksByStatus('Completed',(size||2)*(page||1)-(size||2),(size||2)*(page||1),size||2,sort||'id',order||'asc').subscribe({
+     this.officeService.getTasksByStatus('Completed',this.user.id,(size||2)*(page||1)-(size||2),(size||2)*(page||1),size||2,sort||'id',order||'asc').subscribe({
       next:(tasks:any)=>{
         if(tasks&&tasks[0]){
         this.tasksCompleted=tasks
@@ -185,7 +185,7 @@ this.toastr.error("Hai già caricato un task con questo titolo!")
     }else{
 
 
-      this.officeService.getTasksByStatus(status,(size||2)*(page||1)-(size||2),(size||2)*(page||1),size||2,sort||'id',order||'asc').subscribe({
+      this.officeService.getTasksByStatus(status,this.user.id,(size||2)*(page||1)-(size||2),(size||2)*(page||1),size||2,sort||'id',order||'asc').subscribe({
         next:(tasks:any)=>{
           if(tasks&&tasks[0]){
             switch(status){
@@ -288,11 +288,11 @@ this.tasksCompleted=tasks
  onDrop(event:any,state:string){
   let modify:boolean=true
   event.preventDefault()
-  let task ={
+  let task:Task ={
     title:this.draggedElement.title,
     description:this.draggedElement.description,
     status:this.draggedElement.status,
-    user_id:this.draggedElement.user_id
+    user:this.draggedElement.user
   }
 switch(state){
 case('Unstarted'):{
