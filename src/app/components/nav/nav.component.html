@@ -5,12 +5,12 @@
         <h1>The best task management application</h1>
       </div>
       <div class="col-md-4">
-        <a routerLink="/">
+        <a routerLink="/" routerLinkActive="text-danger fw-bold">
           Home
         </a>
       </div>
       <div class="col-md-4" *ngIf="isUserAuthenticated else emptyCol4">
-        <a routerLink="/office" routerLinkActive="text-success">
+        <a routerLink="/office" routerLinkActive="text-danger fw-bold">
           Office
         </a>
       </div>
@@ -18,13 +18,13 @@
         <div class="col-md-4"></div>
       </ng-template>
       <div class="col-md-4" *ngIf="!isUserAuthenticated else logout">
-        <a routerLink="/forms" routerLinkActive="text-success">
+        <a routerLink="/forms" routerLinkActive="text-danger fw-bold">
           Login / Signup
         </a>
       </div>
       <ng-template #logout>
         <div class="col-md-4" *ngIf="isUserAuthenticated else logout">
-          <a routerLink="/forms" routerLinkActive="text-success">
+          <a routerLink="/forms" routerLinkActive="text-danger fw-bold">
             <button class="btn" (click)="logOut()">
               Logout
             </button>
