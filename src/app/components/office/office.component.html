@@ -43,10 +43,10 @@
   </ul>
   <ng-template #notLoadingUnstarted>
     <ul class="p-4">
-<li *ngFor="let t of tasksUnstarted" class="text-start p-0 m-0" (click)="selectedTask=t">
+<li *ngFor="let t of tasksUnstarted index as i" class="text-start p-0 m-0" (click)="selectedTask=t">
   <p class="m-1 bg-light rounded title">{{t.title}}</p>
   <p class="m-1 bg-light rounded">{{t.status}}</p>
-  <p class="m-1 bg-light rounded py-2">{{t.description}}</p>
+  <p class="m-1 bg-light rounded py-2" id="U{{i}}">{{formatCodeToHtml(t.description,'U',i)}}</p>
 </li>
 <li *ngIf="!tasksUnstarted||tasksUnstarted.length==0">Still no tasks</li>
 <p class="pt-5">Want to search?</p>
@@ -114,10 +114,10 @@ In Progress
   </ul>
   <ng-template #notLoadingInProgress>
     <ul class="p-4">
-<li *ngFor="let t of tasksInProgress" class="text-start p-0 m-0" (click)="selectedTask=t">
+<li *ngFor="let t of tasksInProgress index as i" class="text-start p-0 m-0" (click)="selectedTask=t">
     <p class="m-1 bg-light rounded title">{{t.title}}</p>
   <p class="m-1 bg-light rounded">{{t.status}}</p>
-  <p class="m-1 bg-light rounded py-2">{{t.description}}</p>
+  <p class="m-1 bg-light rounded py-2" id="I{{i}}">{{formatCodeToHtml(t.description,'I',i)}}</p>
 </li>
 <li *ngIf="!tasksInProgress||tasksInProgress.length==0">Still no tasks</li>
 <p class="pt-5">Want to search?</p>
@@ -185,10 +185,10 @@ Completed
   </ul>
   <ng-template #notLoadingComplete>
     <ul class="p-4">
-<li *ngFor="let t of tasksCompleted" class="text-start p-0 m-0" (click)="selectedTask=t">
+<li *ngFor="let t of tasksCompleted index as i" class="text-start p-0 m-0" (click)="selectedTask=t">
 <p class="m-1 bg-light rounded title">{{t.title}}</p>
   <p class="m-1 bg-light rounded">{{t.status}}</p>
-  <p class="m-1 bg-light rounded py-2">{{t.description}}</p>
+  <p class="m-1 bg-light rounded py-2" id="C{{i}}">{{formatCodeToHtml(t.description,'C',i)}}</p>
 </li>
 <li *ngIf="!tasksCompleted||tasksCompleted.length==0">Still no tasks</li>
 <p class="pt-5">Want to search?</p>

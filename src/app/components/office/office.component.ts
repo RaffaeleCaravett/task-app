@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import Quill from 'quill';
 import { environment } from 'src/app/core/environment';
 import { directions, elements, status, Task, taskAttributes, Tasks, userLogged } from 'src/app/interfaces/interfaces';
 import { OfficeService } from 'src/app/shared/services/office.service';
@@ -269,5 +270,15 @@ this.tasksCompleted=tasks
       },
       complete:()=>{}
      })
+  }
+  formatCodeToHtml(delta:any,startedId:string,index:number){
+    let firstCharacter= Array.from(delta)[0];
+  if(firstCharacter!='<'){
+    return delta;
+  }else{
+    let div = document.getElementById(startedId+index)!
+    div.innerHTML=''
+    return div.innerHTML+=delta
+  }
   }
 }

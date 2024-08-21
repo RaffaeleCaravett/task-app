@@ -11,7 +11,7 @@
         <div class="row">
           <div class="col-md-8">
       <label class="p-4">Title</label>
-      <input type="text" class="form-control" placeholder="Place a title" formControlName="title">
+      <input type="text" class="form-control" placeholder="Place a title" formControlName="title" (input)="updatedTitle=taskForm.controls['title'].value">
       <p class="text-danger" *ngIf="taskForm.controls['title'].invalid">Campo invalido. Inserisci un valore.</p>
           </div>
             <div class="col-md-4">
@@ -33,6 +33,15 @@
           </div>
         </div>
       </form>
+      <p>Oppure</p>
+      <hr>
+      <h1>Modifica la descrizione del tuo task.</h1>
+      <p class="fs-5">*Ricordati che se lascerai anche solo un carattere nel WYSIWYG Editor la tua descrizione attuale verrà sostituita col testo del WYSIWYG Editor.</p>
+  <quill-editor
+  placeholder="Enter Text"
+  [modules]="quillConfig"
+  (onSelectionChanged)="onSelectionChanged($event)"
+  (onContentChanged)="onContentChanged($event)"></quill-editor>
     </div>
   </div>
 </div>

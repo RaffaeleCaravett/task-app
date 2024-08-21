@@ -18,12 +18,35 @@ export class TaskComponent implements OnInit, OnChanges{
 @Input() task!:Tasks
 @Input() stati!:status[]
 @Output() selectedTask:EventEmitter<any> = new EventEmitter<any>()
+changedDescription:string=''
+updatedTitle:string=''
+quillConfig={
+    toolbar: [
+      ['bold', 'italic', 'underline', 'strike'],
+      ['blockquote', 'code-block'],
 
+      [{ 'header': 1 }, { 'header': 2 }],
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      [{ 'script': 'sub'}, { 'script': 'super' }],
+      [{ 'indent': '-1'}, { 'indent': '+1' }],
+      [{ 'direction': 'rtl' }],
+
+      [{ 'size': ['small', false, 'large', 'huge'] }],
+      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+      [{ 'color': [] }, { 'background': [] }],
+      [{ 'font': [] }],
+      [{ 'align': [] }],
+
+      ['clean'],
+
+      ['link', 'image', 'video']
+    ]
+}
 taskForm!:FormGroup
 constructor(private officeService:OfficeService,private toastr:ToastrService,private matDialog:MatDialog){}
 
 ngOnInit(): void {
-  console.log(this.task)
 this.taskForm=new FormGroup({
 title:new FormControl(this.task.title,Validators.required),
 description:new FormControl(this.task.description,Validators.required),
@@ -40,13 +63,15 @@ ngOnChanges(changes: SimpleChanges): void {
 }
 
 putTask(){
+  console.log(this.updatedTitle)
 if(this.taskForm.valid){
   let task ={
     title:this.taskForm.controls['title'].value,
-    description:this.taskForm.controls['description'].value,
+    description:this.changedDescription!=''?this.changedDescription:this.taskForm.controls['description'].value,
     status:this.taskForm.controls['status'].value,
     user_id:this.task.user_id
   }
+  if(this.updatedTitle!=''&&this.updatedTitle!=this.task.title){
   this.officeService.getTasksByTitle(task.title).subscribe({
     next:(check:any)=>{
       if(check && check.length> 0 || (check&&check[0])){
@@ -80,6 +105,25 @@ complete:()=>{
 }
 })
 }else{
+  this.officeService.putTask(task,this.task.id).subscribe({
+    next:(task:any)=>{
+    if(task){
+      this.toastr.show("Task modificato con successo.")
+      this.close()
+    }else{
+      this.toastr.error(environment.COMMON_ERROR)
+    }
+    },
+    error:(error:any)=>{
+      this.toastr.error(error.message||environment.COMMON_ERROR)
+
+    },
+    complete:()=>{
+
+    }
+    })
+}
+}else{
 this.toastr.error(environment.COMMON_ERROR_FORMS)
 }
 }
@@ -110,4 +154,26 @@ this.toastr.show("Non è stato eliminato nessun task")
 close(){
   this.selectedTask.emit(null)
 }
+
+onSelectionChanged = (event:any) =>{
+  if(event.oldRange == null){
+    this.onFocus();
+  }
+  if(event.range == null){
+    this.onBlur();
+  }
+}
+
+onContentChanged = (event:any) =>{
+this.changedDescription=event.html
+console.log(this.changedDescription)
+}
+onFocus = () =>{
+  console.log("On Focus");
+}
+onBlur = () =>{
+  console.log("Blurred");
+}
+
+
 }

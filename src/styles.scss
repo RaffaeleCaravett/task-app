@@ -2,7 +2,9 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import 'ngx-toastr/toastr';
 @import "~aos/dist/aos.css";
-
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
 html, body { height: 100%; }
 * { margin: 0;  font-family: "Happy Monkey", system-ui;line-height: 1.05;
 }

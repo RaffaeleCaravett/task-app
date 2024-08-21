@@ -130,11 +130,11 @@
       "id": "5c32"
     },
     {
-      "id": "8cfd",
       "title": "title 11",
-      "description": "nice description",
+      "description": "<p>a new <strong>description!!</strong></p>",
       "status": "Unstarted",
-      "user_id": "9256"
+      "user_id": "9256",
+      "id": "8cfd"
     },
     {
       "title": "Titolo",
