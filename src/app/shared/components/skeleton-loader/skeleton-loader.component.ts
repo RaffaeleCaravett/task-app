@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'app-skeleton-loader',
   template: `
-  <div class="skelt-load loader">
+  <div [ngStyle]="getMyStyles()" class="skelt-load loader">
 
   </div>`,
   styleUrls: ['./skeleton-loader.component.scss']
