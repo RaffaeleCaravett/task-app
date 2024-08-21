@@ -19,16 +19,19 @@ getStatus(){
 return this.http.get(environment.API_URL+this.status)
 }
 
-getTasksByStatus(status:string,page:number,size:number,sort:string,order:string){
+getTasksByStatus(status:string,page:number,end:number,size:number,sort:string,order:string){
   if(order=='asc'){
-return this.http.get(environment.API_URL+this.tasks+`?status=${status}&_page=${page}&_limit=${size}&_sort=${sort}&_order=asc`)
+return this.http.get(environment.API_URL+this.tasks+`?status=${status}&_start=${page}&_end=${end}&_limit=${size}&_sort=${sort}&_order=asc`)
   }else {
-    return this.http.get(environment.API_URL+this.tasks+`?status=${status}&_page=${page}&_limit=${size}&_sort=-${sort}`)
+    return this.http.get(environment.API_URL+this.tasks+`?status=${status}&_start=${page}&_end=${end}&_limit=${size}&_sort=-${sort}`)
   }
 }
 getTasks(){
   return this.http.get(environment.API_URL+this.tasks)
   }
+  getTasksByTitle(title:string){
+    return this.http.get(environment.API_URL+this.tasks+`?title=${title}`)
+    }
 postTask(task:any){
   return this.http.post(environment.API_URL+this.tasks,task)
   }

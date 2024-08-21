@@ -45,6 +45,11 @@ if(this.taskForm.valid){
     status:this.taskForm.controls['status'].value,
     user_id:this.task.user_id
   }
+  this.officeService.getTasksByTitle(task.title).subscribe({
+    next:(check:any)=>{
+      if(check && check.length> 0 || (check&&check[0])){
+  this.toastr.error("Hai già caricato un task con questo titolo!")
+      }else{
   this.officeService.putTask(task,this.task.id).subscribe({
     next:(task:any)=>{
     if(task){
@@ -62,6 +67,16 @@ if(this.taskForm.valid){
 
     }
     })
+  }
+},
+error:(error:any)=>{
+  this.toastr.error(error.message||environment.COMMON_ERROR)
+
+},
+complete:()=>{
+
+}
+})
 }else{
 this.toastr.error(environment.COMMON_ERROR_FORMS)
 }

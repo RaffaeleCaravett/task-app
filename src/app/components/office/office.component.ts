@@ -102,7 +102,12 @@ let task ={
   status:this.taskForm.controls['status'].value,
   user_id:this.user?.id
 }
-this.officeService.postTask(task).subscribe({
+this.officeService.getTasksByTitle(task.title).subscribe({
+  next:(check:any)=>{
+    if(check && check.length> 0 || (check&&check[0])){
+this.toastr.error("Hai già caricato un task con questo titolo!")
+    }else{
+      this.officeService.postTask(task).subscribe({
   next:(task:any)=>{
   if(task){
    this.getTasks()
@@ -118,6 +123,17 @@ this.officeService.postTask(task).subscribe({
 
   }
   })
+    }
+    },
+    error:(error:any)=>{
+      this.toastr.error(error.message||environment.COMMON_ERROR)
+
+    },
+    complete:()=>{
+
+    }
+    })
+
 }else{
       this.toastr.error(environment.COMMON_ERROR_FORMS)
     }
@@ -128,7 +144,7 @@ this.officeService.postTask(task).subscribe({
       this.tasksUnstarted=[]
       this.tasksInProgress=[]
       this.tasksCompleted=[]
-    this.officeService.getTasksByStatus('Unstarted',page||1,size||2,sort||'id',order||'asc').subscribe({
+    this.officeService.getTasksByStatus('Unstarted',(size||2)*(page||1)-(size||2),(size||2)*(page||1),size||2,sort||'id',order||'asc').subscribe({
       next:(tasks:any)=>{
         if(tasks&&tasks[0]){
         this.tasksUnstarted=tasks
@@ -139,7 +155,7 @@ this.officeService.postTask(task).subscribe({
       },
       complete:()=>{}
      })
-     this.officeService.getTasksByStatus('In Progress',page||1,size||2,sort||'id',order||'asc').subscribe({
+     this.officeService.getTasksByStatus('In Progress',(size||2)*(page||1)-(size||2),(size||2)*(page||1),size||2,sort||'id',order||'asc').subscribe({
       next:(tasks:any)=>{
         if(tasks&&tasks[0]){
         this.tasksInProgress=tasks
@@ -150,7 +166,7 @@ this.officeService.postTask(task).subscribe({
       },
       complete:()=>{}
      })
-     this.officeService.getTasksByStatus('Completed',page||1,size||2,sort||'id',order||'asc').subscribe({
+     this.officeService.getTasksByStatus('Completed',(size||2)*(page||1)-(size||2),(size||2)*(page||1),size||2,sort||'id',order||'asc').subscribe({
       next:(tasks:any)=>{
         if(tasks&&tasks[0]){
         this.tasksCompleted=tasks
@@ -164,7 +180,7 @@ this.officeService.postTask(task).subscribe({
     }else{
 
 
-      this.officeService.getTasksByStatus(status,page||1,size||2,sort||'id',order||'asc').subscribe({
+      this.officeService.getTasksByStatus(status,(size||2)*(page||1)-(size||2),(size||2)*(page||1),size||2,sort||'id',order||'asc').subscribe({
         next:(tasks:any)=>{
           if(tasks&&tasks[0]){
             switch(status){

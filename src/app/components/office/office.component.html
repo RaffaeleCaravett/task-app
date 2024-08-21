@@ -51,12 +51,13 @@
 <li *ngIf="!tasksUnstarted||tasksUnstarted.length==0">Still no tasks</li>
 <p class="pt-5">Want to search?</p>
 <hr>
-<div *ngIf="tasksCompleted&&tasksCompleted.length>0" class="pt-5">
+<div *ngIf="tasksUnstarted&&tasksUnstarted.length>0" class="pt-5">
   <form [formGroup]="searchUnstartedTask" *ngIf="!unstartedSearching else unSearch">
     <div class="row">
   <div class="col-md-12 py-2">
 <label> Pagina</label><br>
 <input type="number" class="w-50" formControlName="page">
+<p *ngIf="searchUnstartedTask.controls['page'].value<0" class="text-danger">Inserisci un valore superiore o uguale allo 0</p>
   </div>
   <div class="col-md-4 py-2">
 <label> Elementi</label><br>
@@ -121,12 +122,13 @@ In Progress
 <li *ngIf="!tasksInProgress||tasksInProgress.length==0">Still no tasks</li>
 <p class="pt-5">Want to search?</p>
 <hr>
-<div *ngIf="tasksCompleted&&tasksCompleted.length>0" class="pt-5">
+<div *ngIf="tasksInProgress&&tasksInProgress.length>0" class="pt-5">
   <form [formGroup]="searchInProgressTask" *ngIf="!inProgressSearching else inSearch">
     <div class="row">
   <div class="col-md-12 py-2">
 <label> Pagina</label><br>
 <input type="number" class="w-50" formControlName="page">
+<p *ngIf="searchInProgressTask.controls['page'].value<0" class="text-danger">Inserisci un valore superiore o uguale allo 0</p>
   </div>
   <div class="col-md-4 py-2">
 <label> Elementi</label><br>
@@ -196,7 +198,8 @@ Completed
     <div class="row">
   <div class="col-md-12 py-2">
 <label> Pagina</label><br>
-<input type="number"  formControlName="page">
+<input type="number"  formControlName="page" class="w-50">
+<p *ngIf="searchCompletedTask.controls['page'].value<0" class="text-danger">Inserisci un valore superiore o uguale allo 0</p>
   </div>
   <div class="col-md-4 py-2">
 <label> Elementi</label><br>
