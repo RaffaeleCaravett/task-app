@@ -4,13 +4,53 @@
   <h1>Inserisci, Modifica, Completa o Elimina i tuoi task!</h1>
  </div>
  <div class="col-md-12 py-5">
-
+<form [formGroup]="taskForm" class="w-75 m-auto">
+  <div class="row">
+    <div class="col-md-8">
+<label class="p-4">Title</label>
+<input type="text" class="form-control" placeholder="Place a title" formControlName="title">
+<p class="text-danger" *ngIf="isTaskSubmitted&&taskForm.controls['title'].invalid">Campo invalido. Inserisci un valore.</p>
+    </div>
+      <div class="col-md-4">
+<label class="p-4">Status</label>
+<select class="form-select" formControlName="status">
+  <option value=""></option>
+  <option value="{{s.nome}}" *ngFor="let s of stati">{{s.nome}}</option>
+</select>
+<p class="text-danger" *ngIf="isTaskSubmitted&&taskForm.controls['status'].invalid">Campo invalido. Seleziona un valore.</p>
+    </div>
+    <div class="col-md-12">
+<label class="p-4">Description</label>
+<textarea class="form-control" placeholder="Place some text" formControlName="description"></textarea>
+<p class="text-danger" *ngIf="isTaskSubmitted&&taskForm.controls['description'].invalid">Campo invalido. Inserisci un valore.</p>
+    </div>
+    <div class="col-md-12 py-4">
+      <button class="btn" type="button" (click)="postTask()">Aggiungi task</button>
+    </div>
+  </div>
+</form>
  </div>
  <div class="col-md-4 p-2">
   <div class="border rounded shadow-sm">
  <p class="fs-5 bg-light p-2">
     Unstarded
   </p>
+  <ul *ngIf="isLoading else notLoadingUnstarted" class="p-4">
+<app-skeleton-loader Cwidth="w-50" Cheight="30"></app-skeleton-loader>
+<app-skeleton-loader Cwidth="w-100" Cheight="50"></app-skeleton-loader>
+<app-skeleton-loader Cwidth="w-100" Cheight="100"></app-skeleton-loader>
+<p>Caricando...</p>
+  </ul>
+  <ng-template #notLoadingUnstarted>
+    <ul class="p-4">
+<li *ngFor="let t of tasksUnstarted" class="text-start p-0 m-0" (click)="selectedTask=t">
+  <p class="m-1 bg-light rounded title">{{t.title}}</p>
+  <p class="m-1 bg-light rounded">{{t.status}}</p>
+  <p class="m-1 bg-light rounded py-2">{{t.description}}</p>
+</li>
+<li *ngIf="!tasksUnstarted||tasksUnstarted.length==0">Still no tasks</li>
+    </ul>
+  </ng-template>
   </div>
  </div>
  <div class="col-md-4 p-2">
@@ -18,6 +58,22 @@
  <p class="fs-5 bg-light p-2">
 In Progress
   </p>
+  <ul *ngIf="isLoading else notLoadingInProgress" class="p-4">
+    <app-skeleton-loader Cwidth="w-50" Cheight="30"></app-skeleton-loader>
+    <app-skeleton-loader Cwidth="w-100" Cheight="50"></app-skeleton-loader>
+<app-skeleton-loader Cwidth="w-100" Cheight="100"></app-skeleton-loader>
+<p>Caricando...</p>
+  </ul>
+  <ng-template #notLoadingInProgress>
+    <ul class="p-4">
+<li *ngFor="let t of tasksInProgress" class="text-start p-0 m-0" (click)="selectedTask=t">
+    <p class="m-1 bg-light rounded title">{{t.title}}</p>
+  <p class="m-1 bg-light rounded">{{t.status}}</p>
+  <p class="m-1 bg-light rounded py-2">{{t.description}}</p>
+</li>
+<li *ngIf="!tasksInProgress||tasksInProgress.length==0">Still no tasks</li>
+    </ul>
+  </ng-template>
   </div>
  </div>
  <div class="col-md-4 p-2">
@@ -25,6 +81,22 @@ In Progress
   <p class="fs-5 bg-light p-2">
 Completed
   </p>
+  <ul *ngIf="isLoading else notLoadingComplete" class="p-4">
+    <app-skeleton-loader Cwidth="w-50" Cheight="30"></app-skeleton-loader>
+    <app-skeleton-loader Cwidth="w-100" Cheight="50"></app-skeleton-loader>
+<app-skeleton-loader Cwidth="w-100" Cheight="100"></app-skeleton-loader>
+<p>Caricando...</p>
+  </ul>
+  <ng-template #notLoadingComplete>
+    <ul class="p-4">
+<li *ngFor="let t of tasksCompleted" class="text-start p-0 m-0" (click)="selectedTask=t">
+<p class="m-1 bg-light rounded title">{{t.title}}</p>
+  <p class="m-1 bg-light rounded">{{t.status}}</p>
+  <p class="m-1 bg-light rounded py-2">{{t.description}}</p>
+</li>
+<li *ngIf="!tasksCompleted||tasksCompleted.length==0">Still no tasks</li>
+    </ul>
+  </ng-template>
   </div>
  </div>
   </div>

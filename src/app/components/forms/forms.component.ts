@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/app/core/environment';
 import { FormsService } from 'src/app/shared/services/forms.service';
+import { OfficeService } from 'src/app/shared/services/office.service';
 
 @Component({
   selector: 'app-forms',
@@ -19,7 +21,7 @@ cities:any[]=[]
 region:any
 cap:any
 
-constructor(private toastr:ToastrService,private formsService:FormsService,private router:Router){}
+constructor(private toastr:ToastrService,private formsService:FormsService,private router:Router,private officeService:OfficeService){}
 
 ngOnInit(): void {
     this.section='login'
@@ -43,7 +45,7 @@ ngOnInit(): void {
 this.cities=data
       },
       error:(error:any)=>{
-this.toastr.error(error?.message||"C'è stato un problema nell'elaborazione dei dati riguardanti le città.")
+this.toastr.error(error?.message||environment.COMMON_ERROR)
       },
       complete:()=>{}
     })
@@ -61,6 +63,7 @@ this.formsService.login(userLogin).subscribe({
     if(data&&data[0]){
       localStorage.setItem('email',data[0].email)
       localStorage.setItem('password',data[0].password)
+      this.officeService.setUser(data[0])
    this.toastr.show("Login effettuato con successo.")
    this.formsService.authenticateUser(true)
    setTimeout(()=>{
@@ -71,12 +74,12 @@ this.router.navigate(['/office'])
   }
   },
   error:(error:any)=>{
-  this.toastr.error(error?.message||"C'è stato un problema nell'elaborazione della richiesta.")
+  this.toastr.error(error?.message||environment.COMMON_ERROR)
   },
   complete:()=>{}
 })
 }else{
-this.toastr.error("Assicurati di compilare correttamente il form.")
+this.toastr.error(environment.COMMON_ERROR_FORMS)
 }
 }
 
@@ -114,20 +117,20 @@ this.formsService.findUserByEmail(user.email).subscribe({
          },1000)
         },
         error:(error:any)=>{
-        this.toastr.error(error?.message||"C'è stato un problema nell'elaborazione della richiesta.")
+        this.toastr.error(error?.message||environment.COMMON_ERROR)
         },
         complete:()=>{}
       })
     }
    },
    error:(error:any)=>{
-   this.toastr.error(error?.message||"C'è stato un problema nell'elaborazione della richiesta.")
+   this.toastr.error(error?.message||environment.COMMON_ERROR)
    },
    complete:()=>{}
 })
 
 }else{
-this.toastr.error("Assicurati di compilare correttamente il form.")
+this.toastr.error(environment.COMMON_ERROR_FORMS)
 }
 }
 

@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { OfficeRoutingModule } from './office-routing.module';
 import { OfficeComponent } from './office.component';
+import { SkeletonModuleModule } from 'src/app/shared/modules/skeleton-module/skeleton-module.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import { OfficeComponent } from './office.component';
   ],
   imports: [
     CommonModule,
-    OfficeRoutingModule
+    OfficeRoutingModule,
+    SkeletonModuleModule,
+    ReactiveFormsModule
   ]
 })
 export class OfficeModule { }

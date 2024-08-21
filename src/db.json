@@ -92,5 +92,56 @@
       "password": "ohohoh",
       "sex": "M"
     }
+  ],
+  "status": [
+    {
+      "id": "1",
+      "nome": "Unstarted"
+    },
+    {
+      "id": "2",
+      "nome": "In Progress"
+    },
+    {
+      "id": "3",
+      "nome": "Completed"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "793f",
+      "title": "Title",
+      "description": "ddd",
+      "status": "Unstarted",
+      "user_id": "9256"
+    },
+    {
+      "id": "030e",
+      "title": "title 1",
+      "description": "gggg",
+      "status": "Unstarted",
+      "user_id": "9256"
+    },
+    {
+      "id": "9795",
+      "title": "title 1",
+      "description": "ggggf",
+      "status": "Unstarted",
+      "user_id": "9256"
+    },
+    {
+      "id": "e1d3",
+      "title": "title2",
+      "description": "ffff",
+      "status": "Unstarted",
+      "user_id": "9256"
+    },
+    {
+      "id": "5c32",
+      "title": "title 3",
+      "description": "FFFF",
+      "status": "Unstarted",
+      "user_id": "9256"
+    }
   ]
 }
