@@ -56,4 +56,7 @@ postTask(task:any){
     getElements(){
       return this.http.get(environment.API_URL+this.elements)
     }
+    patchTask(object:any,id:string){
+      return this.http.patch(environment.API_URL+this.tasks+`/${id}`,object)
+    }
 }

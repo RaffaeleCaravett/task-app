@@ -31,7 +31,7 @@ elements:elements[]=[]
 unstartedSearching:boolean=false
 inProgressSearching:boolean=false
 completedSearching:boolean=false
-
+draggedElement!:Tasks
 constructor(private officeService:OfficeService,private toastr:ToastrService){}
 
   ngOnInit(): void {
@@ -282,10 +282,59 @@ this.tasksCompleted=tasks
   }
   }
  onDragStart(item:Tasks){
-
+ this.draggedElement=item
  }
 
- onDrop(event:any,status:string){
+ onDrop(event:any,state:string){
+  let modify:boolean=true
+  event.preventDefault()
+  let task ={
+    title:this.draggedElement.title,
+    description:this.draggedElement.description,
+    status:this.draggedElement.status,
+    user_id:this.draggedElement.user_id
+  }
+switch(state){
+case('Unstarted'):{
+  task.status=state
+}
+break;
+case('In Progress'):{
+  task.status=state
+}
+break;
+case('Completed'):{
+  task.status=state
+}
+break;
+default:{
+  modify=false
+  this.toastr.show("Non è stato aggiornato nessun task.")
+}
+}
 
+if(modify){
+  this.officeService.patchTask({status:task.status},this.draggedElement.id).subscribe({
+    next:(task:any)=>{
+    if(task){
+      this.toastr.show("Task modificato con successo.")
+      this.getTasks()
+    }else{
+      this.toastr.error(environment.COMMON_ERROR)
+    }
+    },
+    error:(error:any)=>{
+      this.toastr.error(error.message||environment.COMMON_ERROR)
+
+    },
+    complete:()=>{
+
+    }
+    })
+}
+ }
+
+ onDragOver(event:any){
+event.preventDefault()
  }
 }
