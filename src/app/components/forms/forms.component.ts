@@ -25,6 +25,7 @@ isLoading:boolean=false
 constructor(private toastr:ToastrService,private formsService:FormsService,private router:Router,private officeService:OfficeService){}
 
 ngOnInit(): void {
+
     this.section='login'
     this.loginForm=new FormGroup({
       email:new FormControl('',[Validators.required,Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)]),

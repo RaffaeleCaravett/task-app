@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import * as Aos from 'aos';
 import { ToastrService } from 'ngx-toastr';
 import Quill from 'quill';
 import { environment } from 'src/app/core/environment';
@@ -35,9 +36,9 @@ draggedElement!:Tasks
 constructor(private officeService:OfficeService,private toastr:ToastrService){}
 
   ngOnInit(): void {
+    Aos.init()
 
 this.user=this.officeService.getUser()
-console.log(this.user)
 localStorage.setItem('location','/office')
 
     this.taskForm=new FormGroup({
@@ -158,9 +159,8 @@ this.toastr.error("Hai già caricato un task con questo titolo!")
       error:(error:any)=>{
         this.toastr.error(error.message||environment.COMMON_ERROR)
       },
-      complete:()=>{}
-     })
-     this.officeService.getTasksByStatus('In Progress',this.user.id,(size||2)*(page||1)-(size||2),(size||2)*(page||1),size||2,sort||'id',order||'asc').subscribe({
+      complete:()=>{
+        this.officeService.getTasksByStatus('In Progress',this.user.id,(size||2)*(page||1)-(size||2),(size||2)*(page||1),size||2,sort||'id',order||'asc').subscribe({
       next:(tasks:any)=>{
         if(tasks&&tasks[0]){
         this.tasksInProgress=tasks
@@ -169,9 +169,8 @@ this.toastr.error("Hai già caricato un task con questo titolo!")
       error:(error:any)=>{
         this.toastr.error(error.message||environment.COMMON_ERROR)
       },
-      complete:()=>{}
-     })
-     this.officeService.getTasksByStatus('Completed',this.user.id,(size||2)*(page||1)-(size||2),(size||2)*(page||1),size||2,sort||'id',order||'asc').subscribe({
+      complete:()=>{
+         this.officeService.getTasksByStatus('Completed',this.user.id,(size||2)*(page||1)-(size||2),(size||2)*(page||1),size||2,sort||'id',order||'asc').subscribe({
       next:(tasks:any)=>{
         if(tasks&&tasks[0]){
         this.tasksCompleted=tasks
@@ -181,6 +180,10 @@ this.toastr.error("Hai già caricato un task con questo titolo!")
         this.toastr.error(error.message||environment.COMMON_ERROR)
       },
       complete:()=>{}
+     })
+      }
+     })
+      }
      })
     }else{
 

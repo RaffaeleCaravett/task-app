@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsService } from './shared/services/forms.service';
 import { OfficeService } from './shared/services/office.service';
-import * as Aos from 'aos';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +14,6 @@ export class AppComponent implements OnInit{
 constructor(private formsService:FormsService,private router:Router,private officeService:OfficeService  ){}
 
   ngOnInit(): void {
-    Aos.init()
 if(localStorage.getItem('email')&&localStorage.getItem('password')){
   let userLogin = {
 email:localStorage.getItem('email'),
