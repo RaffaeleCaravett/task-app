@@ -42,8 +42,8 @@
 <p>Caricando...</p>
   </ul>
   <ng-template #notLoadingUnstarted>
-    <ul class="p-4">
-<li *ngFor="let t of tasksUnstarted index as i" class="text-start p-0 m-0" (click)="selectedTask=t">
+    <ul class="p-4" (drop)="onDrop($event,'Unstarted')">
+<li *ngFor="let t of tasksUnstarted index as i" class="text-start p-0 m-0" (click)="selectedTask=t" (dragstart)="onDragStart(t)">
   <p class="m-1 bg-light rounded title">{{t.title}}</p>
   <p class="m-1 bg-light rounded">{{t.status}}</p>
   <p class="m-1 bg-light rounded py-2" id="U{{i}}">{{formatCodeToHtml(t.description,'U',i)}}</p>
@@ -113,8 +113,8 @@ In Progress
 <p>Caricando...</p>
   </ul>
   <ng-template #notLoadingInProgress>
-    <ul class="p-4">
-<li *ngFor="let t of tasksInProgress index as i" class="text-start p-0 m-0" (click)="selectedTask=t">
+    <ul class="p-4" (drop)="onDrop($event,'In Progress')">
+<li *ngFor="let t of tasksInProgress index as i" class="text-start p-0 m-0" (click)="selectedTask=t" (dragstart)="onDragStart(t)">
     <p class="m-1 bg-light rounded title">{{t.title}}</p>
   <p class="m-1 bg-light rounded">{{t.status}}</p>
   <p class="m-1 bg-light rounded py-2" id="I{{i}}">{{formatCodeToHtml(t.description,'I',i)}}</p>
@@ -184,8 +184,8 @@ Completed
 <p>Caricando...</p>
   </ul>
   <ng-template #notLoadingComplete>
-    <ul class="p-4">
-<li *ngFor="let t of tasksCompleted index as i" class="text-start p-0 m-0" (click)="selectedTask=t">
+    <ul class="p-4" (drop)="onDrop($event,'Completed')">
+<li *ngFor="let t of tasksCompleted index as i" class="text-start p-0 m-0" (click)="selectedTask=t" (dragstart)="onDragStart(t)">
 <p class="m-1 bg-light rounded title">{{t.title}}</p>
   <p class="m-1 bg-light rounded">{{t.status}}</p>
   <p class="m-1 bg-light rounded py-2" id="C{{i}}">{{formatCodeToHtml(t.description,'C',i)}}</p>

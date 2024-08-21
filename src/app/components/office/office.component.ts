@@ -281,4 +281,11 @@ this.tasksCompleted=tasks
     return div.innerHTML+=delta
   }
   }
+ onDragStart(item:Tasks){
+
+ }
+
+ onDrop(event:any,status:string){
+
+ }
 }
