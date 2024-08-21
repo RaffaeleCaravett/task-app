@@ -25,7 +25,7 @@ directions:any[]=[]
 searchCompletedTask!:FormGroup
 searchInProgressTask!:FormGroup
 searchUnstartedTask!:FormGroup
-
+elements:any[]=[]
 constructor(private officeService:OfficeService,private toastr:ToastrService){}
 
   ngOnInit(): void {
@@ -41,19 +41,19 @@ status:new FormControl('',Validators.required)
 })
 
 this.searchCompletedTask= new FormGroup({
-page:new FormControl(1,Validators.required),
+page:new FormControl(1,[Validators.required,Validators.min(1)]),
 size:new FormControl(2,Validators.required),
 sort:new FormControl('id',Validators.required),
 order:new FormControl('asc',Validators.required)
 })
 this.searchInProgressTask= new FormGroup({
-  page:new FormControl(1,Validators.required),
+  page:new FormControl(1,[Validators.required,Validators.min(1)]),
   size:new FormControl(2,Validators.required),
   sort:new FormControl('id',Validators.required),
   order:new FormControl('asc',Validators.required)
   })
   this.searchUnstartedTask= new FormGroup({
-    page:new FormControl(1,Validators.required),
+    page:new FormControl(1,[Validators.required,Validators.min(1)]),
     size:new FormControl(2,Validators.required),
     sort:new FormControl('id',Validators.required),
     order:new FormControl('asc',Validators.required)
@@ -121,9 +121,9 @@ this.officeService.postTask(task).subscribe({
 
   getTasks(page?:number,size?:number,sort?:string,order?:string,status?:string){
     if(!status){
-    this.tasksUnstarted=[]
-              this.tasksInProgress=[]
-              this.tasksCompleted=[]
+      this.tasksUnstarted=[]
+      this.tasksInProgress=[]
+      this.tasksCompleted=[]
     this.officeService.getTasksByStatus('Unstarted',page||1,size||2,sort||'id',order||'asc').subscribe({
       next:(tasks:any)=>{
         if(tasks&&tasks[0]){
@@ -163,14 +163,17 @@ this.officeService.postTask(task).subscribe({
           if(tasks&&tasks[0]){
             switch(status){
               case('Unstarted'):{
+                this.tasksUnstarted=[]
                 this.tasksUnstarted=tasks
               }
               break;
               case('In Progress'):{
+                this.tasksInProgress=[]
                 this.tasksInProgress=tasks
               }
               break;
               case('Completed'):{
+                this.tasksCompleted=[]
                 this.tasksCompleted=tasks
               }
               break;
@@ -179,7 +182,6 @@ this.officeService.postTask(task).subscribe({
               }
               break;
             }
-          this.tasksCompleted=tasks
                   }
         },
         error:(error:any)=>{
@@ -210,6 +212,17 @@ this.officeService.postTask(task).subscribe({
       next:(directions:any)=>{
         if(directions&&directions[0]){
         this.directions=directions
+        }
+      },
+      error:(error:any)=>{
+        this.toastr.error(error.message||environment.COMMON_ERROR)
+      },
+      complete:()=>{}
+     })
+     this.officeService.getElements().subscribe({
+      next:(elements:any)=>{
+        if(elements&&elements[0]){
+        this.elements=elements
         }
       },
       error:(error:any)=>{

@@ -49,6 +49,49 @@
   <p class="m-1 bg-light rounded py-2">{{t.description}}</p>
 </li>
 <li *ngIf="!tasksUnstarted||tasksUnstarted.length==0">Still no tasks</li>
+<p class="pt-5">Want to search?</p>
+<hr>
+<div *ngIf="tasksCompleted&&tasksCompleted.length>0" class="pt-5">
+  <form [formGroup]="searchUnstartedTask">
+    <div class="row">
+  <div class="col-md-12 py-2">
+<label> Pagina</label><br>
+<input type="number" class="w-50" formControlName="page">
+  </div>
+  <div class="col-md-4 py-2">
+<label> Elementi</label><br>
+<select formControlName="size">
+  <option value=""></option>
+  <option value="{{e.value}}" *ngFor="let e of elements">{{e.value}}</option>
+</select>
+  </div>
+  <div class="col-md-4 py-2">
+<label>Ordine</label><br>
+    <select formControlName="sort">
+  <option value=""></option>
+  <option value="{{t.value}}" *ngFor="let t of taskAttributes">{{t.value}}</option>
+</select>
+  </div>
+  <div class="col-md-4 py-2">
+    <label>Direzione</label><br>
+    <select formControlName="order">
+      <option value=""></option>
+  <option value="{{d.value}}" *ngFor="let d of directions">{{d.value}}</option>
+</select>
+  </div>
+</div>
+<div class="col-md-12 py-2">
+  <button class="btn" type="button" (click)="getTasks(searchUnstartedTask.controls['page'].value,
+  searchUnstartedTask.controls['size'].value,
+  searchUnstartedTask.controls['sort'].value,
+  searchUnstartedTask.controls['order'].value,
+  'Unstarted')">
+    Cerca
+  </button>
+</div>
+  </form>
+
+</div>
     </ul>
   </ng-template>
   </div>
@@ -72,6 +115,49 @@ In Progress
   <p class="m-1 bg-light rounded py-2">{{t.description}}</p>
 </li>
 <li *ngIf="!tasksInProgress||tasksInProgress.length==0">Still no tasks</li>
+<p class="pt-5">Want to search?</p>
+<hr>
+<div *ngIf="tasksCompleted&&tasksCompleted.length>0" class="pt-5">
+  <form [formGroup]="searchInProgressTask">
+    <div class="row">
+  <div class="col-md-12 py-2">
+<label> Pagina</label><br>
+<input type="number" class="w-50" formControlName="page">
+  </div>
+  <div class="col-md-4 py-2">
+<label> Elementi</label><br>
+<select formControlName="size">
+  <option value=""></option>
+  <option value="{{e.value}}" *ngFor="let e of elements">{{e.value}}</option>
+</select>
+  </div>
+  <div class="col-md-4 py-2">
+<label>Ordine</label><br>
+    <select formControlName="sort">
+  <option value=""></option>
+  <option value="{{t.value}}" *ngFor="let t of taskAttributes">{{t.value}}</option>
+</select>
+  </div>
+  <div class="col-md-4 py-2">
+    <label>Direzione</label><br>
+    <select formControlName="order">
+      <option value=""></option>
+  <option value="{{d.value}}" *ngFor="let d of directions">{{d.value}}</option>
+</select>
+  </div>
+</div>
+<div class="col-md-12 py-2">
+  <button class="btn" type="button" (click)="getTasks(searchInProgressTask.controls['page'].value,
+  searchInProgressTask.controls['size'].value,
+  searchInProgressTask.controls['sort'].value,
+  searchInProgressTask.controls['order'].value,
+  'In Progress')">
+    Cerca
+  </button>
+</div>
+  </form>
+
+</div>
     </ul>
   </ng-template>
   </div>
@@ -95,34 +181,43 @@ Completed
   <p class="m-1 bg-light rounded py-2">{{t.description}}</p>
 </li>
 <li *ngIf="!tasksCompleted||tasksCompleted.length==0">Still no tasks</li>
-<div *ngIf="tasksCompleted&&tasksCompleted.length>0">
+<p class="pt-5">Want to search?</p>
+<hr>
+<div *ngIf="tasksCompleted&&tasksCompleted.length>0" class="pt-5">
   <form [formGroup]="searchCompletedTask">
     <div class="row">
-  <div class="col-md-12" *ngIf="tasksCompleted.length>1">
-<button class="btn fs-5">
-  Indietro
-</button>
-<button class="btn fs-5">
-Avanti
-</button>
+  <div class="col-md-12 py-2">
+<label> Pagina</label><br>
+<input type="number"  formControlName="page">
   </div>
-  <div class="col-md-6">
-<label>Ordina per</label><br>
-    <select>
+  <div class="col-md-4 py-2">
+<label> Elementi</label><br>
+<select formControlName="size">
+  <option value=""></option>
+  <option value="{{e.value}}" *ngFor="let e of elements">{{e.value}}</option>
+</select>
+  </div>
+  <div class="col-md-4 py-2">
+<label>Ordine</label><br>
+    <select formControlName="sort">
   <option value=""></option>
   <option value="{{t.value}}" *ngFor="let t of taskAttributes">{{t.value}}</option>
 </select>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-4 py-2">
     <label>Direzione</label><br>
-    <select>
+    <select formControlName="order">
       <option value=""></option>
   <option value="{{d.value}}" *ngFor="let d of directions">{{d.value}}</option>
 </select>
   </div>
 </div>
-<div class="col-md-12 py-5">
-  <button class="btn" type="button" (click)="getTasks()">
+<div class="col-md-12 py-2">
+  <button class="btn" type="button" (click)="getTasks(searchCompletedTask.controls['page'].value,
+  searchCompletedTask.controls['size'].value,
+  searchCompletedTask.controls['sort'].value,
+  searchCompletedTask.controls['order'].value,
+  'Completed')">
     Cerca
   </button>
 </div>
