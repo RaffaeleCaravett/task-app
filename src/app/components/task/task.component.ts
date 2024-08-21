@@ -64,7 +64,7 @@ ngOnChanges(changes: SimpleChanges): void {
 
 putTask(){
   console.log(this.updatedTitle)
-if(this.taskForm.valid){
+if(this.taskForm.valid||(this.taskForm.controls['title'].value&&this.taskForm.controls['status'].value&&this.changedDescription!='')){
   let task ={
     title:this.taskForm.controls['title'].value,
     description:this.changedDescription!=''?this.changedDescription:this.taskForm.controls['description'].value,
@@ -166,7 +166,6 @@ onSelectionChanged = (event:any) =>{
 
 onContentChanged = (event:any) =>{
 this.changedDescription=event.html
-console.log(this.changedDescription)
 }
 onFocus = () =>{
   console.log("On Focus");

@@ -13,5 +13,10 @@ h1{
 
   li{
     cursor: pointer;
+    transition: 1s;
+    &:hover{
+      transform: scale(1.05);
+      transition: 1s;
+    }
   }
 
