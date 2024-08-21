@@ -20,22 +20,51 @@ tasksUnstarted:any[]=[]
 tasksInProgress:any[]=[]
 tasksCompleted:any[]=[]
 selectedTask:any
+taskAttributes:any[]=[]
+directions:any[]=[]
+searchCompletedTask!:FormGroup
+searchInProgressTask!:FormGroup
+searchUnstartedTask!:FormGroup
+
 constructor(private officeService:OfficeService,private toastr:ToastrService){}
 
   ngOnInit(): void {
+
 this.user=this.officeService.getUser()
-    localStorage.setItem('location','/office')
+
+localStorage.setItem('location','/office')
+
     this.taskForm=new FormGroup({
 title:new FormControl('',Validators.required),
 description:new FormControl('',Validators.required),
 status:new FormControl('',Validators.required)
 })
 
+this.searchCompletedTask= new FormGroup({
+page:new FormControl(1,Validators.required),
+size:new FormControl(2,Validators.required),
+sort:new FormControl('id',Validators.required),
+order:new FormControl('asc',Validators.required)
+})
+this.searchInProgressTask= new FormGroup({
+  page:new FormControl(1,Validators.required),
+  size:new FormControl(2,Validators.required),
+  sort:new FormControl('id',Validators.required),
+  order:new FormControl('asc',Validators.required)
+  })
+  this.searchUnstartedTask= new FormGroup({
+    page:new FormControl(1,Validators.required),
+    size:new FormControl(2,Validators.required),
+    sort:new FormControl('id',Validators.required),
+    order:new FormControl('asc',Validators.required)
+    })
+
 this.isLoading=true;
 
 setTimeout(()=>{
   this.isLoading=false;
   this.getTasks()
+  this.getSearchSelects()
 },2000)
 this.getStati()
   }
@@ -163,5 +192,30 @@ this.officeService.postTask(task).subscribe({
   updateSelectedTask(event:any){
     this.selectedTask=event
     this.getTasks()
+  }
+
+  getSearchSelects(){
+    this.officeService.getAttributes().subscribe({
+      next:(attributes:any)=>{
+        if(attributes&&attributes[0]){
+        this.taskAttributes=attributes
+        }
+      },
+      error:(error:any)=>{
+        this.toastr.error(error.message||environment.COMMON_ERROR)
+      },
+      complete:()=>{}
+     })
+     this.officeService.getDirections().subscribe({
+      next:(directions:any)=>{
+        if(directions&&directions[0]){
+        this.directions=directions
+        }
+      },
+      error:(error:any)=>{
+        this.toastr.error(error.message||environment.COMMON_ERROR)
+      },
+      complete:()=>{}
+     })
   }
 }

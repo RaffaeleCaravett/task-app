@@ -136,5 +136,33 @@
       "user_id": "9256",
       "id": "5c32"
     }
+  ],
+  "tasksAttributes": [
+    {
+      "id": 1,
+      "value":"id"
+    },
+    {
+      "id": 2,
+      "value": "title"
+    },
+    {
+      "id": 3,
+      "value": "description"
+    },
+    {
+      "id": 4,
+      "value": "status"
+    }
+  ],
+  "directions": [
+    {
+      "id": 1,
+      "value":"asc"
+    },
+    {
+      "id": 2,
+      "value": "desc"
+    }
   ]
 }

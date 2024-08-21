@@ -9,6 +9,8 @@ export class OfficeService {
 
   private status:string='status'
   private tasks:string='tasks'
+  private directions:string='directions'
+  private tasksAttributes:string='tasksAttributes'
   private user:any={}
   constructor(private http:HttpClient) { }
 
@@ -40,5 +42,11 @@ postTask(task:any){
     }
     getUser(){
       return this.user
+    }
+    getAttributes(){
+      return this.http.get(environment.API_URL+this.tasksAttributes)
+    }
+    getDirections(){
+      return this.http.get(environment.API_URL+this.directions)
     }
 }

@@ -95,6 +95,40 @@ Completed
   <p class="m-1 bg-light rounded py-2">{{t.description}}</p>
 </li>
 <li *ngIf="!tasksCompleted||tasksCompleted.length==0">Still no tasks</li>
+<div *ngIf="tasksCompleted&&tasksCompleted.length>0">
+  <form [formGroup]="searchCompletedTask">
+    <div class="row">
+  <div class="col-md-12" *ngIf="tasksCompleted.length>1">
+<button class="btn fs-5">
+  Indietro
+</button>
+<button class="btn fs-5">
+Avanti
+</button>
+  </div>
+  <div class="col-md-6">
+<label>Ordina per</label><br>
+    <select>
+  <option value=""></option>
+  <option value="{{t.value}}" *ngFor="let t of taskAttributes">{{t.value}}</option>
+</select>
+  </div>
+  <div class="col-md-6">
+    <label>Direzione</label><br>
+    <select>
+      <option value=""></option>
+  <option value="{{d.value}}" *ngFor="let d of directions">{{d.value}}</option>
+</select>
+  </div>
+</div>
+<div class="col-md-12 py-5">
+  <button class="btn" type="button" (click)="getTasks()">
+    Cerca
+  </button>
+</div>
+  </form>
+
+</div>
     </ul>
   </ng-template>
   </div>
