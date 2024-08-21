@@ -26,6 +26,10 @@ searchCompletedTask!:FormGroup
 searchInProgressTask!:FormGroup
 searchUnstartedTask!:FormGroup
 elements:any[]=[]
+unstartedSearching:boolean=false
+inProgressSearching:boolean=false
+completedSearching:boolean=false
+
 constructor(private officeService:OfficeService,private toastr:ToastrService){}
 
   ngOnInit(): void {
@@ -158,23 +162,38 @@ this.officeService.postTask(task).subscribe({
       complete:()=>{}
      })
     }else{
+
+
       this.officeService.getTasksByStatus(status,page||1,size||2,sort||'id',order||'asc').subscribe({
         next:(tasks:any)=>{
           if(tasks&&tasks[0]){
             switch(status){
               case('Unstarted'):{
-                this.tasksUnstarted=[]
+                this.unstartedSearching=true
+                setTimeout(()=>{
+                     this.tasksUnstarted=[]
                 this.tasksUnstarted=tasks
+this.unstartedSearching=false
+                },1500)
               }
               break;
               case('In Progress'):{
-                this.tasksInProgress=[]
+                this.inProgressSearching=true
+                setTimeout(()=>{
+this.inProgressSearching=false
+this.tasksInProgress=[]
                 this.tasksInProgress=tasks
+                },1500)
+
               }
               break;
               case('Completed'):{
-                this.tasksCompleted=[]
-                this.tasksCompleted=tasks
+                this.completedSearching=true
+                setTimeout(()=>{
+this.completedSearching=false
+this.tasksCompleted=[]
+this.tasksCompleted=tasks
+                },1500)
               }
               break;
               default:{

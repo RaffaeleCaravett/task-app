@@ -52,7 +52,7 @@
 <p class="pt-5">Want to search?</p>
 <hr>
 <div *ngIf="tasksCompleted&&tasksCompleted.length>0" class="pt-5">
-  <form [formGroup]="searchUnstartedTask">
+  <form [formGroup]="searchUnstartedTask" *ngIf="!unstartedSearching else unSearch">
     <div class="row">
   <div class="col-md-12 py-2">
 <label> Pagina</label><br>
@@ -90,7 +90,11 @@
   </button>
 </div>
   </form>
-
+<ng-template #unSearch>
+  <div class="w-100">
+    <mat-spinner class="m-auto"></mat-spinner>
+  </div>
+</ng-template>
 </div>
     </ul>
   </ng-template>
@@ -118,7 +122,7 @@ In Progress
 <p class="pt-5">Want to search?</p>
 <hr>
 <div *ngIf="tasksCompleted&&tasksCompleted.length>0" class="pt-5">
-  <form [formGroup]="searchInProgressTask">
+  <form [formGroup]="searchInProgressTask" *ngIf="!inProgressSearching else inSearch">
     <div class="row">
   <div class="col-md-12 py-2">
 <label> Pagina</label><br>
@@ -156,7 +160,11 @@ In Progress
   </button>
 </div>
   </form>
-
+  <ng-template #inSearch>
+    <div class="w-100">
+      <mat-spinner class="m-auto"></mat-spinner>
+    </div>
+  </ng-template>
 </div>
     </ul>
   </ng-template>
@@ -184,7 +192,7 @@ Completed
 <p class="pt-5">Want to search?</p>
 <hr>
 <div *ngIf="tasksCompleted&&tasksCompleted.length>0" class="pt-5">
-  <form [formGroup]="searchCompletedTask">
+  <form [formGroup]="searchCompletedTask" *ngIf="!completedSearching else cmSearch">
     <div class="row">
   <div class="col-md-12 py-2">
 <label> Pagina</label><br>
@@ -222,7 +230,11 @@ Completed
   </button>
 </div>
   </form>
-
+  <ng-template #cmSearch>
+    <div class="w-100">
+      <mat-spinner class="m-auto"></mat-spinner>
+    </div>
+  </ng-template>
 </div>
     </ul>
   </ng-template>
