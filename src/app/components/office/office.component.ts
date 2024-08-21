@@ -90,25 +90,36 @@ this.officeService.postTask(task).subscribe({
     }
   }
 
-  getTasks(){
+  getTasks(page?:number,size?:number,sort?:string,order?:string){
     this.tasksUnstarted=[]
               this.tasksInProgress=[]
               this.tasksCompleted=[]
-    this.officeService.getTasks().subscribe({
+    this.officeService.getTasksByStatus('Unstarted',page||1,size||2,sort||'id',order||'asc').subscribe({
       next:(tasks:any)=>{
         if(tasks&&tasks[0]){
-          this.tasks=tasks
-          this.tasks.filter(t=>{
-            if(t.status=='Unstarted'){
-              this.tasksUnstarted.push(t)
-            }else if(t.status=='In Progress'){
-              this.tasksInProgress.push(t)
-            }else if(t.status=='Completed'){
-              this.tasksCompleted.push(t)
-            }else{
-              console.log("Different status")
-            }
-          })
+        this.tasksUnstarted=tasks
+                }
+      },
+      error:(error:any)=>{
+        this.toastr.error(error.message||environment.COMMON_ERROR)
+      },
+      complete:()=>{}
+     })
+     this.officeService.getTasksByStatus('In Progress',page||1,size||2,sort||'id',order||'asc').subscribe({
+      next:(tasks:any)=>{
+        if(tasks&&tasks[0]){
+        this.tasksInProgress=tasks
+                }
+      },
+      error:(error:any)=>{
+        this.toastr.error(error.message||environment.COMMON_ERROR)
+      },
+      complete:()=>{}
+     })
+     this.officeService.getTasksByStatus('Completed',page||1,size||2,sort||'id',order||'asc').subscribe({
+      next:(tasks:any)=>{
+        if(tasks&&tasks[0]){
+        this.tasksCompleted=tasks
                 }
       },
       error:(error:any)=>{

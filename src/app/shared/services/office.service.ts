@@ -16,8 +16,12 @@ getStatus(){
 return this.http.get(environment.API_URL+this.status)
 }
 
-getTasksByStatus(status:string){
-return this.http.get(environment.API_URL+this.tasks+`?status=${status}`)
+getTasksByStatus(status:string,page:number,size:number,sort:string,order:string){
+  if(order=='asc'){
+return this.http.get(environment.API_URL+this.tasks+`?status=${status}&_page=${page}&_limit=${size}&_sort=${sort}&_order=asc`)
+  }else {
+    return this.http.get(environment.API_URL+this.tasks+`?status=${status}&_page=${page}&_limit=${size}&_sort=-${sort}`)
+  }
 }
 getTasks(){
   return this.http.get(environment.API_URL+this.tasks)
