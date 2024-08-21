@@ -32,7 +32,7 @@
  </div>
  <div class="col-md-4 p-2">
   <div class="border rounded shadow-sm">
- <p class="fs-5 bg-light p-2">
+ <p class="fs-5 bg-success p-2 fw-bold rounded-top">
     Unstarded
   </p>
   <ul *ngIf="isLoading else notLoadingUnstarted" class="p-4">
@@ -98,7 +98,7 @@
  </div>
  <div class="col-md-4 p-2">
   <div class="border rounded shadow-sm">
- <p class="fs-5 bg-light p-2">
+ <p class="fs-5 bg-warning p-2 fw-bold rounded-top">
 In Progress
   </p>
   <ul *ngIf="isLoading else notLoadingInProgress" class="p-4">
@@ -164,7 +164,7 @@ In Progress
  </div>
  <div class="col-md-4 p-2">
   <div class="border rounded shadow-sm">
-  <p class="fs-5 bg-light p-2">
+  <p class="fs-5 bg-danger p-2 fw-bold rounded-top">
 Completed
   </p>
   <ul *ngIf="isLoading else notLoadingComplete" class="p-4">
