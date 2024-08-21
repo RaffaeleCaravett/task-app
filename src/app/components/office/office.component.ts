@@ -114,4 +114,7 @@ this.officeService.postTask(task).subscribe({
       complete:()=>{}
      })
   }
+  updateSelectedTask(event:any){
+    this.selectedTask=event
+  }
 }

@@ -100,7 +100,7 @@ Completed
   </div>
  </div>
  <div class="col-md-12 py-5" *ngIf="selectedTask">
-  <app-task [task]="selectedTask" [stati]="stati"></app-task>
+  <app-task [task]="selectedTask" [stati]="stati" (selectedTask)="updateSelectedTask($event)"></app-task>
  </div>
   </div>
 </div>

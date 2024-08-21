@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OfficeService } from 'src/app/shared/services/office.service';
 
@@ -11,6 +11,7 @@ export class TaskComponent implements OnInit, OnChanges{
 
 @Input() task:any={}
 @Input() stati:any[]=[]
+@Output() selectedTask:EventEmitter<any> = new EventEmitter<any>()
 
 taskForm!:FormGroup
 constructor(private officeService:OfficeService){}
@@ -37,5 +38,8 @@ putTask(){
 }
 deleteTask(){
 
+}
+close(){
+  this.selectedTask.emit(null)
 }
 }
