@@ -90,7 +90,8 @@ this.officeService.postTask(task).subscribe({
     }
   }
 
-  getTasks(page?:number,size?:number,sort?:string,order?:string){
+  getTasks(page?:number,size?:number,sort?:string,order?:string,status?:string){
+    if(!status){
     this.tasksUnstarted=[]
               this.tasksInProgress=[]
               this.tasksCompleted=[]
@@ -127,6 +128,37 @@ this.officeService.postTask(task).subscribe({
       },
       complete:()=>{}
      })
+    }else{
+      this.officeService.getTasksByStatus(status,page||1,size||2,sort||'id',order||'asc').subscribe({
+        next:(tasks:any)=>{
+          if(tasks&&tasks[0]){
+            switch(status){
+              case('Unstarted'):{
+                this.tasksUnstarted=tasks
+              }
+              break;
+              case('In Progress'):{
+                this.tasksInProgress=tasks
+              }
+              break;
+              case('Completed'):{
+                this.tasksCompleted=tasks
+              }
+              break;
+              default:{
+               this.toastr.error(environment.COMMON_ERROR)
+              }
+              break;
+            }
+          this.tasksCompleted=tasks
+                  }
+        },
+        error:(error:any)=>{
+          this.toastr.error(error.message||environment.COMMON_ERROR)
+        },
+        complete:()=>{}
+       })
+    }
   }
   updateSelectedTask(event:any){
     this.selectedTask=event
