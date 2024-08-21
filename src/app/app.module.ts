@@ -9,7 +9,8 @@ import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-br
 import { ToastrModule, provideToastr } from 'ngx-toastr';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomeComponent } from './components/home/home.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { ErrorInterceptor } from './core/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,11 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
     ],
  providers:[
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: ErrorInterceptor,
+    multi: true,
+  },
     provideAnimations(),
     provideToastr()
  ],

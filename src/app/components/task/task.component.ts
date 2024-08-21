@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/app/core/environment';
+import { status, Tasks } from 'src/app/interfaces/interfaces';
 import { ConfirmDeleteComponent } from 'src/app/shared/components/confirm-delete/confirm-delete.component';
 import { OfficeService } from 'src/app/shared/services/office.service';
 
@@ -12,9 +13,10 @@ import { OfficeService } from 'src/app/shared/services/office.service';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent implements OnInit, OnChanges{
+[x: string]: any;
 
-@Input() task:any={}
-@Input() stati:any[]=[]
+@Input() task!:Tasks
+@Input() stati!:status[]
 @Output() selectedTask:EventEmitter<any> = new EventEmitter<any>()
 
 taskForm!:FormGroup
@@ -81,7 +83,7 @@ complete:()=>{
 this.toastr.error(environment.COMMON_ERROR_FORMS)
 }
 }
-deleteTask(taskId:number){
+deleteTask(taskId:string){
 if(taskId){
   const dialogRef = this.matDialog.open(ConfirmDeleteComponent,{data:taskId})
   dialogRef.afterClosed().subscribe((data)=>{

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/app/core/environment';
+import { directions, elements, status, Task, taskAttributes, Tasks, userLogged } from 'src/app/interfaces/interfaces';
 import { OfficeService } from 'src/app/shared/services/office.service';
 
 @Component({
@@ -12,20 +13,20 @@ import { OfficeService } from 'src/app/shared/services/office.service';
 export class OfficeComponent implements OnInit{
 isLoading:boolean=false
 taskForm!:FormGroup
-stati:any[]=[]
-user:any
+stati:status[]=[]
+user!:userLogged
 isTaskSubmitted:boolean=false
-tasks:any[]=[]
-tasksUnstarted:any[]=[]
-tasksInProgress:any[]=[]
-tasksCompleted:any[]=[]
-selectedTask:any
-taskAttributes:any[]=[]
-directions:any[]=[]
+tasks:Tasks[]=[]
+tasksUnstarted:Tasks[]=[]
+tasksInProgress:Tasks[]=[]
+tasksCompleted:Tasks[]=[]
+selectedTask!:Tasks
+taskAttributes:taskAttributes[]=[]
+directions:directions[]=[]
 searchCompletedTask!:FormGroup
 searchInProgressTask!:FormGroup
 searchUnstartedTask!:FormGroup
-elements:any[]=[]
+elements:elements[]=[]
 unstartedSearching:boolean=false
 inProgressSearching:boolean=false
 completedSearching:boolean=false
@@ -96,7 +97,7 @@ complete:()=>{
   postTask(){
     this.isTaskSubmitted=true
     if(this.taskForm.valid){
-let task ={
+let task: Task ={
   title:this.taskForm.controls['title'].value,
   description:this.taskForm.controls['description'].value,
   status:this.taskForm.controls['status'].value,
@@ -110,6 +111,9 @@ this.toastr.error("Hai già caricato un task con questo titolo!")
       this.officeService.postTask(task).subscribe({
   next:(task:any)=>{
   if(task){
+    this.toastr.show("Task inserito correttamente")
+    this.taskForm.reset()
+    this.isTaskSubmitted=false
    this.getTasks()
   }else{
     this.toastr.error(environment.COMMON_ERROR)

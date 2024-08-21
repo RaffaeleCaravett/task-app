@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/app/core/environment';
+import { cap, cities, regions, userLogin, userSignup } from 'src/app/interfaces/interfaces';
 import { FormsService } from 'src/app/shared/services/forms.service';
 import { OfficeService } from 'src/app/shared/services/office.service';
 
@@ -17,9 +18,9 @@ loginForm!:FormGroup
 signupForm!:FormGroup
 submittedLogin:boolean=false
 submittedSignup:boolean=false
-cities:any[]=[]
-region:any
-cap:any
+cities:cities[]=[]
+region!:regions[]
+cap!:cap[]
 
 constructor(private toastr:ToastrService,private formsService:FormsService,private router:Router,private officeService:OfficeService){}
 
@@ -54,7 +55,7 @@ this.toastr.error(error?.message||environment.COMMON_ERROR)
 login(){
   this.submittedLogin=true
 if(this.loginForm.valid){
-let userLogin = {
+let userLogin:userLogin = {
   email:this.loginForm.controls['email'].value,
   password:this.loginForm.controls['password'].value
 }
@@ -94,7 +95,7 @@ this.submittedSignup=false
 register(){
   this.submittedSignup=true
 if(this.signupForm.valid){
-let user = {
+let user:userSignup = {
   nome: this.signupForm.controls['nome'].value,
   cognome: this.signupForm.controls['cognome'].value,
   citta: this.signupForm.controls['citta'].value,
@@ -102,7 +103,7 @@ let user = {
   cap: this.signupForm.controls['cap'].value,
   email: this.signupForm.controls['email'].value,
   password: this.signupForm.controls['password'].value,
-  sex: this.signupForm.controls['sex'].value
+  sex: this.signupForm.controls['sex'].value,
 }
 this.formsService.findUserByEmail(user.email).subscribe({
   next:(data:any)=>{

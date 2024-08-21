@@ -35,10 +35,10 @@ getTasks(){
 postTask(task:any){
   return this.http.post(environment.API_URL+this.tasks,task)
   }
-  putTask(task:any,id:number){
+  putTask(task:any,id:string){
     return this.http.put(environment.API_URL+this.tasks+`/${id}`,task)
     }
-    deleteTask(id:number){
+    deleteTask(id:string){
       return this.http.delete(environment.API_URL+this.tasks+`/${id}`)
       }
     setUser(user:any){
