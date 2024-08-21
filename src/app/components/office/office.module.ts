@@ -6,21 +6,26 @@ import { OfficeComponent } from './office.component';
 import { SkeletonModuleModule } from 'src/app/shared/modules/skeleton-module/skeleton-module.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TaskComponent } from 'src/app/components/task/task.component';
+import { ConfirmDeleteComponent } from 'src/app/shared/components/confirm-delete/confirm-delete.component';
+import { MatDialogModule } from '@angular/material/dialog'
 
 
 @NgModule({
   declarations: [
     OfficeComponent,
-    TaskComponent
+    TaskComponent,
+    ConfirmDeleteComponent
   ],
   imports: [
     CommonModule,
     OfficeRoutingModule,
     SkeletonModuleModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule
   ],
   exports:[
-    TaskComponent
+    TaskComponent,
+    ConfirmDeleteComponent
   ]
 })
 export class OfficeModule { }

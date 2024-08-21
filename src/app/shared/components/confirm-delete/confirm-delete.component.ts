@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-confirm-delete',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./confirm-delete.component.scss']
 })
 export class ConfirmDeleteComponent {
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: number) { }
 
 }

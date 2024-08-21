@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/app/core/environment';
+import { ConfirmDeleteComponent } from 'src/app/shared/components/confirm-delete/confirm-delete.component';
 import { OfficeService } from 'src/app/shared/services/office.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class TaskComponent implements OnInit, OnChanges{
 @Output() selectedTask:EventEmitter<any> = new EventEmitter<any>()
 
 taskForm!:FormGroup
-constructor(private officeService:OfficeService,private toastr:ToastrService,private matDialog:MatDialogModule){}
+constructor(private officeService:OfficeService,private toastr:ToastrService,private matDialog:MatDialog){}
 
 ngOnInit(): void {
   console.log(this.task)
@@ -65,8 +66,29 @@ if(this.taskForm.valid){
 this.toastr.error(environment.COMMON_ERROR_FORMS)
 }
 }
-deleteTask(){
-
+deleteTask(taskId:number){
+if(taskId){
+  const dialogRef = this.matDialog.open(ConfirmDeleteComponent,{data:taskId})
+  dialogRef.afterClosed().subscribe((data)=>{
+    if(data){
+    this.officeService.deleteTask(taskId).subscribe({
+      next:(deleted:any)=>{
+        if(deleted){
+          this.toastr.show("Task eliminato con successo.")
+          this.close()
+        }
+      },
+      error:(error:any)=>{
+        this.toastr.error(environment.COMMON_ERROR)
+      },
+      complete:()=>{}
+    })
+    }
+    else{
+this.toastr.show("Non è stato eliminato nessun task")
+    }
+  })
+}
 }
 close(){
   this.selectedTask.emit(null)
