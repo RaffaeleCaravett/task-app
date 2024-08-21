@@ -22,13 +22,13 @@ ngOnInit(): void {
 getMyClasses(){
   const myClasses = [
     this.Cwidth||'',
-    this.circle? 'rounded-circle':''
   ]
-  return myClasses[0] + ' ' + myClasses[2];
+  return myClasses[0];
 }
 getMyStyles(){
   const myStyles = {
-    'height.px': this.Cheight?this.Cheight:''
+    'height.px': this.Cheight?this.Cheight:'',
+    'border-radius': this.circle?'50%':''
   }
   return myStyles;
 }
