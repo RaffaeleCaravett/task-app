@@ -91,6 +91,9 @@ this.officeService.postTask(task).subscribe({
   }
 
   getTasks(){
+    this.tasksUnstarted=[]
+              this.tasksInProgress=[]
+              this.tasksCompleted=[]
     this.officeService.getTasks().subscribe({
       next:(tasks:any)=>{
         if(tasks&&tasks[0]){
@@ -116,5 +119,6 @@ this.officeService.postTask(task).subscribe({
   }
   updateSelectedTask(event:any){
     this.selectedTask=event
+    this.getTasks()
   }
 }

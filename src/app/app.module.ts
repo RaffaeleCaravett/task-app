@@ -10,6 +10,7 @@ import { ToastrModule, provideToastr } from 'ngx-toastr';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomeComponent } from './components/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ConfirmDeleteComponent } from './shared/components/confirm-delete/confirm-delete.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     NotFoundComponent,
     HomeComponent,
+    ConfirmDeleteComponent,
   ],
   imports: [
     BrowserModule,

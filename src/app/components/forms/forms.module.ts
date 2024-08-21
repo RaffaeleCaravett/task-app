@@ -5,7 +5,7 @@ import { FormsRoutingModule } from './forms-routing.module';
 import { FormsComponent } from './forms.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
-
+import { MatDialogModule } from '@angular/material/dialog'
 
 @NgModule({
   declarations: [
@@ -15,7 +15,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
     CommonModule,
     FormsRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
   ]
 })
 export class FormsModule { }
