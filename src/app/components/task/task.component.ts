@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/app/core/environment';
-import { status, Tasks } from 'src/app/interfaces/interfaces';
+import { status, Task, Tasks } from 'src/app/interfaces/interfaces';
 import { ConfirmDeleteComponent } from 'src/app/shared/components/confirm-delete/confirm-delete.component';
 import { OfficeService } from 'src/app/shared/services/office.service';
 
@@ -65,11 +65,11 @@ ngOnChanges(changes: SimpleChanges): void {
 putTask(){
   console.log(this.updatedTitle)
 if(this.taskForm.valid||(this.taskForm.controls['title'].value&&this.taskForm.controls['status'].value&&this.changedDescription!='')){
-  let task ={
+  let task:Task ={
     title:this.taskForm.controls['title'].value,
     description:this.changedDescription!=''?this.changedDescription:this.taskForm.controls['description'].value,
     status:this.taskForm.controls['status'].value,
-    user_id:this.task.user_id
+    user:this.task.user
   }
   if(this.updatedTitle!=''&&this.updatedTitle!=this.task.title){
   this.officeService.getTasksByTitle(task.title).subscribe({

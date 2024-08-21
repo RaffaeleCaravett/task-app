@@ -29,7 +29,7 @@
     {
       "id": 1,
       "name": "Lazio",
-      "citta": "Lazio"
+      "citta": "Roma"
     },
     {
       "id": 2,
@@ -91,6 +91,17 @@
       "email": "raffaelecaravetta1@gmail.com",
       "password": "ohohoh",
       "sex": "M"
+    },
+    {
+      "nome": "Raffaele",
+      "cognome": "Caravetta",
+      "citta": "Roma",
+      "regione": "Lazio",
+      "cap": 3010,
+      "email": "raffaelecaravetta@gmail.com",
+      "password": "aaaaaa",
+      "sex": "M",
+      "id": "-EYsLwq"
     }
   ],
   "status": [
@@ -113,56 +124,63 @@
       "title": "Title",
       "description": "ddd",
       "status": "Unstarted",
-      "user_id": "9256"
+      "user": "9256"
     },
     {
       "title": "title 3",
       "description": "ffff",
-      "status": "In Progress",
-      "user_id": "9256",
+      "status": "Completed",
+      "user": "9256",
       "id": "e1d3"
     },
     {
       "title": "title 33",
       "description": "FFFF",
       "status": "In Progress",
-      "user_id": "9256",
+      "user": "9256",
       "id": "5c32"
     },
     {
       "title": "title 11",
       "description": "<p>a new <strong>description!!</strong></p>",
-      "status": "Unstarted",
-      "user_id": "9256",
+      "status": "In Progress",
+      "user": "9256",
       "id": "8cfd"
     },
     {
       "title": "Titolo",
       "description": "descrizione di titolo",
       "status": "Unstarted",
-      "user_id": "9256",
+      "user": "9256",
       "id": "lRdQ_9l"
     },
     {
       "title": "Another title",
       "description": "another description",
       "status": "Unstarted",
-      "user_id": "9256",
+      "user": "9256",
       "id": "EhM2JfQ"
     },
     {
       "title": "another one",
       "description": "another one",
       "status": "Unstarted",
-      "user_id": "9256",
+      "user": "9256",
       "id": "JUPnxAm"
     },
     {
       "title": "title 1",
       "description": "<p><strong>description</strong></p>",
       "status": "Unstarted",
-      "user_id": "9256",
+      "user": "9256",
       "id": "xLWs_v4"
+    },
+    {
+      "title": "new title",
+      "description": "<p>a <strong>description</strong></p>",
+      "status": "Unstarted",
+      "user": "-EYsLwq",
+      "id": "D0IxHuk"
     }
   ],
   "tasksAttributes": [

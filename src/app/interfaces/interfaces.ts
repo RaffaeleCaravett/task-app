@@ -5,14 +5,14 @@ export interface Tasks {
     title: string,
     description: string,
     status: string,
-    user_id: string,
+    user: string,
     id: string
 };
 export interface Task {
   title: string,
   description: string,
   status: string,
-  user_id: string
+  user: string
 };
 export interface cities {
     id:number,
