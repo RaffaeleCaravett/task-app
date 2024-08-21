@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <form [formGroup]="taskForm" class="w-75 m-auto">
+        <div class="row">
+          <div class="col-md-8">
+      <label class="p-4">Title</label>
+      <input type="text" class="form-control" placeholder="Place a title" formControlName="title">
+      <p class="text-danger" *ngIf="taskForm.controls['title'].invalid">Campo invalido. Inserisci un valore.</p>
+          </div>
+            <div class="col-md-4">
+      <label class="p-4">Status</label>
+      <select class="form-select" formControlName="status">
+        <option value=""></option>
+        <option value="{{s.nome}}" *ngFor="let s of stati">{{s.nome}}</option>
+      </select>
+      <p class="text-danger" *ngIf="taskForm.controls['status'].invalid">Campo invalido. Seleziona un valore.</p>
+          </div>
+          <div class="col-md-12">
+      <label class="p-4">Description</label>
+      <textarea class="form-control" placeholder="Place some text" formControlName="description"></textarea>
+      <p class="text-danger" *ngIf="taskForm.controls['description'].invalid">Campo invalido. Inserisci un valore.</p>
+          </div>
+          <div class="col-md-12 py-4">
+            <button class="btn" type="button" (click)="putTask()">Modifica task</button>
+            <button class="btn btn-danger" type="button" (click)="deleteTask()">Cancella task</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

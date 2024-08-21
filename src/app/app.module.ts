@@ -10,7 +10,6 @@ import { ToastrModule, provideToastr } from 'ngx-toastr';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomeComponent } from './components/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
-import { TaskComponent } from './shared/components/task/task.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +18,6 @@ import { TaskComponent } from './shared/components/task/task.component';
     FooterComponent,
     NotFoundComponent,
     HomeComponent,
-    TaskComponent
   ],
   imports: [
     BrowserModule,

@@ -99,5 +99,8 @@ Completed
   </ng-template>
   </div>
  </div>
+ <div class="col-md-12 py-5" *ngIf="selectedTask">
+  <app-task [task]="selectedTask" [stati]="stati"></app-task>
+ </div>
   </div>
 </div>
