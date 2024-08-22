@@ -20,6 +20,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 export function createTransLoader(http:HttpClient){
 return new TranslateHttpLoader(http, './assets/i18n/','.json')
 }
+/*Qui dichiaro i componenti che si riferiscono all'appModule per i moduli e le librerie, importo questi ultimi, fornisco l'interceptor per gestire gli errori globalmente e imposto
+alcuni settaggi generali*/
 
 @NgModule({
   declarations: [

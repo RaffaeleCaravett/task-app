@@ -11,6 +11,11 @@ import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
+
+  /*
+  Interceptor che uso per intercettare gli errori di tutte le chiamate http che vengono effettuate. Lancio un toastr e mando in console l'errore
+  */
+
   constructor(private toastr: ToastrService) {}
   intercept(
     req: HttpRequest<any>,

@@ -11,6 +11,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
+/*
+  Guardia del router dell'applicativo. Contiene una variabile e un metodo per facilitare la gestione del ritorno del valore di approvazione della guardia.
+ */
+
   constructor() {}
 
   isAuthenticated: boolean = false;

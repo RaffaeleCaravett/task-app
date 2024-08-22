@@ -1,3 +1,5 @@
+/*definisco le interfacce che mi servono per tipizzare gli ogetti*/
+
 export interface Interfaces {}
 
 export interface Tasks {

@@ -1,3 +1,35 @@
 <app-nav></app-nav>
 <router-outlet></router-outlet>
 <app-footer></app-footer>
+
+<!--
+IMPOSTAZIONI GENERALI DEI COMPONENTI HTML
+
+Per tutti i componenti ho utilizzato le seguenti directives:
+*ngIf,
+*ngFor,
+ngClass
+
+Ho anche utilizzato gli ng-template da utilizzare nel caso *ngIf desse false con la dicitura *ngIf="condizione else id".
+
+Ho utilizzato componenti di librerie esterne come il mat-spinner, skeleton e altri.
+
+Ho implementato la logica dei componenti "parent - child" passando le variabili dal parent con [variabile]="variabile" dove le parentesi quadre contengono l'input del child e
+le virgolette contengono la variabile del parent, e con (variabile)="method($event)" dove le parentesi tonde contengono l'event emitter del child e le virgolette il metodo che
+catcha l'evento che contiente il valore emesso dall'event emitter.
+
+Ho utilizzato bootstrap per rendere l'applicazione responsive e user friendly.
+
+Ho utilizzato il one e two way data binding per comunicare efficientemente tra html e ts , con , per esempio :
+-(click)
+-(dragstart)
+-{{variabile}}
+-(input)
+-(change)
+-[formGroup]
+ecc.
+
+Ho formattato tutto il codice.
+
+Ho utilizzato ngx-translate per garantire una traduzione dell'applicativo e implementato una funzionalità per visualizzare l'app in modalità light o night.
+-->

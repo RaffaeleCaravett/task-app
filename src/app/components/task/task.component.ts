@@ -21,6 +21,16 @@ import { OfficeService } from 'src/app/shared/services/office.service';
   styleUrls: ['./task.component.scss'],
 })
 export class TaskComponent implements OnInit, OnChanges {
+
+/*
+Questo è un componente che utilizzo come child component all'interno dell'ufficio. Qui accetto alcuni parametri in entrata dal parent (@Input()), e ne mando altri in uscita
+(EventEmitter).
+Utilizzo ngx-quill per formattare il testo della descrizione del singolo task visualizzato.
+Effettuo alcune chiamate http per eliminare o modificare il dato task, effettuando la sottoscrizione con '.subscribe' e gestisco i dati asyncrono con gli stati ' next, error, complete'
+dove next sta per successo, error per aborto e complete garantisce l'esecuzione di regole di default se ne abbiamo.
+Uso una descrizione indipendente da quella del task per catchare eventuali cambiamenti o formattazioni del testo e, nel caso, inserirla nel body di richiesta della put request.
+*/
+
   [x: string]: any;
 
   @Input() task!: Tasks;
