@@ -10,11 +10,14 @@ import { FormsService } from 'src/app/shared/services/forms.service';
 })
 export class NavComponent {
   isUserAuthenticated: boolean = false;
-
+  background:boolean=false
   constructor(private formsService: FormsService, private router: Router, private translate:TranslateService
   ) {
     this.formsService.isAuthenticatedUser.subscribe((data: boolean) => {
       this.isUserAuthenticated = data;
+    });
+    this.formsService.background.subscribe((data: boolean) => {
+      this.background = data;
     });
   }
 
@@ -26,5 +29,8 @@ export class NavComponent {
 switchLanguage(lang:'it'|'en'){
   this.translate.use(lang)
 }
-
+setBg(){
+this.background=!this.background
+this.formsService.setBackground(this.background)
+}
 }

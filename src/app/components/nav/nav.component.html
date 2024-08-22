@@ -1,30 +1,30 @@
-<nav class="p-3 bg-light">
+<nav class="p-3" [ngClass]="!background?'bg-light text-dark':'bg-black text-light'">
   <div class="container text-center">
     <div class="row">
       <div class="col-md-12 py-5">
         <h1>{{ "titleNav" | translate }}</h1>
       </div>
       <div class="col-md-4">
-        <a routerLink="/"> Home </a>
+        <a routerLink="/" [ngClass]="!background?'bg-light text-dark':'bg-black text-light'"> Home </a>
       </div>
       <div class="col-md-4" *ngIf="isUserAuthenticated; else emptyCol4">
-        <a routerLink="/office"> Office </a>
+        <a routerLink="/office" [ngClass]="!background?'bg-light text-dark':'bg-black text-light'"> Office </a>
       </div>
       <ng-template #emptyCol4>
         <div class="col-md-4"></div>
       </ng-template>
       <div class="col-md-4" *ngIf="!isUserAuthenticated; else logout">
-        <a routerLink="/forms"> Login / Signup </a>
+        <a routerLink="/forms" [ngClass]="!background?'bg-light text-dark':'bg-black text-light'"> Login / Signup </a>
       </div>
       <ng-template #logout>
         <div class="col-md-4" *ngIf="isUserAuthenticated; else logout">
           <a routerLink="/forms">
-            <button class="btn" (click)="logOut()">Logout</button>
+            <button class="btn" [ngClass]="!background?'bg-light text-dark':'bg-black text-light'" (click)="logOut()">Logout</button>
           </a>
         </div>
       </ng-template>
       <div class="col-md-12 d-flex justify-content-end">
-        <button class="btn fs-6" (click)="switchLanguage('it')">
+        <button class="btn fs-6" [ngClass]="!background?'bg-light text-dark':'bg-black text-light'" (click)="switchLanguage('it')">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="32"
@@ -52,7 +52,7 @@
             ></path>
           </svg>
         </button>
-        <button class="btn fs-6" (click)="switchLanguage('en')">
+        <button class="btn fs-6" [ngClass]="!background?'bg-light text-dark':'bg-black text-light'" (click)="switchLanguage('en')">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="32"
@@ -174,6 +174,7 @@
             ></path>
           </svg>
         </button>
+        <button class="btn fs-6" [ngClass]="!background?'bg-light text-dark':'bg-black text-light'" (click)="setBg()">💡</button>
       </div>
     </div>
   </div>

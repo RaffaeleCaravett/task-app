@@ -15,6 +15,9 @@ export class FormsService {
   private regions: string = 'regions';
   private cap: string = 'cap';
   private users: string = 'users';
+  public background: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
 
   constructor(private http: HttpClient, private authGuard: AuthGuard) {}
 
@@ -48,5 +51,8 @@ export class FormsService {
   }
   findUserByEmail(email: string) {
     return this.http.get(environment.API_URL + this.users + `?email=${email}`);
+  }
+  setBackground(bg:boolean){
+this.background.next(bg)
   }
 }
