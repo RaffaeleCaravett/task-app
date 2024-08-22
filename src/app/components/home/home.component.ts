@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/app/core/environment';
 import { HomeService } from 'src/app/shared/services/home.service';
 
 @Component({
@@ -8,41 +10,44 @@ import { HomeService } from 'src/app/shared/services/home.service';
 })
 export class HomeComponent implements OnInit{
 firstImages:any[]=[]
-slider:string[]=[]
+slider:any[]=[]
 
-constructor(private homeService:HomeService){}
+constructor(private homeService:HomeService,private toastr :ToastrService){}
 
 ngOnInit(): void {
 
   localStorage.setItem('location','/')
+this.getElements()
+}
 
-  this.firstImages=[
-  {
-    title:'Fast',
-    description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    image:'assets/home/fast.png'
-  },
-  {
-    title:'Secure',
-    description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    image:'assets/home/security.png'
-  },
-  {
-    title:'Easy',
-    description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    image:'assets/home/list.png'
-  },
-]
-this.slider=[
-  'assets/home/list.png',
-  'assets/home/list.png',
-  'assets/home/security.png',
-  'assets/home/fast.png',
-  'assets/home/security.png',
-  'assets/home/fast.png',
-  'assets/home/fast.png',
-  'assets/home/security.png',
-  'assets/home/fast.png'
-  ]
+getElements(){
+  this.homeService.getFirstImages().subscribe({
+    next:(data:any)=>{
+if(data&&data[0]){
+  this.firstImages=data
+}else{
+  this.toastr.error(environment.COMMON_ERROR)
+}
+    },
+    error:(error)=>{
+      this.toastr.error(error.message||environment.COMMON_ERROR)
+
+    },
+    complete:()=>{}
+  })
+  this.homeService.getSlider().subscribe({
+    next:(data:any)=>{
+if(data&&data[0]){
+  this.slider=data
+}else{
+  this.toastr.error(environment.COMMON_ERROR)
+}
+    },
+    error:(error)=>{
+      this.toastr.error(error.message||environment.COMMON_ERROR)
+
+    },
+    complete:()=>{}
+  })
 }
 }
