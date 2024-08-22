@@ -9,8 +9,9 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { environment } from 'src/app/core/environment';
+import { environment, environmentErrors } from 'src/app/core/environment';
 import { status, Task, Tasks } from 'src/app/interfaces/interfaces';
 import { ConfirmDeleteComponent } from 'src/app/shared/components/confirm-delete/confirm-delete.component';
 import { OfficeService } from 'src/app/shared/services/office.service';
@@ -66,7 +67,8 @@ Uso una descrizione indipendente da quella del task per catchare eventuali cambi
   constructor(
     private officeService: OfficeService,
     private toastr: ToastrService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private translate:TranslateService
   ) {}
   /*on init lifecycle*/
   ngOnInit(): void {
@@ -105,26 +107,26 @@ Uso una descrizione indipendente da quella del task per catchare eventuali cambi
         this.officeService.getTasksByTitle(task.title).subscribe({
           next: (check: any) => {
             if ((check && check.length > 0) || (check && check[0])) {
-              this.toastr.error('Hai già caricato un task con questo titolo!');
+              this.toastr.error(this.translate.currentLang=='en'?environmentErrors.EN_TASK_ALREADY_UPDATED:environmentErrors.TASK_ALREADY_UPDATED);
             } else {
               this.officeService.putTask(task, this.task.id).subscribe({
                 next: (task: any) => {
                   if (task) {
-                    this.toastr.show('Task modificato con successo.');
+                    this.toastr.show(this.translate.currentLang=='en'?environmentErrors.EN_TASK_UPDATED:environmentErrors.TASK_UPDATED);
                     this.close();
                   } else {
-                    this.toastr.error(environment.COMMON_ERROR);
+                    this.toastr.error(this.translate.currentLang=='en'?environment.EN_COMMON_ERROR:environment.COMMON_ERROR);
                   }
                 },
                 error: (error: any) => {
-                  this.toastr.error(error.message || environment.COMMON_ERROR);
+                  this.toastr.error(error.message || this.translate.currentLang=='en'?environment.EN_COMMON_ERROR:environment.COMMON_ERROR);
                 },
                 complete: () => {},
               });
             }
           },
           error: (error: any) => {
-            this.toastr.error(error.message || environment.COMMON_ERROR);
+            this.toastr.error(error.message || this.translate.currentLang=='en'?environment.EN_COMMON_ERROR:environment.COMMON_ERROR);
           },
           complete: () => {},
         });
@@ -132,20 +134,20 @@ Uso una descrizione indipendente da quella del task per catchare eventuali cambi
         this.officeService.putTask(task, this.task.id).subscribe({
           next: (task: any) => {
             if (task) {
-              this.toastr.show('Task modificato con successo.');
+              this.toastr.show(this.translate.currentLang=='en'?environmentErrors.EN_TASK_UPDATED:environmentErrors.TASK_UPDATED);
               this.close();
             } else {
-              this.toastr.error(environment.COMMON_ERROR);
+              this.toastr.error(this.translate.currentLang=='en'?environment.EN_COMMON_ERROR:environment.COMMON_ERROR);
             }
           },
           error: (error: any) => {
-            this.toastr.error(error.message || environment.COMMON_ERROR);
+            this.toastr.error(error.message || this.translate.currentLang=='en'?environment.EN_COMMON_ERROR:environment.COMMON_ERROR);
           },
           complete: () => {},
         });
       }
     } else {
-      this.toastr.error(environment.COMMON_ERROR_FORMS);
+      this.toastr.error(this.translate.currentLang=='en'?environment.EN_COMMON_ERROR_FORMS:environment.COMMON_ERROR_FORMS);
     }
   }
   /*delete task method*/
@@ -159,7 +161,7 @@ Uso una descrizione indipendente da quella del task per catchare eventuali cambi
           this.officeService.deleteTask(taskId).subscribe({
             next: (deleted: any) => {
               if (deleted) {
-                this.toastr.show('Task eliminato con successo.');
+                this.toastr.show(this.translate.currentLang=='en'?environmentErrors.EN_TASK_DELETED:environmentErrors.TASK_DELETED);
                 this.close();
               }
             },
@@ -169,7 +171,7 @@ Uso una descrizione indipendente da quella del task per catchare eventuali cambi
             complete: () => {},
           });
         } else {
-          this.toastr.show('Non è stato eliminato nessun task');
+          this.toastr.show(this.translate.currentLang=='en'?environmentErrors.EN_TASK_UNDELETED:environmentErrors.TASK_UNDELETED);
         }
       });
     }

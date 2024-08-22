@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { environment } from 'src/app/core/environment';
+import { environment, environmentErrors } from 'src/app/core/environment';
 import {
   directions,
   elements,
@@ -14,6 +14,7 @@ import {
 import { OfficeService } from 'src/app/shared/services/office.service';
 import { EChartsOption } from 'echarts';
 import { FormsService } from 'src/app/shared/services/forms.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-office',
@@ -55,7 +56,8 @@ export class OfficeComponent implements OnInit {
   constructor(
     private officeService: OfficeService,
     private toastr: ToastrService,
-    private formsService: FormsService
+    private formsService: FormsService,
+    private translate:TranslateService
   ) {
     this.formsService.background.subscribe((data: boolean) => {
       this.background = data;
@@ -111,11 +113,11 @@ export class OfficeComponent implements OnInit {
         if (next && next[0]) {
           this.stati = next;
         } else {
-          this.toastr.error(environment.COMMON_ERROR);
+          this.toastr.error(this.translate.currentLang=='en'?environment.EN_COMMON_ERROR:environment.COMMON_ERROR);
         }
       },
       error: (error: any) => {
-        this.toastr.error(error.message || environment.COMMON_ERROR);
+        this.toastr.error(error.message || this.translate.currentLang=='en'?environment.EN_COMMON_ERROR:environment.COMMON_ERROR);
       },
       complete: () => {},
     });
@@ -133,33 +135,33 @@ export class OfficeComponent implements OnInit {
       this.officeService.getTasksByTitle(task.title).subscribe({
         next: (check: any) => {
           if ((check && check.length > 0) || (check && check[0])) {
-            this.toastr.error('Hai già caricato un task con questo titolo!');
+            this.toastr.error(this.translate.currentLang=='en'?environmentErrors.EN_TASK_ALREADY_UPDATED:environmentErrors.TASK_ALREADY_UPDATED);
           } else {
             this.officeService.postTask(task).subscribe({
               next: (task: any) => {
                 if (task) {
-                  this.toastr.show('Task inserito correttamente');
+                  this.toastr.show(this.translate.currentLang=='en'?environmentErrors.EN_TASK_UPLOADED:environmentErrors.TASK_UPLOADED);
                   this.taskForm.reset();
                   this.isTaskSubmitted = false;
                   this.getTasks();
                 } else {
-                  this.toastr.error(environment.COMMON_ERROR);
+                  this.toastr.error(this.translate.currentLang=='en'?environment.EN_COMMON_ERROR:environment.COMMON_ERROR);
                 }
               },
               error: (error: any) => {
-                this.toastr.error(error.message || environment.COMMON_ERROR);
+                this.toastr.error(error.message || this.translate.currentLang=='en'?environment.EN_COMMON_ERROR:environment.COMMON_ERROR);
               },
               complete: () => {},
             });
           }
         },
         error: (error: any) => {
-          this.toastr.error(error.message || environment.COMMON_ERROR);
+          this.toastr.error(error.message || this.translate.currentLang=='en'?environment.EN_COMMON_ERROR:environment.COMMON_ERROR);
         },
         complete: () => {},
       });
     } else {
-      this.toastr.error(environment.COMMON_ERROR_FORMS);
+      this.toastr.error(this.translate.currentLang=='en'?environment.EN_COMMON_ERROR_FORMS:environment.COMMON_ERROR_FORMS);
     }
   }
   /*get task method with optional parameters*/
@@ -193,7 +195,7 @@ export class OfficeComponent implements OnInit {
             }
           },
           error: (error: any) => {
-            this.toastr.error(error.message || environment.COMMON_ERROR);
+            this.toastr.error(error.message || this.translate.currentLang=='en'?environment.EN_COMMON_ERROR:environment.COMMON_ERROR);
           },
           complete: () => {
             this.initOptions();
@@ -217,7 +219,7 @@ export class OfficeComponent implements OnInit {
             }
           },
           error: (error: any) => {
-            this.toastr.error(error.message || environment.COMMON_ERROR);
+            this.toastr.error(error.message || this.translate.currentLang=='en'?environment.EN_COMMON_ERROR:environment.COMMON_ERROR);
           },
           complete: () => {
             this.initOptions();
@@ -241,7 +243,7 @@ export class OfficeComponent implements OnInit {
             }
           },
           error: (error: any) => {
-            this.toastr.error(error.message || environment.COMMON_ERROR);
+            this.toastr.error(error.message || this.translate.currentLang=='en'?environment.EN_COMMON_ERROR:environment.COMMON_ERROR);
           },
           complete: () => {
             this.initOptions();
@@ -295,14 +297,14 @@ export class OfficeComponent implements OnInit {
                   break;
                 default:
                   {
-                    this.toastr.error(environment.COMMON_ERROR);
+                    this.toastr.error(this.translate.currentLang=='en'?environment.EN_COMMON_ERROR:environment.COMMON_ERROR);
                   }
                   break;
               }
             }
           },
           error: (error: any) => {
-            this.toastr.error(error.message || environment.COMMON_ERROR);
+            this.toastr.error(error.message || this.translate.currentLang=='en'?environment.EN_COMMON_ERROR:environment.COMMON_ERROR);
           },
           complete: () => {
             this.initOptions();
@@ -324,7 +326,7 @@ export class OfficeComponent implements OnInit {
         }
       },
       error: (error: any) => {
-        this.toastr.error(error.message || environment.COMMON_ERROR);
+        this.toastr.error(error.message || this.translate.currentLang=='en'?environment.EN_COMMON_ERROR:environment.COMMON_ERROR);
       },
       complete: () => {},
     });
@@ -335,7 +337,7 @@ export class OfficeComponent implements OnInit {
         }
       },
       error: (error: any) => {
-        this.toastr.error(error.message || environment.COMMON_ERROR);
+        this.toastr.error(error.message || this.translate.currentLang=='en'?environment.EN_COMMON_ERROR:environment.COMMON_ERROR);
       },
       complete: () => {},
     });
@@ -346,7 +348,7 @@ export class OfficeComponent implements OnInit {
         }
       },
       error: (error: any) => {
-        this.toastr.error(error.message || environment.COMMON_ERROR);
+        this.toastr.error(error.message || this.translate.currentLang=='en'?environment.EN_COMMON_ERROR:environment.COMMON_ERROR);
       },
       complete: () => {},
     });
@@ -394,7 +396,7 @@ export class OfficeComponent implements OnInit {
         break;
       default: {
         modify = false;
-        this.toastr.show('Non è stato aggiornato nessun task.');
+        this.toastr.show(this.translate.currentLang=='en'?environmentErrors.EN_NO_TASK_UPDATED:environmentErrors.NO_TASK_UPDATED);
       }
     }
 
@@ -404,14 +406,14 @@ export class OfficeComponent implements OnInit {
         .subscribe({
           next: (task: any) => {
             if (task) {
-              this.toastr.show('Task modificato con successo.');
+              this.toastr.show(this.translate.currentLang=='en'?environmentErrors.EN_NO_TASK_UPDATED:environmentErrors.NO_TASK_UPDATED);
               this.getTasks();
             } else {
-              this.toastr.error(environment.COMMON_ERROR);
+              this.toastr.error(this.translate.currentLang=='en'?environment.EN_COMMON_ERROR:environment.COMMON_ERROR);
             }
           },
           error: (error: any) => {
-            this.toastr.error(error.message || environment.COMMON_ERROR);
+            this.toastr.error(error.message || this.translate.currentLang=='en'?environment.EN_COMMON_ERROR:environment.COMMON_ERROR);
           },
           complete: () => {},
         });

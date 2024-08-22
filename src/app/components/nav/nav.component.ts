@@ -27,6 +27,7 @@ export class NavComponent {
     this.formsService.background.subscribe((data: boolean) => {
       this.background = data;
     });
+    this.switchLanguage('en')
   }
   /*logout method*/
   logOut() {

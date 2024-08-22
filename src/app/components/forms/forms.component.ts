@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/app/core/environment';
 import {
@@ -42,7 +43,8 @@ export class FormsComponent implements OnInit {
     private toastr: ToastrService,
     private formsService: FormsService,
     private router: Router,
-    private officeService: OfficeService
+    private officeService: OfficeService,
+    private translate: TranslateService
   ) {
     this.formsService.background.subscribe((data:boolean)=>{
       this.background=data
@@ -103,24 +105,27 @@ export class FormsComponent implements OnInit {
             localStorage.setItem('email', data[0].email);
             localStorage.setItem('password', data[0].password);
             this.officeService.setUser(data[0]);
-            this.toastr.show('Login effettuato con successo.');
+            this.toastr.show(this.translate.currentLang=='en'?'Succesfuly logged in':'Login effettuato con successo.');
             this.formsService.authenticateUser(true);
             setTimeout(() => {
               this.router.navigate(['/office']);
             }, 1000);
           } else {
             this.toastr.error(
+              this.translate.currentLang=='en'?
+              'Sorry, we don\'t have any user with these credentials in db'
+              :
               'Mi dispiace ma non abbiamo un user in db con le credenziali che hai inserito.'
             );
           }
         },
         error: (error: any) => {
-          this.toastr.error(error?.message || environment.COMMON_ERROR);
+          this.toastr.error(error?.message || this.translate.currentLang=='en'?environment.EN_COMMON_ERROR:environment.COMMON_ERROR);
         },
         complete: () => {},
       });
     } else {
-      this.toastr.error(environment.COMMON_ERROR_FORMS);
+      this.toastr.error(this.translate.currentLang=='en'?environment.EN_COMMON_ERROR_FORMS:environment.COMMON_ERROR_FORMS);
     }
   }
   /*switch from login to signup and viceversa */
@@ -152,11 +157,14 @@ export class FormsComponent implements OnInit {
       this.formsService.findUserByEmail(user.email).subscribe({
         next: (data: any) => {
           if (data && data[0]) {
-            this.toastr.error("Esiste già un'user con questa email in db.");
+            this.toastr.error(this.translate.currentLang=='en'?"A user with these credentials already exists in db":"Esiste già un'user con questa email in db.");
           } else {
             this.formsService.register(user).subscribe({
               next: (data: any) => {
                 this.toastr.show(
+                  this.translate.currentLang=='e'?
+                  'Excellent! You\'ve succesfully signed up'
+                  :
                   'Complimenti! Ti sei registrato con successo.'
                 );
                 this.isLoading = true;
@@ -166,19 +174,19 @@ export class FormsComponent implements OnInit {
                 }, 1500);
               },
               error: (error: any) => {
-                this.toastr.error(error?.message || environment.COMMON_ERROR);
+                this.toastr.error(error?.message ||this.translate.currentLang=='en'?environment.EN_COMMON_ERROR : environment.COMMON_ERROR);
               },
               complete: () => {},
             });
           }
         },
         error: (error: any) => {
-          this.toastr.error(error?.message || environment.COMMON_ERROR);
+          this.toastr.error(error?.message || this.translate.currentLang=='en'?environment.EN_COMMON_ERROR : environment.COMMON_ERROR);
         },
         complete: () => {},
       });
     } else {
-      this.toastr.error(environment.COMMON_ERROR_FORMS);
+      this.toastr.error(this.translate.currentLang=='en'?environment.EN_COMMON_ERROR_FORMS : environment.COMMON_ERROR_FORMS);
     }
   }
   /*get Region And Cap by City name method */
@@ -197,7 +205,7 @@ export class FormsComponent implements OnInit {
             error: (error: any) => {
               this.toastr.error(
                 error?.message ||
-                  "C'è stato un problema nel recupero della regione."
+                this.translate.currentLang=='en'?environment.EN_COMMON_ERROR : environment.COMMON_ERROR
               );
             },
             complete: () => {},
@@ -205,13 +213,13 @@ export class FormsComponent implements OnInit {
         },
         error: (error: any) => {
           this.toastr.error(
-            error?.message || "C'è stato un problema nel recupero del cap."
+            error?.message || this.translate.currentLang=='en'?environment.EN_COMMON_ERROR : environment.COMMON_ERROR
           );
         },
         complete: () => {},
       });
     } else {
-      this.toastr.error('Devi inserire una città.');
+      this.toastr.error(this.translate.currentLang=='en'?'You must insert a city.' : 'Devi inserire una città.');
     }
   }
 }
