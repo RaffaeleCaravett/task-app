@@ -1,27 +1,42 @@
 <footer class="p-3 bg-light">
-<div class="container text-center py-5">
-  <div class="row">
-    <div class="col-md-12 py-2">
-      <h1>Hands down, the best task application ever.</h1>
-    </div>
-    <div class="col-md-6 py-4">
-<p class="fs-5">
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
-    </div>
-    <div class="col-md-6 py-4">
-<img src="assets/footer/best_task_application.jpg" class="w-50 m-auto border rounded shadow" alt="logo image" title="Task application logo">
-    </div>
-    <div class="col-md-4" *ngFor="let i of images">
-      <p class="fs-5">{{i.title}}</p>
-      <img src="{{i.image}}" alt="{{i.title}} logo" class="img-scale" title="{{i.title}} logo" (click)="a.click()">
-      <a href="{{i.link}}" class="d-none" target="_blank" #a></a>
-    </div>
-    <div class="col-md-12 pt-5">
-      <p class="fs-3">
-        All rights reserved®
-      </p>
+  <div class="container text-center py-5">
+    <div class="row">
+      <div class="col-md-12 py-2">
+        <h1>Hands down, the best task application ever.</h1>
+      </div>
+      <div class="col-md-6 py-4">
+        <p class="fs-5">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+      </div>
+      <div class="col-md-6 py-4">
+        <img
+          src="assets/footer/best_task_application.jpg"
+          class="w-50 m-auto border rounded shadow"
+          alt="logo image"
+          title="Task application logo"
+        />
+      </div>
+      <div class="col-md-4" *ngFor="let i of images">
+        <p class="fs-5">{{ i.title }}</p>
+        <img
+          src="{{ i.image }}"
+          alt="{{ i.title }} logo"
+          class="img-scale"
+          title="{{ i.title }} logo"
+          (click)="a.click()"
+        />
+        <a href="{{ i.link }}" class="d-none" target="_blank" #a></a>
+      </div>
+      <div class="col-md-12 pt-5">
+        <p class="fs-3">All rights reserved®</p>
+      </div>
     </div>
   </div>
-</div>
 </footer>
