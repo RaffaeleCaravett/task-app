@@ -71,3 +71,13 @@ export interface elements{
   id: number,
   value: number
 };
+export interface slider{
+  id: number,
+    value: string
+};
+export interface firstImages{
+  id: number,
+  title: string,
+  description:string,
+  image:string
+};
