@@ -21,8 +21,7 @@ import { OfficeService } from 'src/app/shared/services/office.service';
   styleUrls: ['./task.component.scss'],
 })
 export class TaskComponent implements OnInit, OnChanges {
-
-/*
+  /*
 Questo è un componente che utilizzo come child component all'interno dell'ufficio. Qui accetto alcuni parametri in entrata dal parent (@Input()), e ne mando altri in uscita
 (EventEmitter).
 Utilizzo ngx-quill per formattare il testo della descrizione del singolo task visualizzato.
@@ -30,7 +29,7 @@ Effettuo alcune chiamate http per eliminare o modificare il dato task, effettuan
 dove next sta per successo, error per aborto e complete garantisce l'esecuzione di regole di default se ne abbiamo.
 Uso una descrizione indipendente da quella del task per catchare eventuali cambiamenti o formattazioni del testo e, nel caso, inserirla nel body di richiesta della put request.
 */
-
+  /*typicized variables */
   [x: string]: any;
 
   @Input() task!: Tasks;
@@ -63,12 +62,13 @@ Uso una descrizione indipendente da quella del task per catchare eventuali cambi
     ],
   };
   taskForm!: FormGroup;
+  /*dependency injection*/
   constructor(
     private officeService: OfficeService,
     private toastr: ToastrService,
     private matDialog: MatDialog
   ) {}
-
+  /*on init lifecycle*/
   ngOnInit(): void {
     this.taskForm = new FormGroup({
       title: new FormControl(this.task.title, Validators.required),
@@ -76,7 +76,7 @@ Uso una descrizione indipendente da quella del task per catchare eventuali cambi
       status: new FormControl(this.task.status, Validators.required),
     });
   }
-
+  /*on change lifecycle*/
   ngOnChanges(changes: SimpleChanges): void {
     this.taskForm = new FormGroup({
       title: new FormControl(this.task.title, Validators.required),
@@ -84,7 +84,7 @@ Uso una descrizione indipendente da quella del task per catchare eventuali cambi
       status: new FormControl(this.task.status, Validators.required),
     });
   }
-
+  /*put task method*/
   putTask() {
     if (
       this.taskForm.valid ||
@@ -148,10 +148,11 @@ Uso una descrizione indipendente da quella del task per catchare eventuali cambi
       this.toastr.error(environment.COMMON_ERROR_FORMS);
     }
   }
+  /*delete task method*/
   deleteTask(taskId: string) {
     if (taskId) {
       const dialogRef = this.matDialog.open(ConfirmDeleteComponent, {
-        data: [taskId,this.background],
+        data: [taskId, this.background],
       });
       dialogRef.afterClosed().subscribe((data) => {
         if (data) {
@@ -173,10 +174,11 @@ Uso una descrizione indipendente da quella del task per catchare eventuali cambi
       });
     }
   }
+  /*reimpostring selected tag to null, so the if is unsatisfied*/
   close() {
     this.selectedTask.emit(null);
   }
-
+  /*quill methods*/
   onSelectionChanged = (event: any) => {
     if (event.oldRange == null) {
       this.onFocus();
@@ -185,13 +187,15 @@ Uso una descrizione indipendente da quella del task per catchare eventuali cambi
       this.onBlur();
     }
   };
-
+  /*on content change quill methods*/
   onContentChanged = (event: any) => {
     this.changedDescription = event.html;
   };
+  /*on focus quill methods*/
   onFocus = () => {
     console.log('On Focus');
   };
+  /*on blur quill methods*/
   onBlur = () => {
     console.log('Blurred');
   };

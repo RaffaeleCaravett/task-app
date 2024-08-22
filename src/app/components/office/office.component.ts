@@ -27,7 +27,7 @@ export class OfficeComponent implements OnInit {
   Utilizzo anche altri componenti di librerie esterne e mi occupo di sottoscrivere alle richieste http dell'office service, e gestire gli stati di quest'ultime.
   Utilizzo diversi ReactiveForms, con più Validators, fingo alcuni ritardi per mostrare lo skeleton, parametri opzionali, switch cases e e-charts.
   */
-
+  /*typicized variable*/
   isLoading: boolean = false;
   taskForm!: FormGroup;
   stati: status[] = [];
@@ -51,6 +51,7 @@ export class OfficeComponent implements OnInit {
   chartOption!: EChartsOption;
   option!: EChartsOption;
   background!: boolean;
+  /*dependency injection*/
   constructor(
     private officeService: OfficeService,
     private toastr: ToastrService,
@@ -60,7 +61,7 @@ export class OfficeComponent implements OnInit {
       this.background = data;
     });
   }
-
+  /*On init lifecycle */
   ngOnInit(): void {
     this.user = this.officeService.getUser();
 
@@ -92,7 +93,7 @@ export class OfficeComponent implements OnInit {
     });
 
     this.isLoading = true;
-
+    /*delay*/
     setTimeout(() => {
       this.isLoading = false;
       this.getTasks();
@@ -100,7 +101,7 @@ export class OfficeComponent implements OnInit {
     }, 2000);
     this.getStati();
   }
-
+  /*get stati method*/
   getStati() {
     this.officeService.getStatus().subscribe({
       next: (next: any) => {
@@ -116,7 +117,7 @@ export class OfficeComponent implements OnInit {
       complete: () => {},
     });
   }
-
+  /*post task method*/
   postTask() {
     this.isTaskSubmitted = true;
     if (this.taskForm.valid) {
@@ -158,7 +159,7 @@ export class OfficeComponent implements OnInit {
       this.toastr.error(environment.COMMON_ERROR_FORMS);
     }
   }
-
+  /*get task method with optional parameters*/
   getTasks(
     page?: number,
     size?: number,
@@ -301,11 +302,12 @@ export class OfficeComponent implements OnInit {
         });
     }
   }
+  /*update selected task method*/
   updateSelectedTask(event: any) {
     this.selectedTask = event;
     this.getTasks();
   }
-
+  /*method to get all the selects options*/
   getSearchSelects() {
     this.officeService.getAttributes().subscribe({
       next: (attributes: any) => {
@@ -341,6 +343,7 @@ export class OfficeComponent implements OnInit {
       complete: () => {},
     });
   }
+  /*format formatted task description with quill*/
   formatCodeToHtml(delta: any, startedId: string, index: number) {
     let firstCharacter = Array.from(delta)[0];
     if (firstCharacter != '<') {
@@ -351,10 +354,11 @@ export class OfficeComponent implements OnInit {
       return (div.innerHTML += delta);
     }
   }
+  /*on drag start method*/
   onDragStart(item: Tasks) {
     this.draggedElement = item;
   }
-
+  /*on drop method*/
   onDrop(event: any, state: string) {
     let modify: boolean = true;
     event.preventDefault();
@@ -405,11 +409,11 @@ export class OfficeComponent implements OnInit {
         });
     }
   }
-
+  /*drag over method*/
   onDragOver(event: any) {
     event.preventDefault();
   }
-
+  /*method to init e-chart options*/
   initOptions() {
     this.chartOption = {
       legend: {},
