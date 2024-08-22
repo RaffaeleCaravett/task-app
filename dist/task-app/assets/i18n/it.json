@@ -43,5 +43,13 @@
   "city":"città",
   "region":"regione"
   },
-  "searching":"Caricando.."
+  "searching":"Caricando..",
+  "errors":{
+    "invalidField":"Campo invalido. Inserisci un valore.",
+    "invalidSelect":"Campo invalido. Seleziona un valore.",
+    "invalidPage":"Inserisci un valore superiore o uguale allo 0",
+    "invalidEmail":"Campo invalido, prova ad inserire un valore tipo 'a@a.com'",
+    "invalidPassword":"Valore invalido, prova ad inserire almeno 6 caratteri.",
+    "invalidAutoFill":"Campo invalido."
+  }
 }
