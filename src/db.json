@@ -168,7 +168,7 @@
     {
       "title": "Another title",
       "description": "<p>anotherdescription</p>",
-      "status": "In Progress",
+      "status": "Completed",
       "user": "9256",
       "id": "EhM2JfQ"
     },
@@ -203,9 +203,16 @@
     {
       "title": "a new task",
       "description": "some text of new task",
-      "status": "In Progress",
+      "status": "Completed",
       "user": "9256",
       "id": "NE5EM8k"
+    },
+    {
+      "title": "nuovo task",
+      "description": "nuova descrizione del task",
+      "status": "Unstarted",
+      "user": "9256",
+      "id": "xH9mdh_"
     }
   ],
   "tasksAttributes": [

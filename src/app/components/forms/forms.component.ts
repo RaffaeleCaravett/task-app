@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { environment } from 'src/app/core/environment';
+import { environment, environmentErrors } from 'src/app/core/environment';
 import {
   cap,
   cities,
@@ -105,17 +105,18 @@ export class FormsComponent implements OnInit {
             localStorage.setItem('email', data[0].email);
             localStorage.setItem('password', data[0].password);
             this.officeService.setUser(data[0]);
-            this.toastr.show(this.translate.currentLang=='en'?'Succesfuly logged in':'Login effettuato con successo.');
+            this.toastr.show(this.translate.currentLang=='en'?environmentErrors.EN_SUCCESFULY_LOGGED:environmentErrors.SUCCESFULY_LOGGED);
             this.formsService.authenticateUser(true);
             setTimeout(() => {
               this.router.navigate(['/office']);
             }, 1000);
           } else {
+            console.log(environmentErrors.EN_USER_NOT_EXISTS,environmentErrors.USER_NOT_EXISTS)
             this.toastr.error(
               this.translate.currentLang=='en'?
-              'Sorry, we don\'t have any user with these credentials in db'
+              environmentErrors.EN_USER_NOT_EXISTS
               :
-              'Mi dispiace ma non abbiamo un user in db con le credenziali che hai inserito.'
+              environmentErrors.USER_NOT_EXISTS
             );
           }
         },
@@ -157,15 +158,15 @@ export class FormsComponent implements OnInit {
       this.formsService.findUserByEmail(user.email).subscribe({
         next: (data: any) => {
           if (data && data[0]) {
-            this.toastr.error(this.translate.currentLang=='en'?"A user with these credentials already exists in db":"Esiste già un'user con questa email in db.");
+            this.toastr.error(this.translate.currentLang=='en'?environmentErrors.EN_USER_ALREADY_EXISTS:environmentErrors.USER_ALREADY_EXISTS);
           } else {
             this.formsService.register(user).subscribe({
               next: (data: any) => {
                 this.toastr.show(
-                  this.translate.currentLang=='e'?
-                  'Excellent! You\'ve succesfully signed up'
+                  this.translate.currentLang=='en'?
+                  environmentErrors.EN_SUCCESFULY_SIGNED
                   :
-                  'Complimenti! Ti sei registrato con successo.'
+                  environmentErrors.SUCCESFULY_SIGNED
                 );
                 this.isLoading = true;
                 setTimeout(() => {
@@ -219,7 +220,7 @@ export class FormsComponent implements OnInit {
         complete: () => {},
       });
     } else {
-      this.toastr.error(this.translate.currentLang=='en'?'You must insert a city.' : 'Devi inserire una città.');
+      this.toastr.error(this.translate.currentLang=='en'?environmentErrors.EN_INSERT_CITY:environmentErrors.INSERT_CITY);
     }
   }
 }

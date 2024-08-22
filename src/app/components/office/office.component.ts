@@ -173,7 +173,7 @@ export class OfficeComponent implements OnInit {
     status?: string,
     title?:string
   ) {
-    if (!status) {
+    if (!status&&(!page||page>=0)) {
       this.tasksUnstarted = [];
       this.tasksInProgress = [];
       this.tasksCompleted = [];
@@ -249,7 +249,7 @@ export class OfficeComponent implements OnInit {
             this.initOptions();
           },
         });
-    } else {
+    } else if(status &&(!page||page>=0)){
       this.officeService
         .getTasksByStatus(
           status,
@@ -310,6 +310,8 @@ export class OfficeComponent implements OnInit {
             this.initOptions();
           },
         });
+    }else{
+      this.toastr.error(this.translate.currentLang=='en'?environmentErrors.EN_PAGE_LESS_THAN_ZERO:environmentErrors.PAGE_LESS_THAN_ZERO)
     }
   }
   /*update selected task method*/
@@ -406,7 +408,7 @@ export class OfficeComponent implements OnInit {
         .subscribe({
           next: (task: any) => {
             if (task) {
-              this.toastr.show(this.translate.currentLang=='en'?environmentErrors.EN_NO_TASK_UPDATED:environmentErrors.NO_TASK_UPDATED);
+              this.toastr.show(this.translate.currentLang=='en'?environmentErrors.EN_TASK_UPDATED:environmentErrors.TASK_UPDATED);
               this.getTasks();
             } else {
               this.toastr.error(this.translate.currentLang=='en'?environment.EN_COMMON_ERROR:environment.COMMON_ERROR);
