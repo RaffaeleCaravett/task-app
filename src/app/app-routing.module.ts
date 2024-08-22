@@ -5,31 +5,34 @@ import { AuthGuard } from './core/auth.guard';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
-
   {
-    path:'',
-    redirectTo:'home',
-    pathMatch:'full'
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
   },
   {
-    path:'home',
-    component:HomeComponent
+    path: 'home',
+    component: HomeComponent,
   },
   {
-    path:'office',
-    loadChildren: () => import('./components/office/office.module').then(m => m.OfficeModule) ,canActivate:[AuthGuard]  },
+    path: 'office',
+    loadChildren: () =>
+      import('./components/office/office.module').then((m) => m.OfficeModule),
+    canActivate: [AuthGuard],
+  },
   {
-    path:'forms',
-    loadChildren: () => import('./components/forms/forms.module').then(m => m.FormsModule) },
-    {
-      path: '**',
-      redirectTo:''
-    }
-
+    path: 'forms',
+    loadChildren: () =>
+      import('./components/forms/forms.module').then((m) => m.FormsModule),
+  },
+  {
+    path: '**',
+    redirectTo: '',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

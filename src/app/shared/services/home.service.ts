@@ -1,23 +1,21 @@
-import { HttpClient } from "@angular/common/http"
-import { Injectable } from "@angular/core"
-import { environment } from "src/app/core/environment"
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from 'src/app/core/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HomeService {
+  private slider: string = 'slider';
+  private firstImages: string = 'firstImages';
 
-  private slider:string='slider'
-  private firstImages:string='firstImages'
+  constructor(private http: HttpClient) {}
 
+  getSlider() {
+    return this.http.get(environment.API_URL + this.slider);
+  }
 
-  constructor(private http:HttpClient) { }
-
-getSlider(){
-return this.http.get(environment.API_URL+this.slider)
-}
-
-getFirstImages(){
-  return this.http.get(environment.API_URL+this.firstImages)
+  getFirstImages() {
+    return this.http.get(environment.API_URL + this.firstImages);
   }
 }
