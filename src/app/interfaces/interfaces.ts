@@ -80,3 +80,6 @@ export interface firstImages {
   description: string;
   image: string;
 }
+export interface data {
+  data:[string,boolean]
+}

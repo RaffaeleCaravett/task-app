@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsService } from 'src/app/shared/services/forms.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,6 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
   images: any[] = [];
+  background!:boolean
+constructor(
+  private formsService:FormsService
+)
+{
+  this.formsService.background.subscribe((data: boolean) => {
+    this.background = data;
+  });
+}
 
   ngOnInit(): void {
     this.images = [

@@ -13,6 +13,7 @@ import {
 } from 'src/app/interfaces/interfaces';
 import { OfficeService } from 'src/app/shared/services/office.service';
 import { EChartsOption } from 'echarts';
+import { FormsService } from 'src/app/shared/services/forms.service';
 
 @Component({
   selector: 'app-office',
@@ -42,10 +43,16 @@ export class OfficeComponent implements OnInit {
   draggedElement!: Tasks;
   chartOption!: EChartsOption;
   option!: EChartsOption;
+  background!: boolean;
   constructor(
     private officeService: OfficeService,
-    private toastr: ToastrService
-  ) {}
+    private toastr: ToastrService,
+    private formsService: FormsService
+  ) {
+    this.formsService.background.subscribe((data: boolean) => {
+      this.background = data;
+    });
+  }
 
   ngOnInit(): void {
     this.user = this.officeService.getUser();

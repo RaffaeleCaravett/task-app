@@ -1,3 +1,4 @@
+<div class="row p-0 m-0" [ngClass]="!background?'bg-white text-dark':'bg-dark text-light'">
 <div class="container text-center py-5">
   <div class="row">
     <div class="col-md-12 py-5">
@@ -66,6 +67,7 @@
                   class="btn"
                   (click)="sectionChange('signup')"
                   type="button"
+                  [ngClass]="!background?'text-dark':'text-light'"
                 >
                  {{"buttons.register"|translate}}
                 </button>
@@ -278,6 +280,7 @@
                   class="btn"
                   (click)="sectionChange('login')"
                   type="button"
+                  [ngClass]="!background?'text-dark':'text-light'"
                 >
                   Login
                 </button>
@@ -294,3 +297,5 @@
     </div>
   </div>
 </div>
+</div>
+

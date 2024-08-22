@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/app/core/environment';
 import { firstImages, slider } from 'src/app/interfaces/interfaces';
+import { FormsService } from 'src/app/shared/services/forms.service';
 import { HomeService } from 'src/app/shared/services/home.service';
 
 @Component({
@@ -12,11 +13,16 @@ import { HomeService } from 'src/app/shared/services/home.service';
 export class HomeComponent implements OnInit {
   firstImages: firstImages[] = [];
   slider: slider[] = [];
-
+  background!:boolean
   constructor(
     private homeService: HomeService,
-    private toastr: ToastrService
-  ) {}
+    private toastr: ToastrService,
+    private formsService:FormsService
+  ) {
+    this.formsService.background.subscribe((data: boolean) => {
+      this.background = data;
+    });
+  }
 
   ngOnInit(): void {
     localStorage.setItem('location', '/');

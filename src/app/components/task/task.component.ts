@@ -25,6 +25,7 @@ export class TaskComponent implements OnInit, OnChanges {
 
   @Input() task!: Tasks;
   @Input() stati!: status[];
+  @Input() background!: boolean;
   @Output() selectedTask: EventEmitter<any> = new EventEmitter<any>();
   changedDescription: string = '';
   updatedTitle: string = '';
@@ -140,7 +141,7 @@ export class TaskComponent implements OnInit, OnChanges {
   deleteTask(taskId: string) {
     if (taskId) {
       const dialogRef = this.matDialog.open(ConfirmDeleteComponent, {
-        data: taskId,
+        data: [taskId,this.background],
       });
       dialogRef.afterClosed().subscribe((data) => {
         if (data) {

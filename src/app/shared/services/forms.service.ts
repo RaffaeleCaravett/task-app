@@ -15,6 +15,7 @@ export class FormsService {
   private regions: string = 'regions';
   private cap: string = 'cap';
   private users: string = 'users';
+  private backgroundMode:boolean =false
   public background: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false
   );
@@ -52,7 +53,8 @@ export class FormsService {
   findUserByEmail(email: string) {
     return this.http.get(environment.API_URL + this.users + `?email=${email}`);
   }
-  setBackground(bg:boolean){
-this.background.next(bg)
-  }
+  setBackground(){
+    this.backgroundMode=!this.backgroundMode
+this.background.next(this.backgroundMode)
+}
 }

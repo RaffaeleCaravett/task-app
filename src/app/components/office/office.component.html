@@ -1,4 +1,5 @@
-<div class="container text-center py-5">
+<div class="row p-0 p-0" [ngClass]="!background?'bg-white text-dark':'bg-dark text-light'">
+ <div class="container text-center py-5">
   <div class="row">
     <div class="col-md-12 pb-5">
       <h1>{{"titleOffice"| translate}}</h1>
@@ -62,7 +63,7 @@
             </p>
           </div>
           <div class="col-md-12 py-4">
-            <button class="btn" type="button" (click)="postTask()">
+            <button class="btn" type="button" [ngClass]="!background?'text-dark':'text-light'" (click)="postTask()">
               {{"buttons.addTask"|translate}}
             </button>
           </div>
@@ -97,9 +98,9 @@
               (click)="selectedTask = t"
               (dragstart)="onDragStart(t)"
             >
-              <p class="m-1 bg-light rounded title">{{ t.title }}</p>
-              <p class="m-1 bg-light rounded">{{ t.status }}</p>
-              <p class="m-1 bg-light rounded py-2" id="U{{ i }}">
+              <p class="m-1 bg-light rounded title text-dark">{{ t.title }}</p>
+              <p class="m-1 bg-light rounded text-dark">{{ t.status }}</p>
+              <p class="m-1 bg-light rounded py-2 text-dark" id="U{{ i }}">
                 {{ formatCodeToHtml(t.description, "U", i) }}
               </p>
             </li>
@@ -174,6 +175,7 @@
                         'Unstarted'
                       )
                     "
+                    [ngClass]="!background?'text-dark':'text-light'"
                   >
                   {{"buttons.search"|translate}}
                   </button>
@@ -217,9 +219,9 @@
               (click)="selectedTask = t"
               (dragstart)="onDragStart(t)"
             >
-              <p class="m-1 bg-light rounded title">{{ t.title }}</p>
-              <p class="m-1 bg-light rounded">{{ t.status }}</p>
-              <p class="m-1 bg-light rounded py-2" id="I{{ i }}">
+              <p class="m-1 bg-light rounded title text-dark">{{ t.title }}</p>
+              <p class="m-1 bg-light rounded text-dark">{{ t.status }}</p>
+              <p class="m-1 bg-light rounded py-2 text-dark" id="I{{ i }}">
                 {{ formatCodeToHtml(t.description, "I", i) }}
               </p>
             </li>
@@ -294,6 +296,7 @@
                         'In Progress'
                       )
                     "
+                    [ngClass]="!background?'text-dark':'text-light'"
                   >
                    {{"buttons.search"|translate}}
                   </button>
@@ -337,9 +340,9 @@
               (click)="selectedTask = t"
               (dragstart)="onDragStart(t)"
             >
-              <p class="m-1 bg-light rounded title">{{ t.title }}</p>
-              <p class="m-1 bg-light rounded">{{ t.status }}</p>
-              <p class="m-1 bg-light rounded py-2" id="C{{ i }}">
+              <p class="m-1 bg-light rounded title text-dark">{{ t.title }}</p>
+              <p class="m-1 bg-light rounded text-dark">{{ t.status }}</p>
+              <p class="m-1 bg-light rounded py-2 text-dark" id="C{{ i }}">
                 {{ formatCodeToHtml(t.description, "C", i) }}
               </p>
             </li>
@@ -415,6 +418,7 @@
                         'Completed'
                       )
                     "
+                    [ngClass]="!background?'text-dark':'text-light'"
                   >
                   {{"buttons.search"|translate}}
                   </button>
@@ -435,7 +439,10 @@
         [task]="selectedTask"
         [stati]="stati"
         (selectedTask)="updateSelectedTask($event)"
+        [background]="background"
       ></app-task>
     </div>
   </div>
 </div>
+</div>
+

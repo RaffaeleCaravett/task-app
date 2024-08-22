@@ -28,13 +28,17 @@ export class FormsComponent implements OnInit {
   region!: regions[];
   cap!: cap[];
   isLoading: boolean = false;
-
+  background!:boolean
   constructor(
     private toastr: ToastrService,
     private formsService: FormsService,
     private router: Router,
     private officeService: OfficeService
-  ) {}
+  ) {
+    this.formsService.background.subscribe((data:boolean)=>{
+      this.background=data
+    })
+  }
 
   ngOnInit(): void {
     this.section = 'login';
