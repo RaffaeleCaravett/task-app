@@ -28,8 +28,8 @@
               class="text-danger"
               *ngIf="isTaskSubmitted && taskForm.controls['title'].invalid"
             >
-              Campo invalido. Inserisci un valore.
-            </p>
+            {{"errors.invalidField"|translate}}
+          </p>
           </div>
           <div class="col-md-4">
             <label class="p-4">{{"taskForm.status"|translate}}</label>
@@ -43,7 +43,7 @@
               class="text-danger"
               *ngIf="isTaskSubmitted && taskForm.controls['status'].invalid"
             >
-              Campo invalido. Seleziona un valore.
+            {{"errors.invalidSelect"|translate}}
             </p>
           </div>
           <div class="col-md-12">
@@ -59,7 +59,7 @@
                 isTaskSubmitted && taskForm.controls['description'].invalid
               "
             >
-              Campo invalido. Inserisci un valore.
+            {{"errors.invalidField"|translate}}
             </p>
           </div>
           <div class="col-md-12 py-4">
@@ -126,8 +126,8 @@
                         *ngIf="searchUnstartedTask.controls['title'].invalid"
                         class="text-danger"
                       >
-                        Inserisci un valore.
-                      </p>
+                      {{"errors.invalidField"|translate}}
+                    </p>
                     </div>
                     <label>  {{"paginator.page"|translate}}</label><br />
                     <input type="number" class="w-50" formControlName="page" />
@@ -135,8 +135,8 @@
                       *ngIf="searchUnstartedTask.controls['page'].value < 0"
                       class="text-danger"
                     >
-                      Inserisci un valore superiore o uguale allo 0
-                    </p>
+                    {{"errors.invalidPage"|translate}}
+                  </p>
                   </div>
                   <div class="col-md-4 py-2">
                     <label> {{"paginator.size"|translate}}</label><br />
@@ -257,8 +257,8 @@
                       *ngIf="searchInProgressTask.controls['title'].invalid"
                       class="text-danger"
                     >
-                      Inserisci un valore.
-                    </p>
+                    {{"errors.invalidField"|translate}}
+                  </p>
                   </div>
                   <div class="col-md-12 py-2">
                     <label> {{"paginator.page"|translate}}</label><br />
@@ -267,8 +267,8 @@
                       *ngIf="searchInProgressTask.controls['page'].value < 0"
                       class="text-danger"
                     >
-                      Inserisci un valore superiore o uguale allo 0
-                    </p>
+                    {{"errors.invalidPage"|translate}}
+                  </p>
                   </div>
                   <div class="col-md-4 py-2">
                     <label> {{"paginator.size"|translate}}</label><br />
@@ -390,8 +390,8 @@
                       *ngIf="searchCompletedTask.controls['title'].invalid"
                       class="text-danger"
                     >
-                      Inserisci un valore.
-                    </p>
+                    {{"errors.invalidField"|translate}}
+                  </p>
                   </div>
                   <div class="col-md-12 py-2">
                     <label>  {{"paginator.page"|translate}}</label><br />
@@ -400,8 +400,8 @@
                       *ngIf="searchCompletedTask.controls['page'].value < 0"
                       class="text-danger"
                     >
-                      Inserisci un valore superiore o uguale allo 0
-                    </p>
+                    {{"errors.invalidPage"|translate}}
+                  </p>
                   </div>
                   <div class="col-md-4 py-2">
                     <label>  {{"paginator.size"|translate}}</label><br />

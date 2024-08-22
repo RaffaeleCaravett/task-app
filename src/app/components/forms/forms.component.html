@@ -35,7 +35,7 @@
                     loginForm.controls['email'].invalid
                   "
                 >
-                  Campo invalido, prova ad inserire un valore tipo 'a&#64;a.com'
+                  {{"errors.invalidEmail"|translate}}
                 </p>
               </div>
               <div class="col-md-12">
@@ -52,8 +52,8 @@
                     loginForm.controls['password'].invalid
                   "
                 >
-                  Valore invalido, prova ad inserire almeno 6 caratteri.
-                </p>
+                {{"errors.invalidPassword"|translate}}
+              </p>
                 <button
                   class="btn btn-dark w-75 m-auto my-3"
                   type="button"
@@ -112,7 +112,7 @@
                       signupForm.controls['nome'].invalid
                     "
                   >
-                    Campo invalido, inserisci un valore.
+                  {{"errors.invalidField"|translate}}
                   </p>
                 </div>
                 <div class="col-md-12">
@@ -129,7 +129,7 @@
                       signupForm.controls['cognome'].invalid
                     "
                   >
-                    Campo invalido, inserisci un valore.
+                  {{"errors.invalidField"|translate}}
                   </p>
                 </div>
                 <div class="col-md-12">
@@ -156,7 +156,7 @@
                       signupForm.controls['citta'].invalid
                     "
                   >
-                    Campo invalido, seleziona un valore.
+                  {{"errors.invalidSelect"|translate}}
                   </p>
                 </div>
                 <div class="col-md-6">
@@ -174,7 +174,7 @@
                       signupForm.controls['regione'].invalid
                     "
                   >
-                    Campo invalido.
+                  {{"errors.invalidAutoFill"|translate}}
                   </p>
                 </div>
                 <div class="col-md-6">
@@ -192,7 +192,7 @@
                       signupForm.controls['cap'].invalid
                     "
                   >
-                    Campo invalido.
+                  {{"errors.invalidAutoFill"|translate}}
                   </p>
                 </div>
                 <div class="col-md-12">
@@ -209,8 +209,7 @@
                       signupForm.controls['email'].invalid
                     "
                   >
-                    Campo invalido, prova ad inserire un valore tipo
-                    'a&#64;a.com'
+                  {{"errors.invalidEmail"|translate}}
                   </p>
                 </div>
                 <div class="col-md-12">
@@ -227,7 +226,7 @@
                       signupForm.controls['password'].invalid
                     "
                   >
-                    Valore invalido, prova ad inserire almeno 6 caratteri.
+                  {{"errors.invalidPassword"|translate}}
                   </p>
                 </div>
                 <div class="col-md-6 py-4">
@@ -264,7 +263,7 @@
                       signupForm.controls['sex'].invalid
                     "
                   >
-                    Campo invalido, seleziona un valore.
+                  {{"errors.invalidSelect"|translate}}
                   </p>
                 </div>
                 <button

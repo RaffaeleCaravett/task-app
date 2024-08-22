@@ -17,7 +17,7 @@
               (input)="updatedTitle = taskForm.controls['title'].value"
             />
             <p class="text-danger" *ngIf="taskForm.controls['title'].invalid">
-              Campo invalido. Inserisci un valore.
+              {{"errors.invalidField"|translate}}
             </p>
           </div>
           <div class="col-md-4">
@@ -29,7 +29,7 @@
               </option>
             </select>
             <p class="text-danger" *ngIf="taskForm.controls['status'].invalid">
-              Campo invalido. Seleziona un valore.
+              {{"errors.invalidSelect"|translate}}
             </p>
           </div>
           <div class="col-md-12">
@@ -43,7 +43,7 @@
               class="text-danger"
               *ngIf="taskForm.controls['description'].invalid"
             >
-              Campo invalido. Inserisci un valore.
+            {{"errors.invalidField"|translate}}
             </p>
           </div>
           <div class="col-md-12 py-4">

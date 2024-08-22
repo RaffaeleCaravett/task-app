@@ -146,7 +146,7 @@
     },
     {
       "title": "title 333",
-      "description": "FFFF",
+      "description": "<p><strong>A brand new description</strong></p>",
       "status": "In Progress",
       "user": "9256",
       "id": "5c32"
@@ -168,7 +168,7 @@
     {
       "title": "Another title",
       "description": "<p>anotherdescription</p>",
-      "status": "Completed",
+      "status": "In Progress",
       "user": "9256",
       "id": "EhM2JfQ"
     },
@@ -199,6 +199,13 @@
       "status": "Unstarted",
       "user": "-EYsLwq",
       "id": "gY4pH9F"
+    },
+    {
+      "title": "a new task",
+      "description": "some text of new task",
+      "status": "In Progress",
+      "user": "9256",
+      "id": "NE5EM8k"
     }
   ],
   "tasksAttributes": [

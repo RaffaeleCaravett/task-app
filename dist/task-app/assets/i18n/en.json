@@ -43,14 +43,6 @@
   "city":"city",
   "region":"region"
   },
-   "searching":"Loading..",
-   "errors":{
-     "invalidField":"Invalid field. Insert a value.",
-     "invalidSelect":"Invalid field. Select a value.",
-     "invalidPage":"Insert a value greater or equal to 0",
-     "invalidEmail":"Invalid field, try to insert a value like 'a@a.com'",
-     "invalidPassword":"Invalid value, try to insert at least 6 characters",
-     "invalidAutoFill":"Invalid field."
-   }
+   "searching":"Loading.."
 }
 
