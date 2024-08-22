@@ -118,9 +118,11 @@ this.formsService.findUserByEmail(user.email).subscribe({
       this.formsService.register(user).subscribe({
         next:(data:any)=>{
          this.toastr.show("Complimenti! Ti sei registrato con successo.")
+         this.isLoading=true
          setTimeout(()=>{
+          this.isLoading=false
       this.section='login'
-         },1000)
+         },1500)
         },
         error:(error:any)=>{
         this.toastr.error(error?.message||environment.COMMON_ERROR)

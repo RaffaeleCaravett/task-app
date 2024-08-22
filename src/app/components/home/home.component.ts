@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HomeService } from 'src/app/shared/services/home.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ export class HomeComponent implements OnInit{
 firstImages:any[]=[]
 slider:string[]=[]
 
-constructor(){}
+constructor(private homeService:HomeService){}
 
 ngOnInit(): void {
 
