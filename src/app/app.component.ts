@@ -16,8 +16,8 @@ constructor(private formsService:FormsService,private router:Router,private offi
   ngOnInit(): void {
 if(localStorage.getItem('email')&&localStorage.getItem('password')){
   let userLogin = {
-email:localStorage.getItem('email'),
-password:localStorage.getItem('password')
+email:localStorage.getItem('email')!,
+password:localStorage.getItem('password')!
   }
 this.formsService.login(userLogin).subscribe({
   next:(data:any)=>{

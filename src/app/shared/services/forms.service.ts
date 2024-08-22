@@ -3,6 +3,7 @@ import { BehaviorSubject } from "rxjs"
 import { HttpClient } from "@angular/common/http"
 import { AuthGuard } from "src/app/core/auth.guard"
 import { environment } from "src/app/core/environment"
+import { userLogin, userSignup } from "src/app/interfaces/interfaces"
 
 @Injectable({
   providedIn: 'root'
@@ -29,14 +30,14 @@ getCapByRegionName(cityName:string){
   return this.http.get(environment.API_URL+this.cap+`?citta=${cityName}`)
 }
 
-authenticateUser(boolean:any){
+authenticateUser(boolean:boolean){
   this.isAuthenticatedUser.next(boolean)
   this.authGuard.authenticateUser(boolean)
 }
-register(user:any){
+register(user:userSignup){
 return this.http.post(environment.API_URL+this.users,user)
 }
-login(userLogin:any){
+login(userLogin:userLogin){
 return this.http.get(environment.API_URL+this.users+`?email=${userLogin.email}&password=${userLogin.password}`)
 }
 findUserByEmail(email:string){
