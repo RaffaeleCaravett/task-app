@@ -63,7 +63,6 @@ ngOnChanges(changes: SimpleChanges): void {
 }
 
 putTask(){
-  console.log(this.updatedTitle)
 if(this.taskForm.valid||(this.taskForm.controls['title'].value&&this.taskForm.controls['status'].value&&this.changedDescription!='')){
   let task:Task ={
     title:this.taskForm.controls['title'].value,

@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import { environment } from "src/app/core/environment"
-import { userLogged } from "src/app/interfaces/interfaces"
+import { Task, userLogged } from "src/app/interfaces/interfaces"
 
 @Injectable({
   providedIn: 'root'
@@ -35,16 +35,16 @@ getTasks(){
   getTasksByTitle(title:string){
     return this.http.get(environment.API_URL+this.tasks+`?title=${title}`)
     }
-postTask(task:any){
+postTask(task:Task){
   return this.http.post(environment.API_URL+this.tasks,task)
   }
-  putTask(task:any,id:string){
+  putTask(task:Task,id:string){
     return this.http.put(environment.API_URL+this.tasks+`/${id}`,task)
     }
     deleteTask(id:string){
       return this.http.delete(environment.API_URL+this.tasks+`/${id}`)
       }
-    setUser(user:any){
+    setUser(user:userLogged){
       this.user=user
     }
     getUser(){
