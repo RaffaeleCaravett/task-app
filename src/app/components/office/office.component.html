@@ -119,6 +119,16 @@
               >
                 <div class="row">
                   <div class="col-md-12 py-2">
+                    <div class="col-md-12 py-2">
+                      <label>  {{"taskForm.title"|translate}}</label><br />
+                      <input type="text" formControlName="title" class="w-50" />
+                      <p
+                        *ngIf="searchUnstartedTask.controls['title'].invalid"
+                        class="text-danger"
+                      >
+                        Inserisci un valore.
+                      </p>
+                    </div>
                     <label>  {{"paginator.page"|translate}}</label><br />
                     <input type="number" class="w-50" formControlName="page" />
                     <p
@@ -172,7 +182,8 @@
                         searchUnstartedTask.controls['size'].value,
                         searchUnstartedTask.controls['sort'].value,
                         searchUnstartedTask.controls['order'].value,
-                        'Unstarted'
+                        'Unstarted',
+                        searchUnstartedTask.controls['title'].value
                       )
                     "
                     [ngClass]="!background?'text-dark':'text-light'"
@@ -240,6 +251,16 @@
               >
                 <div class="row">
                   <div class="col-md-12 py-2">
+                    <label>  {{"taskForm.title"|translate}}</label><br />
+                    <input type="text" formControlName="title" class="w-50" />
+                    <p
+                      *ngIf="searchInProgressTask.controls['title'].invalid"
+                      class="text-danger"
+                    >
+                      Inserisci un valore.
+                    </p>
+                  </div>
+                  <div class="col-md-12 py-2">
                     <label> {{"paginator.page"|translate}}</label><br />
                     <input type="number" class="w-50" formControlName="page" />
                     <p
@@ -293,7 +314,8 @@
                         searchInProgressTask.controls['size'].value,
                         searchInProgressTask.controls['sort'].value,
                         searchInProgressTask.controls['order'].value,
-                        'In Progress'
+                        'In Progress',
+                        searchInProgressTask.controls['title'].value
                       )
                     "
                     [ngClass]="!background?'text-dark':'text-light'"
@@ -362,6 +384,16 @@
               >
                 <div class="row">
                   <div class="col-md-12 py-2">
+                    <label>  {{"taskForm.title"|translate}}</label><br />
+                    <input type="text" formControlName="title" class="w-50" />
+                    <p
+                      *ngIf="searchCompletedTask.controls['title'].invalid"
+                      class="text-danger"
+                    >
+                      Inserisci un valore.
+                    </p>
+                  </div>
+                  <div class="col-md-12 py-2">
                     <label>  {{"paginator.page"|translate}}</label><br />
                     <input type="number" formControlName="page" class="w-50" />
                     <p
@@ -415,7 +447,8 @@
                         searchCompletedTask.controls['size'].value,
                         searchCompletedTask.controls['sort'].value,
                         searchCompletedTask.controls['order'].value,
-                        'Completed'
+                        'Completed',
+                        searchCompletedTask.controls['title'].value
                       )
                     "
                     [ngClass]="!background?'text-dark':'text-light'"

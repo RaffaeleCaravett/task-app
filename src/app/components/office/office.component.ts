@@ -74,18 +74,21 @@ export class OfficeComponent implements OnInit {
     });
 
     this.searchCompletedTask = new FormGroup({
+      title:new FormControl(''),
       page: new FormControl(1, [Validators.required, Validators.min(1)]),
       size: new FormControl(2, Validators.required),
       sort: new FormControl('id', Validators.required),
       order: new FormControl('asc', Validators.required),
     });
     this.searchInProgressTask = new FormGroup({
+      title:new FormControl(''),
       page: new FormControl(1, [Validators.required, Validators.min(1)]),
       size: new FormControl(2, Validators.required),
       sort: new FormControl('id', Validators.required),
       order: new FormControl('asc', Validators.required),
     });
     this.searchUnstartedTask = new FormGroup({
+      title:new FormControl(''),
       page: new FormControl(1, [Validators.required, Validators.min(1)]),
       size: new FormControl(2, Validators.required),
       sort: new FormControl('id', Validators.required),
@@ -165,7 +168,8 @@ export class OfficeComponent implements OnInit {
     size?: number,
     sort?: string,
     order?: string,
-    status?: string
+    status?: string,
+    title?:string
   ) {
     if (!status) {
       this.tasksUnstarted = [];
@@ -179,7 +183,8 @@ export class OfficeComponent implements OnInit {
           (size || 2) * (page || 1),
           size || 2,
           sort || 'id',
-          order || 'asc'
+          order || 'asc',
+          title ||''
         )
         .subscribe({
           next: (tasks: any) => {
@@ -202,7 +207,8 @@ export class OfficeComponent implements OnInit {
           (size || 2) * (page || 1),
           size || 2,
           sort || 'id',
-          order || 'asc'
+          order || 'asc',
+          title ||''
         )
         .subscribe({
           next: (tasks: any) => {
@@ -225,7 +231,8 @@ export class OfficeComponent implements OnInit {
           (size || 2) * (page || 1),
           size || 2,
           sort || 'id',
-          order || 'asc'
+          order || 'asc',
+          title ||''
         )
         .subscribe({
           next: (tasks: any) => {
@@ -249,7 +256,8 @@ export class OfficeComponent implements OnInit {
           (size || 2) * (page || 1),
           size || 2,
           sort || 'id',
-          order || 'asc'
+          order || 'asc',
+          title||''
         )
         .subscribe({
           next: (tasks: any) => {

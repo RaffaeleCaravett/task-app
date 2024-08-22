@@ -34,13 +34,14 @@ export class OfficeService {
     end: number,
     size: number,
     sort: string,
-    order: string
+    order: string,
+    title: string
   ) {
     // if(order=='asc'){
     return this.http.get(
       environment.API_URL +
         this.tasks +
-        `?status=${status}&user=${userId}&_start=${page}&_end=${end}&_limit=${size}&_sort=${sort}&_order=${order}`
+        `?status=${status}&user=${userId}&title_like=${title}&_start=${page}&_end=${end}&_limit=${size}&_sort=${sort}&_order=${order}`
     );
     // }else {
     //   return this.http.get(environment.API_URL+this.tasks+`?status=${status}&user=${userId}&_start=${page}&_end=${end}&_limit=${size}&_sort=${sort}&_order=${order}`)
