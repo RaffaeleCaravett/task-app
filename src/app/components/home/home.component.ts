@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/app/core/environment';
+import { firstImages, slider } from 'src/app/interfaces/interfaces';
 import { HomeService } from 'src/app/shared/services/home.service';
 
 @Component({
@@ -9,8 +10,8 @@ import { HomeService } from 'src/app/shared/services/home.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit{
-firstImages:any[]=[]
-slider:any[]=[]
+firstImages:firstImages[]=[]
+slider:slider[]=[]
 
 constructor(private homeService:HomeService,private toastr :ToastrService){}
 

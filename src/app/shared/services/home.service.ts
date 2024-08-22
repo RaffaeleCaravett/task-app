@@ -1,7 +1,5 @@
 import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
-import { BehaviorSubject } from "rxjs"
-import { AuthGuard } from "src/app/core/auth.guard"
 import { environment } from "src/app/core/environment"
 
 @Injectable({
