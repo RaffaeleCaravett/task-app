@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import { environment } from "src/app/core/environment"
+import { userLogged } from "src/app/interfaces/interfaces"
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,9 @@ export class OfficeService {
   private directions:string='directions'
   private tasksAttributes:string='tasksAttributes'
   private elements:string='elements'
-  private user:any={}
+  private user!:userLogged
+  isLoading:boolean=false
+
   constructor(private http:HttpClient) { }
 
 getStatus(){
@@ -20,11 +23,11 @@ return this.http.get(environment.API_URL+this.status)
 }
 
 getTasksByStatus(status:string,userId:string,page:number,end:number,size:number,sort:string,order:string){
-  if(order=='asc'){
-return this.http.get(environment.API_URL+this.tasks+`?status=${status}&user=${userId}&_start=${page}&_end=${end}&_limit=${size}&_sort=${sort}&_order=asc`)
-  }else {
-    return this.http.get(environment.API_URL+this.tasks+`?status=${status}&user=${userId}&_start=${page}&_end=${end}&_limit=${size}&_sort=-${sort}`)
-  }
+  // if(order=='asc'){
+return this.http.get(environment.API_URL+this.tasks+`?status=${status}&user=${userId}&_start=${page}&_end=${end}&_limit=${size}&_sort=${sort}&_order=${order}`)
+  // }else {
+  //   return this.http.get(environment.API_URL+this.tasks+`?status=${status}&user=${userId}&_start=${page}&_end=${end}&_limit=${size}&_sort=${sort}&_order=${order}`)
+  // }
 }
 getTasks(){
   return this.http.get(environment.API_URL+this.tasks)

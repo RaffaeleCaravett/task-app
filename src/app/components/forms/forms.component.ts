@@ -21,6 +21,7 @@ submittedSignup:boolean=false
 cities:cities[]=[]
 region!:regions[]
 cap!:cap[]
+isLoading:boolean=false
 
 constructor(private toastr:ToastrService,private formsService:FormsService,private router:Router,private officeService:OfficeService){}
 
@@ -86,9 +87,13 @@ this.toastr.error(environment.COMMON_ERROR_FORMS)
 
 sectionChange(value:string){
   if(value){
-this.section=value
-this.submittedLogin=false
-this.submittedSignup=false
+    this.isLoading=true
+    setTimeout(()=>{
+      this.isLoading=false
+      this.section=value
+      this.submittedLogin=false
+      this.submittedSignup=false
+    },2000)
   }
 }
 
