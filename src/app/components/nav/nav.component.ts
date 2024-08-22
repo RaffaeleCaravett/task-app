@@ -19,6 +19,6 @@ export class NavComponent {
   logOut() {
     localStorage.clear();
     this.formsService.authenticateUser(false);
-    this.router.navigate(['/forms']);
+    this.router.navigate(['/']);
   }
 }
