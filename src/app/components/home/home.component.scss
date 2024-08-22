@@ -110,6 +110,39 @@ $animationSpeed: 40s;
     blink-caret .75s step-end infinite;
 }
 
+.checklist{
+  transition: 1s;
+  &:hover{
+scale: 1.1;
+transition: 1s;
+  }
+}
+.hover-effect{
+  &:hover{
+    .bg-black{
+  transform: translateY(50px);
+transition: 2s;
+}
+    .bg-white{
+        transform: translateY(-50px);
+transition: 2s;
+    }
+  }
+  .bg-black{
+  transition: 2s;
+  }
+      .bg-white{
+  transition: 2s;
+      }
+}
+
+.text-danger{
+  transition: 1s;
+  &:hover{
+    color: rgb(255, 196, 0)!important;
+    transition: 1s;
+  }
+}
 @keyframes typing {
   from { width: 0 }
   to { width: 100% }
