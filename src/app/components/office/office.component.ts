@@ -325,10 +325,8 @@ if(modify){
     },
     error:(error:any)=>{
       this.toastr.error(error.message||environment.COMMON_ERROR)
-
     },
     complete:()=>{
-
     }
     })
 }
