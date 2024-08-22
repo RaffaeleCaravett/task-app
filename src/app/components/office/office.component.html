@@ -1,259 +1,440 @@
 <div class="container text-center py-5">
   <div class="row">
- <div class="col-md-12 pb-5">
-  <h1>A quick look at your statistics!</h1>
- </div>
- <div class="col-md-6 py-5">
-  <div echarts [options]="chartOption" class="demo-chart"></div>
- </div>
- <div class="col-md-6 py-5">
-  <div echarts [options]="option" class="demo-chart"></div>
- </div>
- <div class="col-md-12 pb-5">
-  <h1>Inserisci, Modifica, Completa o Elimina i tuoi task!</h1>
- </div>
- <div class="col-md-12 py-5">
-<form [formGroup]="taskForm" class="w-75 m-auto">
-  <div class="row">
-    <div class="col-md-8">
-<label class="p-4">Title</label>
-<input type="text" class="form-control" placeholder="Place a title" formControlName="title">
-<p class="text-danger" *ngIf="isTaskSubmitted&&taskForm.controls['title'].invalid">Campo invalido. Inserisci un valore.</p>
+    <div class="col-md-12 pb-5">
+      <h1>A quick look at your statistics!</h1>
     </div>
-      <div class="col-md-4">
-<label class="p-4">Status</label>
-<select class="form-select" formControlName="status">
-  <option value=""></option>
-  <option value="{{s.nome}}" *ngFor="let s of stati">{{s.nome}}</option>
-</select>
-<p class="text-danger" *ngIf="isTaskSubmitted&&taskForm.controls['status'].invalid">Campo invalido. Seleziona un valore.</p>
+    <div class="col-md-6 py-5">
+      <div echarts [options]="chartOption" class="demo-chart"></div>
     </div>
-    <div class="col-md-12">
-<label class="p-4">Description</label>
-<textarea class="form-control" placeholder="Place some text" formControlName="description"></textarea>
-<p class="text-danger" *ngIf="isTaskSubmitted&&taskForm.controls['description'].invalid">Campo invalido. Inserisci un valore.</p>
+    <div class="col-md-6 py-5">
+      <div echarts [options]="option" class="demo-chart"></div>
     </div>
-    <div class="col-md-12 py-4">
-      <button class="btn" type="button" (click)="postTask()">Aggiungi task</button>
+    <div class="col-md-12 pb-5">
+      <h1>Inserisci, Modifica, Completa o Elimina i tuoi task!</h1>
     </div>
-  </div>
-</form>
- </div>
- <div class="col-md-4 p-2">
-  <div class="border rounded shadow-sm">
- <p class="fs-5 bg-success p-2 fw-bold rounded-top">
-    Unstarded
-  </p>
-  <ul *ngIf="isLoading else notLoadingUnstarted" class="p-4">
-<app-skeleton-loader Cwidth="w-50" Cheight="30"></app-skeleton-loader>
-<app-skeleton-loader Cwidth="w-100" Cheight="50"></app-skeleton-loader>
-<app-skeleton-loader Cwidth="w-100" Cheight="100"></app-skeleton-loader>
-<p>Caricando...</p>
-  </ul>
-  <ng-template #notLoadingUnstarted>
-    <ul class="p-4" (drop)="onDrop($event,'Unstarted')" (dragover)="onDragOver($event)">
-<li *ngFor="let t of tasksUnstarted index as i" class="text-start p-0 m-0" [draggable]="true" (click)="selectedTask=t" (dragstart)="onDragStart(t)">
-  <p class="m-1 bg-light rounded title">{{t.title}}</p>
-  <p class="m-1 bg-light rounded">{{t.status}}</p>
-  <p class="m-1 bg-light rounded py-2" id="U{{i}}">{{formatCodeToHtml(t.description,'U',i)}}</p>
-</li>
-<li *ngIf="!tasksUnstarted||tasksUnstarted.length==0">Still no tasks</li>
-<p class="pt-5">Want to search?</p>
-<hr>
-<div *ngIf="tasksUnstarted&&tasksUnstarted.length>0" class="pt-5">
-  <form [formGroup]="searchUnstartedTask" *ngIf="!unstartedSearching else unSearch">
-    <div class="row">
-  <div class="col-md-12 py-2">
-<label> Pagina</label><br>
-<input type="number" class="w-50" formControlName="page">
-<p *ngIf="searchUnstartedTask.controls['page'].value<0" class="text-danger">Inserisci un valore superiore o uguale allo 0</p>
-  </div>
-  <div class="col-md-4 py-2">
-<label> Elementi</label><br>
-<select formControlName="size">
-  <option value=""></option>
-  <option value="{{e.value}}" *ngFor="let e of elements">{{e.value}}</option>
-</select>
-  </div>
-  <div class="col-md-4 py-2">
-<label>Ordine</label><br>
-    <select formControlName="sort">
-  <option value=""></option>
-  <option value="{{t.value}}" *ngFor="let t of taskAttributes">{{t.value}}</option>
-</select>
-  </div>
-  <div class="col-md-4 py-2">
-    <label>Direzione</label><br>
-    <select formControlName="order">
-      <option value=""></option>
-  <option value="{{d.value}}" *ngFor="let d of directions">{{d.value}}</option>
-</select>
-  </div>
-</div>
-<div class="col-md-12 py-2">
-  <button class="btn" type="button" (click)="getTasks(searchUnstartedTask.controls['page'].value,
-  searchUnstartedTask.controls['size'].value,
-  searchUnstartedTask.controls['sort'].value,
-  searchUnstartedTask.controls['order'].value,
-  'Unstarted')">
-    Cerca
-  </button>
-</div>
-  </form>
-<ng-template #unSearch>
-  <div class="w-100">
-    <mat-spinner class="m-auto"></mat-spinner>
-  </div>
-</ng-template>
-</div>
-    </ul>
-  </ng-template>
-  </div>
- </div>
- <div class="col-md-4 p-2">
-  <div class="border rounded shadow-sm">
- <p class="fs-5 bg-warning p-2 fw-bold rounded-top">
-In Progress
-  </p>
-  <ul *ngIf="isLoading else notLoadingInProgress" class="p-4">
-    <app-skeleton-loader Cwidth="w-50" Cheight="30"></app-skeleton-loader>
-    <app-skeleton-loader Cwidth="w-100" Cheight="50"></app-skeleton-loader>
-<app-skeleton-loader Cwidth="w-100" Cheight="100"></app-skeleton-loader>
-<p>Caricando...</p>
-  </ul>
-  <ng-template #notLoadingInProgress>
-    <ul class="p-4" (drop)="onDrop($event,'In Progress')" (dragover)="onDragOver($event)">
-<li *ngFor="let t of tasksInProgress index as i" class="text-start p-0 m-0" [draggable]="true" (click)="selectedTask=t" (dragstart)="onDragStart(t)">
-    <p class="m-1 bg-light rounded title">{{t.title}}</p>
-  <p class="m-1 bg-light rounded">{{t.status}}</p>
-  <p class="m-1 bg-light rounded py-2" id="I{{i}}">{{formatCodeToHtml(t.description,'I',i)}}</p>
-</li>
-<li *ngIf="!tasksInProgress||tasksInProgress.length==0">Still no tasks</li>
-<p class="pt-5">Want to search?</p>
-<hr>
-<div *ngIf="tasksInProgress&&tasksInProgress.length>0" class="pt-5">
-  <form [formGroup]="searchInProgressTask" *ngIf="!inProgressSearching else inSearch">
-    <div class="row">
-  <div class="col-md-12 py-2">
-<label> Pagina</label><br>
-<input type="number" class="w-50" formControlName="page">
-<p *ngIf="searchInProgressTask.controls['page'].value<0" class="text-danger">Inserisci un valore superiore o uguale allo 0</p>
-  </div>
-  <div class="col-md-4 py-2">
-<label> Elementi</label><br>
-<select formControlName="size">
-  <option value=""></option>
-  <option value="{{e.value}}" *ngFor="let e of elements">{{e.value}}</option>
-</select>
-  </div>
-  <div class="col-md-4 py-2">
-<label>Ordine</label><br>
-    <select formControlName="sort">
-  <option value=""></option>
-  <option value="{{t.value}}" *ngFor="let t of taskAttributes">{{t.value}}</option>
-</select>
-  </div>
-  <div class="col-md-4 py-2">
-    <label>Direzione</label><br>
-    <select formControlName="order">
-      <option value=""></option>
-  <option value="{{d.value}}" *ngFor="let d of directions">{{d.value}}</option>
-</select>
-  </div>
-</div>
-<div class="col-md-12 py-2">
-  <button class="btn" type="button" (click)="getTasks(searchInProgressTask.controls['page'].value,
-  searchInProgressTask.controls['size'].value,
-  searchInProgressTask.controls['sort'].value,
-  searchInProgressTask.controls['order'].value,
-  'In Progress')">
-    Cerca
-  </button>
-</div>
-  </form>
-  <ng-template #inSearch>
-    <div class="w-100">
-      <mat-spinner class="m-auto"></mat-spinner>
+    <div class="col-md-12 py-5">
+      <form [formGroup]="taskForm" class="w-75 m-auto">
+        <div class="row">
+          <div class="col-md-8">
+            <label class="p-4">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Place a title"
+              formControlName="title"
+            />
+            <p
+              class="text-danger"
+              *ngIf="isTaskSubmitted && taskForm.controls['title'].invalid"
+            >
+              Campo invalido. Inserisci un valore.
+            </p>
+          </div>
+          <div class="col-md-4">
+            <label class="p-4">Status</label>
+            <select class="form-select" formControlName="status">
+              <option value=""></option>
+              <option value="{{ s.nome }}" *ngFor="let s of stati">
+                {{ s.nome }}
+              </option>
+            </select>
+            <p
+              class="text-danger"
+              *ngIf="isTaskSubmitted && taskForm.controls['status'].invalid"
+            >
+              Campo invalido. Seleziona un valore.
+            </p>
+          </div>
+          <div class="col-md-12">
+            <label class="p-4">Description</label>
+            <textarea
+              class="form-control"
+              placeholder="Place some text"
+              formControlName="description"
+            ></textarea>
+            <p
+              class="text-danger"
+              *ngIf="
+                isTaskSubmitted && taskForm.controls['description'].invalid
+              "
+            >
+              Campo invalido. Inserisci un valore.
+            </p>
+          </div>
+          <div class="col-md-12 py-4">
+            <button class="btn" type="button" (click)="postTask()">
+              Aggiungi task
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
-  </ng-template>
-</div>
-    </ul>
-  </ng-template>
-  </div>
- </div>
- <div class="col-md-4 p-2">
-  <div class="border rounded shadow-sm">
-  <p class="fs-5 bg-danger p-2 fw-bold rounded-top">
-Completed
-  </p>
-  <ul *ngIf="isLoading else notLoadingComplete" class="p-4">
-    <app-skeleton-loader Cwidth="w-50" Cheight="30"></app-skeleton-loader>
-    <app-skeleton-loader Cwidth="w-100" Cheight="50"></app-skeleton-loader>
-<app-skeleton-loader Cwidth="w-100" Cheight="100"></app-skeleton-loader>
-<p>Caricando...</p>
-  </ul>
-  <ng-template #notLoadingComplete>
-    <ul class="p-4" (drop)="onDrop($event,'Completed')" (dragover)="onDragOver($event)">
-<li *ngFor="let t of tasksCompleted index as i" class="text-start p-0 m-0" [draggable]="true" (click)="selectedTask=t" (dragstart)="onDragStart(t)">
-<p class="m-1 bg-light rounded title">{{t.title}}</p>
-  <p class="m-1 bg-light rounded">{{t.status}}</p>
-  <p class="m-1 bg-light rounded py-2" id="C{{i}}">{{formatCodeToHtml(t.description,'C',i)}}</p>
-</li>
-<li *ngIf="!tasksCompleted||tasksCompleted.length==0">Still no tasks</li>
-<p class="pt-5">Want to search?</p>
-<hr>
-<div *ngIf="tasksCompleted&&tasksCompleted.length>0" class="pt-5">
-  <form [formGroup]="searchCompletedTask" *ngIf="!completedSearching else cmSearch">
-    <div class="row">
-  <div class="col-md-12 py-2">
-<label> Pagina</label><br>
-<input type="number"  formControlName="page" class="w-50">
-<p *ngIf="searchCompletedTask.controls['page'].value<0" class="text-danger">Inserisci un valore superiore o uguale allo 0</p>
-  </div>
-  <div class="col-md-4 py-2">
-<label> Elementi</label><br>
-<select formControlName="size">
-  <option value=""></option>
-  <option value="{{e.value}}" *ngFor="let e of elements">{{e.value}}</option>
-</select>
-  </div>
-  <div class="col-md-4 py-2">
-<label>Ordine</label><br>
-    <select formControlName="sort">
-  <option value=""></option>
-  <option value="{{t.value}}" *ngFor="let t of taskAttributes">{{t.value}}</option>
-</select>
-  </div>
-  <div class="col-md-4 py-2">
-    <label>Direzione</label><br>
-    <select formControlName="order">
-      <option value=""></option>
-  <option value="{{d.value}}" *ngFor="let d of directions">{{d.value}}</option>
-</select>
-  </div>
-</div>
-<div class="col-md-12 py-2">
-  <button class="btn" type="button" (click)="getTasks(searchCompletedTask.controls['page'].value,
-  searchCompletedTask.controls['size'].value,
-  searchCompletedTask.controls['sort'].value,
-  searchCompletedTask.controls['order'].value,
-  'Completed')">
-    Cerca
-  </button>
-</div>
-  </form>
-  <ng-template #cmSearch>
-    <div class="w-100">
-      <mat-spinner class="m-auto"></mat-spinner>
+    <div class="col-md-4 p-2">
+      <div class="border rounded shadow-sm">
+        <p class="fs-5 bg-success p-2 fw-bold rounded-top">Unstarded</p>
+        <ul *ngIf="isLoading; else notLoadingUnstarted" class="p-4">
+          <app-skeleton-loader Cwidth="w-50" Cheight="30"></app-skeleton-loader>
+          <app-skeleton-loader
+            Cwidth="w-100"
+            Cheight="50"
+          ></app-skeleton-loader>
+          <app-skeleton-loader
+            Cwidth="w-100"
+            Cheight="100"
+          ></app-skeleton-loader>
+          <p>Caricando...</p>
+        </ul>
+        <ng-template #notLoadingUnstarted>
+          <ul
+            class="p-4"
+            (drop)="onDrop($event, 'Unstarted')"
+            (dragover)="onDragOver($event)"
+          >
+            <li
+              *ngFor="let t of tasksUnstarted; index as i"
+              class="text-start p-0 m-0"
+              [draggable]="true"
+              (click)="selectedTask = t"
+              (dragstart)="onDragStart(t)"
+            >
+              <p class="m-1 bg-light rounded title">{{ t.title }}</p>
+              <p class="m-1 bg-light rounded">{{ t.status }}</p>
+              <p class="m-1 bg-light rounded py-2" id="U{{ i }}">
+                {{ formatCodeToHtml(t.description, "U", i) }}
+              </p>
+            </li>
+            <li *ngIf="!tasksUnstarted || tasksUnstarted.length == 0">
+              Still no tasks
+            </li>
+            <p class="pt-5">Want to search?</p>
+            <hr />
+            <div
+              *ngIf="tasksUnstarted && tasksUnstarted.length > 0"
+              class="pt-5"
+            >
+              <form
+                [formGroup]="searchUnstartedTask"
+                *ngIf="!unstartedSearching; else unSearch"
+              >
+                <div class="row">
+                  <div class="col-md-12 py-2">
+                    <label> Pagina</label><br />
+                    <input type="number" class="w-50" formControlName="page" />
+                    <p
+                      *ngIf="searchUnstartedTask.controls['page'].value < 0"
+                      class="text-danger"
+                    >
+                      Inserisci un valore superiore o uguale allo 0
+                    </p>
+                  </div>
+                  <div class="col-md-4 py-2">
+                    <label> Elementi</label><br />
+                    <select formControlName="size">
+                      <option value=""></option>
+                      <option value="{{ e.value }}" *ngFor="let e of elements">
+                        {{ e.value }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col-md-4 py-2">
+                    <label>Ordine</label><br />
+                    <select formControlName="sort">
+                      <option value=""></option>
+                      <option
+                        value="{{ t.value }}"
+                        *ngFor="let t of taskAttributes"
+                      >
+                        {{ t.value }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col-md-4 py-2">
+                    <label>Direzione</label><br />
+                    <select formControlName="order">
+                      <option value=""></option>
+                      <option
+                        value="{{ d.value }}"
+                        *ngFor="let d of directions"
+                      >
+                        {{ d.value }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-12 py-2">
+                  <button
+                    class="btn"
+                    type="button"
+                    (click)="
+                      getTasks(
+                        searchUnstartedTask.controls['page'].value,
+                        searchUnstartedTask.controls['size'].value,
+                        searchUnstartedTask.controls['sort'].value,
+                        searchUnstartedTask.controls['order'].value,
+                        'Unstarted'
+                      )
+                    "
+                  >
+                    Cerca
+                  </button>
+                </div>
+              </form>
+              <ng-template #unSearch>
+                <div class="w-100">
+                  <mat-spinner class="m-auto"></mat-spinner>
+                </div>
+              </ng-template>
+            </div>
+          </ul>
+        </ng-template>
+      </div>
     </div>
-  </ng-template>
-</div>
-    </ul>
-  </ng-template>
-  </div>
- </div>
- <div class="col-md-12 py-5" *ngIf="selectedTask">
-  <app-task [task]="selectedTask" [stati]="stati" (selectedTask)="updateSelectedTask($event)"></app-task>
- </div>
+    <div class="col-md-4 p-2">
+      <div class="border rounded shadow-sm">
+        <p class="fs-5 bg-warning p-2 fw-bold rounded-top">In Progress</p>
+        <ul *ngIf="isLoading; else notLoadingInProgress" class="p-4">
+          <app-skeleton-loader Cwidth="w-50" Cheight="30"></app-skeleton-loader>
+          <app-skeleton-loader
+            Cwidth="w-100"
+            Cheight="50"
+          ></app-skeleton-loader>
+          <app-skeleton-loader
+            Cwidth="w-100"
+            Cheight="100"
+          ></app-skeleton-loader>
+          <p>Caricando...</p>
+        </ul>
+        <ng-template #notLoadingInProgress>
+          <ul
+            class="p-4"
+            (drop)="onDrop($event, 'In Progress')"
+            (dragover)="onDragOver($event)"
+          >
+            <li
+              *ngFor="let t of tasksInProgress; index as i"
+              class="text-start p-0 m-0"
+              [draggable]="true"
+              (click)="selectedTask = t"
+              (dragstart)="onDragStart(t)"
+            >
+              <p class="m-1 bg-light rounded title">{{ t.title }}</p>
+              <p class="m-1 bg-light rounded">{{ t.status }}</p>
+              <p class="m-1 bg-light rounded py-2" id="I{{ i }}">
+                {{ formatCodeToHtml(t.description, "I", i) }}
+              </p>
+            </li>
+            <li *ngIf="!tasksInProgress || tasksInProgress.length == 0">
+              Still no tasks
+            </li>
+            <p class="pt-5">Want to search?</p>
+            <hr />
+            <div
+              *ngIf="tasksInProgress && tasksInProgress.length > 0"
+              class="pt-5"
+            >
+              <form
+                [formGroup]="searchInProgressTask"
+                *ngIf="!inProgressSearching; else inSearch"
+              >
+                <div class="row">
+                  <div class="col-md-12 py-2">
+                    <label> Pagina</label><br />
+                    <input type="number" class="w-50" formControlName="page" />
+                    <p
+                      *ngIf="searchInProgressTask.controls['page'].value < 0"
+                      class="text-danger"
+                    >
+                      Inserisci un valore superiore o uguale allo 0
+                    </p>
+                  </div>
+                  <div class="col-md-4 py-2">
+                    <label> Elementi</label><br />
+                    <select formControlName="size">
+                      <option value=""></option>
+                      <option value="{{ e.value }}" *ngFor="let e of elements">
+                        {{ e.value }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col-md-4 py-2">
+                    <label>Ordine</label><br />
+                    <select formControlName="sort">
+                      <option value=""></option>
+                      <option
+                        value="{{ t.value }}"
+                        *ngFor="let t of taskAttributes"
+                      >
+                        {{ t.value }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col-md-4 py-2">
+                    <label>Direzione</label><br />
+                    <select formControlName="order">
+                      <option value=""></option>
+                      <option
+                        value="{{ d.value }}"
+                        *ngFor="let d of directions"
+                      >
+                        {{ d.value }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-12 py-2">
+                  <button
+                    class="btn"
+                    type="button"
+                    (click)="
+                      getTasks(
+                        searchInProgressTask.controls['page'].value,
+                        searchInProgressTask.controls['size'].value,
+                        searchInProgressTask.controls['sort'].value,
+                        searchInProgressTask.controls['order'].value,
+                        'In Progress'
+                      )
+                    "
+                  >
+                    Cerca
+                  </button>
+                </div>
+              </form>
+              <ng-template #inSearch>
+                <div class="w-100">
+                  <mat-spinner class="m-auto"></mat-spinner>
+                </div>
+              </ng-template>
+            </div>
+          </ul>
+        </ng-template>
+      </div>
+    </div>
+    <div class="col-md-4 p-2">
+      <div class="border rounded shadow-sm">
+        <p class="fs-5 bg-danger p-2 fw-bold rounded-top">Completed</p>
+        <ul *ngIf="isLoading; else notLoadingComplete" class="p-4">
+          <app-skeleton-loader Cwidth="w-50" Cheight="30"></app-skeleton-loader>
+          <app-skeleton-loader
+            Cwidth="w-100"
+            Cheight="50"
+          ></app-skeleton-loader>
+          <app-skeleton-loader
+            Cwidth="w-100"
+            Cheight="100"
+          ></app-skeleton-loader>
+          <p>Caricando...</p>
+        </ul>
+        <ng-template #notLoadingComplete>
+          <ul
+            class="p-4"
+            (drop)="onDrop($event, 'Completed')"
+            (dragover)="onDragOver($event)"
+          >
+            <li
+              *ngFor="let t of tasksCompleted; index as i"
+              class="text-start p-0 m-0"
+              [draggable]="true"
+              (click)="selectedTask = t"
+              (dragstart)="onDragStart(t)"
+            >
+              <p class="m-1 bg-light rounded title">{{ t.title }}</p>
+              <p class="m-1 bg-light rounded">{{ t.status }}</p>
+              <p class="m-1 bg-light rounded py-2" id="C{{ i }}">
+                {{ formatCodeToHtml(t.description, "C", i) }}
+              </p>
+            </li>
+            <li *ngIf="!tasksCompleted || tasksCompleted.length == 0">
+              Still no tasks
+            </li>
+            <p class="pt-5">Want to search?</p>
+            <hr />
+            <div
+              *ngIf="tasksCompleted && tasksCompleted.length > 0"
+              class="pt-5"
+            >
+              <form
+                [formGroup]="searchCompletedTask"
+                *ngIf="!completedSearching; else cmSearch"
+              >
+                <div class="row">
+                  <div class="col-md-12 py-2">
+                    <label> Pagina</label><br />
+                    <input type="number" formControlName="page" class="w-50" />
+                    <p
+                      *ngIf="searchCompletedTask.controls['page'].value < 0"
+                      class="text-danger"
+                    >
+                      Inserisci un valore superiore o uguale allo 0
+                    </p>
+                  </div>
+                  <div class="col-md-4 py-2">
+                    <label> Elementi</label><br />
+                    <select formControlName="size">
+                      <option value=""></option>
+                      <option value="{{ e.value }}" *ngFor="let e of elements">
+                        {{ e.value }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col-md-4 py-2">
+                    <label>Ordine</label><br />
+                    <select formControlName="sort">
+                      <option value=""></option>
+                      <option
+                        value="{{ t.value }}"
+                        *ngFor="let t of taskAttributes"
+                      >
+                        {{ t.value }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col-md-4 py-2">
+                    <label>Direzione</label><br />
+                    <select formControlName="order">
+                      <option value=""></option>
+                      <option
+                        value="{{ d.value }}"
+                        *ngFor="let d of directions"
+                      >
+                        {{ d.value }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-12 py-2">
+                  <button
+                    class="btn"
+                    type="button"
+                    (click)="
+                      getTasks(
+                        searchCompletedTask.controls['page'].value,
+                        searchCompletedTask.controls['size'].value,
+                        searchCompletedTask.controls['sort'].value,
+                        searchCompletedTask.controls['order'].value,
+                        'Completed'
+                      )
+                    "
+                  >
+                    Cerca
+                  </button>
+                </div>
+              </form>
+              <ng-template #cmSearch>
+                <div class="w-100">
+                  <mat-spinner class="m-auto"></mat-spinner>
+                </div>
+              </ng-template>
+            </div>
+          </ul>
+        </ng-template>
+      </div>
+    </div>
+    <div class="col-md-12 py-5" *ngIf="selectedTask">
+      <app-task
+        [task]="selectedTask"
+        [stati]="stati"
+        (selectedTask)="updateSelectedTask($event)"
+      ></app-task>
+    </div>
   </div>
 </div>

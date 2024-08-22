@@ -1,47 +1,78 @@
 <div class="container">
   <div class="row border rounded shadow">
     <div class="col-md-12 text-end">
-<button class="btn" type="button" (click)="close()">
-  ❌
-</button>
+      <button class="btn" type="button" (click)="close()">❌</button>
     </div>
     <div class="col-md-12">
-      <h1>Task - {{task.id}}</h1>
+      <h1>Task - {{ task.id }}</h1>
       <form [formGroup]="taskForm" class="w-75 m-auto">
         <div class="row">
           <div class="col-md-8">
-      <label class="p-4">Title</label>
-      <input type="text" class="form-control" placeholder="Place a title" formControlName="title" (input)="updatedTitle=taskForm.controls['title'].value">
-      <p class="text-danger" *ngIf="taskForm.controls['title'].invalid">Campo invalido. Inserisci un valore.</p>
+            <label class="p-4">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Place a title"
+              formControlName="title"
+              (input)="updatedTitle = taskForm.controls['title'].value"
+            />
+            <p class="text-danger" *ngIf="taskForm.controls['title'].invalid">
+              Campo invalido. Inserisci un valore.
+            </p>
           </div>
-            <div class="col-md-4">
-      <label class="p-4">Status</label>
-      <select class="form-select" formControlName="status">
-        <option value=""></option>
-        <option value="{{s.nome}}" *ngFor="let s of stati">{{s.nome}}</option>
-      </select>
-      <p class="text-danger" *ngIf="taskForm.controls['status'].invalid">Campo invalido. Seleziona un valore.</p>
+          <div class="col-md-4">
+            <label class="p-4">Status</label>
+            <select class="form-select" formControlName="status">
+              <option value=""></option>
+              <option value="{{ s.nome }}" *ngFor="let s of stati">
+                {{ s.nome }}
+              </option>
+            </select>
+            <p class="text-danger" *ngIf="taskForm.controls['status'].invalid">
+              Campo invalido. Seleziona un valore.
+            </p>
           </div>
           <div class="col-md-12">
-      <label class="p-4">Description</label>
-      <textarea class="form-control" placeholder="Place some text" formControlName="description"></textarea>
-      <p class="text-danger" *ngIf="taskForm.controls['description'].invalid">Campo invalido. Inserisci un valore.</p>
+            <label class="p-4">Description</label>
+            <textarea
+              class="form-control"
+              placeholder="Place some text"
+              formControlName="description"
+            ></textarea>
+            <p
+              class="text-danger"
+              *ngIf="taskForm.controls['description'].invalid"
+            >
+              Campo invalido. Inserisci un valore.
+            </p>
           </div>
           <div class="col-md-12 py-4">
-            <button class="btn" type="button" (click)="putTask()">Modifica task</button>
-            <button class="btn btn-danger" type="button" (click)="deleteTask(task.id)">Cancella task</button>
+            <button class="btn" type="button" (click)="putTask()">
+              Modifica task
+            </button>
+            <button
+              class="btn btn-danger"
+              type="button"
+              (click)="deleteTask(task.id)"
+            >
+              Cancella task
+            </button>
           </div>
         </div>
       </form>
       <p>Oppure</p>
-      <hr>
+      <hr />
       <h1>Modifica la descrizione del tuo task.</h1>
-      <p >*Ricordati che se lascerai anche solo un carattere nel WYSIWYG Editor la tua descrizione attuale verrà sostituita col testo del WYSIWYG Editor.</p>
-  <quill-editor
-  placeholder="Enter Text"
-  [modules]="quillConfig"
-  (onSelectionChanged)="onSelectionChanged($event)"
-  (onContentChanged)="onContentChanged($event)"></quill-editor>
+      <p>
+        *Ricordati che se lascerai anche solo un carattere nel WYSIWYG Editor la
+        tua descrizione attuale verrà sostituita col testo del WYSIWYG Editor.
+      </p>
+      <quill-editor
+        placeholder="Enter Text"
+        [modules]="quillConfig"
+        (onSelectionChanged)="onSelectionChanged($event)"
+        (onContentChanged)="onContentChanged($event)"
+      ></quill-editor>
     </div>
   </div>
 </div>
