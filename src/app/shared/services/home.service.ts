@@ -6,6 +6,11 @@ import { environment } from 'src/app/core/environment';
   providedIn: 'root',
 })
 export class HomeService {
+
+  /*
+  Service che utilizzo per il componente home fontamentalmente per recuperare alcuni dati fondamentali per l'html.
+  */
+
   private slider: string = 'slider';
   private firstImages: string = 'firstImages';
 

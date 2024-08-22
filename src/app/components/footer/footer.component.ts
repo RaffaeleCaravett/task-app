@@ -7,9 +7,12 @@ import { FormsService } from 'src/app/shared/services/forms.service';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
+  /*Typicized variables */
   images: any[] = [];
   background!:boolean
-constructor(
+
+  /*Dependency Injection */
+  constructor(
   private formsService:FormsService
 )
 {
@@ -17,7 +20,7 @@ constructor(
     this.background = data;
   });
 }
-
+  /*On Init lifecycle */
   ngOnInit(): void {
     this.images = [
       {

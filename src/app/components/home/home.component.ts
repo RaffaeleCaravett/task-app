@@ -11,9 +11,15 @@ import { HomeService } from 'src/app/shared/services/home.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+
+  /*
+  In questo componente effettuo delle chiamate http e le sottoscrivo gestendo gli stati delle stesse.
+  */
+  /*typicized variables*/
   firstImages: firstImages[] = [];
   slider: slider[] = [];
   background!:boolean
+  /*dependency injection*/
   constructor(
     private homeService: HomeService,
     private toastr: ToastrService,
@@ -23,12 +29,12 @@ export class HomeComponent implements OnInit {
       this.background = data;
     });
   }
-
+  /*On Init lifecicle*/
   ngOnInit(): void {
     localStorage.setItem('location', '/');
     this.getElements();
   }
-
+  /*get things to display in html method*/
   getElements() {
     this.homeService.getFirstImages().subscribe({
       next: (data: any) => {

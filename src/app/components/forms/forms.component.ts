@@ -19,6 +19,13 @@ import { OfficeService } from 'src/app/shared/services/office.service';
   styleUrls: ['./forms.component.scss'],
 })
 export class FormsComponent implements OnInit {
+
+  /*
+  Componente che utilizzo per chiamate http relative al signup e al login.
+  */
+
+
+  /*Typicized variables */
   section: string = '';
   loginForm!: FormGroup;
   signupForm!: FormGroup;
@@ -29,6 +36,8 @@ export class FormsComponent implements OnInit {
   cap!: cap[];
   isLoading: boolean = false;
   background!:boolean
+
+  /*Dependency injection */
   constructor(
     private toastr: ToastrService,
     private formsService: FormsService,
@@ -39,7 +48,8 @@ export class FormsComponent implements OnInit {
       this.background=data
     })
   }
-
+  /*OnInit lifecycle */
+  /*Reactive Forms, Validators, Validators.pattern */
   ngOnInit(): void {
     this.section = 'login';
     this.loginForm = new FormGroup({
@@ -79,7 +89,7 @@ export class FormsComponent implements OnInit {
       complete: () => {},
     });
   }
-
+  /*Login method */
   login() {
     this.submittedLogin = true;
     if (this.loginForm.valid) {
@@ -113,7 +123,7 @@ export class FormsComponent implements OnInit {
       this.toastr.error(environment.COMMON_ERROR_FORMS);
     }
   }
-
+  /*switch from login to signup and viceversa */
   sectionChange(value: string) {
     if (value) {
       this.isLoading = true;
@@ -125,7 +135,7 @@ export class FormsComponent implements OnInit {
       }, 2000);
     }
   }
-
+  /*Signup method */
   register() {
     this.submittedSignup = true;
     if (this.signupForm.valid) {
@@ -171,7 +181,7 @@ export class FormsComponent implements OnInit {
       this.toastr.error(environment.COMMON_ERROR_FORMS);
     }
   }
-
+  /*get Region And Cap by City name method */
   getRegionAndCapByCityName(cityName: string) {
     if (cityName) {
       this.formsService.getRegionByCityName(cityName).subscribe({

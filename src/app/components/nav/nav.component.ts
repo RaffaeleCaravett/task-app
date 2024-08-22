@@ -9,9 +9,17 @@ import { FormsService } from 'src/app/shared/services/forms.service';
   styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent {
+  /*
+  Componente che utilizzo per gestire le rotte, la lingua e la modalità dell'applicazione.
+  */
+  /*typicized variable*/
   isUserAuthenticated: boolean = false;
-  background!:boolean
-  constructor(private formsService: FormsService, private router: Router, private translate:TranslateService
+  background!: boolean;
+  /*Dependency Injection*/
+  constructor(
+    private formsService: FormsService,
+    private router: Router,
+    private translate: TranslateService
   ) {
     this.formsService.isAuthenticatedUser.subscribe((data: boolean) => {
       this.isUserAuthenticated = data;
@@ -20,16 +28,18 @@ export class NavComponent {
       this.background = data;
     });
   }
-
+  /*logout method*/
   logOut() {
     localStorage.clear();
     this.formsService.authenticateUser(false);
     this.router.navigate(['/']);
   }
-switchLanguage(lang:'it'|'en'){
-  this.translate.use(lang)
-}
-setBg(){
-this.formsService.setBackground()
-}
+  /*switch language method */
+  switchLanguage(lang: 'it' | 'en') {
+    this.translate.use(lang);
+  }
+  /*set mod method*/
+  setBg() {
+    this.formsService.setBackground();
+  }
 }

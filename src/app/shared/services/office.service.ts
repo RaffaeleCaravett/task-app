@@ -7,6 +7,12 @@ import { Task, userLogged } from 'src/app/interfaces/interfaces';
   providedIn: 'root',
 })
 export class OfficeService {
+
+  /*
+  Service che utilizzo per le chiamate http principalmente dell'office component e dei children component di office. Strutturo logiche di paginazione, sorting, ordering,
+  filtering.
+  */
+
   private status: string = 'status';
   private tasks: string = 'tasks';
   private directions: string = 'directions';

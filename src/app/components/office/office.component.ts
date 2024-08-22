@@ -21,6 +21,13 @@ import { FormsService } from 'src/app/shared/services/forms.service';
   styleUrls: ['./office.component.scss'],
 })
 export class OfficeComponent implements OnInit {
+
+  /*
+  Questo componente lo utilizzo per gestire tutte le azioni relative ai tasks, recupero, modifica (con il child component), eliminazione, salvataggio.
+  Utilizzo anche altri componenti di librerie esterne e mi occupo di sottoscrivere alle richieste http dell'office service, e gestire gli stati di quest'ultime.
+  Utilizzo diversi ReactiveForms, con più Validators, fingo alcuni ritardi per mostrare lo skeleton, parametri opzionali, switch cases e e-charts.
+  */
+
   isLoading: boolean = false;
   taskForm!: FormGroup;
   stati: status[] = [];
