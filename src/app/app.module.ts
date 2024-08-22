@@ -25,7 +25,8 @@ import { ErrorInterceptor } from './core/error.interceptor';
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+
     ],
  providers:[
   {

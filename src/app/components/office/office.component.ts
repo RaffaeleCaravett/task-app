@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import Quill from 'quill';
 import { environment } from 'src/app/core/environment';
 import { directions, elements, status, Task, taskAttributes, Tasks, userLogged } from 'src/app/interfaces/interfaces';
 import { OfficeService } from 'src/app/shared/services/office.service';
+import { EChartsOption } from 'echarts';
 
 @Component({
   selector: 'app-office',
@@ -32,6 +32,8 @@ unstartedSearching:boolean=false
 inProgressSearching:boolean=false
 completedSearching:boolean=false
 draggedElement!:Tasks
+chartOption!: EChartsOption
+option!: EChartsOption
 constructor(private officeService:OfficeService,private toastr:ToastrService){}
 
   ngOnInit(): void {
@@ -158,7 +160,9 @@ this.toastr.error("Hai già caricato un task con questo titolo!")
       error:(error:any)=>{
         this.toastr.error(error.message||environment.COMMON_ERROR)
       },
-      complete:()=>{}
+      complete:()=>{
+        this.initOptions()
+      }
      })
      this.officeService.getTasksByStatus('In Progress',this.user?.id,(size||2)*(page||1)-(size||2),(size||2)*(page||1),size||2,sort||'id',order||'asc').subscribe({
       next:(tasks:any)=>{
@@ -169,7 +173,9 @@ this.toastr.error("Hai già caricato un task con questo titolo!")
       error:(error:any)=>{
         this.toastr.error(error.message||environment.COMMON_ERROR)
       },
-      complete:()=>{}
+      complete:()=>{
+        this.initOptions()
+      }
      })
      this.officeService.getTasksByStatus('Completed',this.user?.id,(size||2)*(page||1)-(size||2),(size||2)*(page||1),size||2,sort||'id',order||'asc').subscribe({
       next:(tasks:any)=>{
@@ -180,7 +186,9 @@ this.toastr.error("Hai già caricato un task con questo titolo!")
       error:(error:any)=>{
         this.toastr.error(error.message||environment.COMMON_ERROR)
       },
-      complete:()=>{}
+      complete:()=>{
+        this.initOptions()
+      }
      })
     }else{
 
@@ -227,7 +235,9 @@ this.tasksCompleted=tasks
         error:(error:any)=>{
           this.toastr.error(error.message||environment.COMMON_ERROR)
         },
-        complete:()=>{}
+        complete:()=>{
+          this.initOptions()
+        }
        })
     }
   }
@@ -336,5 +346,59 @@ if(modify){
 
  onDragOver(event:any){
 event.preventDefault()
+ }
+
+ initOptions(){
+  this.chartOption  = {
+    legend: {},
+    tooltip: {},
+    dataset: {
+      dimensions: ['product', 'title length', 'description length', 'status'],
+      source: [
+        { product: this.tasksUnstarted[0]?.title, 'title length': this.tasksUnstarted[0]?.title.length||1, 'description length': this.tasksUnstarted[0]?.description.length||1, 'status': 1 },
+        { product:this.tasksUnstarted[0]?.title, 'title length': this.tasksUnstarted[1]?.title.length||1, 'description length': this.tasksUnstarted[1]?.description.length||1, 'status': 1 },
+        { product: this.tasksInProgress[0]?.title, 'title length': this.tasksInProgress[0]?.title.length||1, 'description length': this.tasksInProgress[0]?.description.length||1, 'status': 2 },
+        { product: this.tasksCompleted[0]?.title, 'title length': this.tasksCompleted[0]?.title.length||1, 'description length': this.tasksCompleted[0]?.description.length||1, 'status': 3 }
+      ]
+    },
+    xAxis: { type: 'category' },
+    yAxis: {},
+    // Declare several bar series, each will be mapped
+    // to a column of dataset.source by default.
+    series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }]
+  };
+  this.option = {
+    title: {
+      text: 'Tasks data',
+      subtext: 'Real Data',
+      left: 'center'
+    },
+    tooltip: {
+      trigger: 'item'
+    },
+    legend: {
+      orient: 'vertical',
+      left: 'left'
+    },
+    series: [
+      {
+        name: 'Access From',
+        type: 'pie',
+        radius: '50%',
+        data: [
+          { value: this.tasksUnstarted.length,  name: 'Unstarted tasks' },
+          { value:  this.tasksInProgress.length, name: 'In Progress tasks' },
+          { value: this.tasksCompleted.length, name: 'Completed tasks' }
+        ],
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }
+    ]
+  };
  }
 }

@@ -10,6 +10,7 @@ import { ConfirmDeleteComponent } from 'src/app/shared/components/confirm-delete
 import { MatDialogModule } from '@angular/material/dialog'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { provideQuillConfig, QuillModule } from 'ngx-quill'
+import { NgxEchartsModule } from 'ngx-echarts';
 
 
 @NgModule({
@@ -30,7 +31,10 @@ import { provideQuillConfig, QuillModule } from 'ngx-quill'
         syntax: true,
       }
     }),
-    FormsModule
+    FormsModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    }),
   ],
   exports:[
     TaskComponent,
