@@ -12,8 +12,14 @@ import {
 import { ToastrModule, provideToastr } from 'ngx-toastr';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomeComponent } from './components/home/home.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { ErrorInterceptor } from './core/error.interceptor';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function createTransLoader(http:HttpClient){
+return new TranslateHttpLoader(http, './assets/i18n/','.json')
+}
 
 @NgModule({
   declarations: [
@@ -29,6 +35,15 @@ import { ErrorInterceptor } from './core/error.interceptor';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     HttpClientModule,
+    TranslateModule.forRoot({
+      defaultLanguage:'en',
+      useDefaultLang:true,
+      loader:{
+        provide:TranslateLoader,
+        useFactory:createTransLoader,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     {

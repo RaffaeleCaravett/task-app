@@ -1,7 +1,7 @@
 <div class="container text-center py-5">
   <div class="row">
     <div class="col-md-12 pb-5">
-      <h1>A quick look at your statistics!</h1>
+      <h1>{{"titleOffice"| translate}}</h1>
     </div>
     <div class="col-md-6 py-5">
       <div echarts [options]="chartOption" class="demo-chart"></div>
@@ -10,13 +10,13 @@
       <div echarts [options]="option" class="demo-chart"></div>
     </div>
     <div class="col-md-12 pb-5">
-      <h1>Inserisci, Modifica, Completa o Elimina i tuoi task!</h1>
+      <h1>{{"secondTitleOffice"| translate}}</h1>
     </div>
     <div class="col-md-12 py-5">
       <form [formGroup]="taskForm" class="w-75 m-auto">
         <div class="row">
           <div class="col-md-8">
-            <label class="p-4">Title</label>
+            <label class="p-4">{{"taskForm.title"|translate}}</label>
             <input
               type="text"
               class="form-control"
@@ -31,7 +31,7 @@
             </p>
           </div>
           <div class="col-md-4">
-            <label class="p-4">Status</label>
+            <label class="p-4">{{"taskForm.status"|translate}}</label>
             <select class="form-select" formControlName="status">
               <option value=""></option>
               <option value="{{ s.nome }}" *ngFor="let s of stati">
@@ -46,7 +46,7 @@
             </p>
           </div>
           <div class="col-md-12">
-            <label class="p-4">Description</label>
+            <label class="p-4">{{"taskForm.description"|translate}}</label>
             <textarea
               class="form-control"
               placeholder="Place some text"
@@ -63,7 +63,7 @@
           </div>
           <div class="col-md-12 py-4">
             <button class="btn" type="button" (click)="postTask()">
-              Aggiungi task
+              {{"buttons.addTask"|translate}}
             </button>
           </div>
         </div>
@@ -71,7 +71,7 @@
     </div>
     <div class="col-md-4 p-2">
       <div class="border rounded shadow-sm">
-        <p class="fs-5 bg-success p-2 fw-bold rounded-top">Unstarded</p>
+        <p class="fs-5 bg-success p-2 fw-bold rounded-top">{{"taskState.unstarted"|translate}}</p>
         <ul *ngIf="isLoading; else notLoadingUnstarted" class="p-4">
           <app-skeleton-loader Cwidth="w-50" Cheight="30"></app-skeleton-loader>
           <app-skeleton-loader
@@ -82,7 +82,7 @@
             Cwidth="w-100"
             Cheight="100"
           ></app-skeleton-loader>
-          <p>Caricando...</p>
+          <p>{{"searching"|translate}}</p>
         </ul>
         <ng-template #notLoadingUnstarted>
           <ul
@@ -104,9 +104,9 @@
               </p>
             </li>
             <li *ngIf="!tasksUnstarted || tasksUnstarted.length == 0">
-              Still no tasks
+              {{"taskForm.noTask"|translate}}
             </li>
-            <p class="pt-5">Want to search?</p>
+            <p class="pt-5"> {{"taskForm.want"|translate}}</p>
             <hr />
             <div
               *ngIf="tasksUnstarted && tasksUnstarted.length > 0"
@@ -118,7 +118,7 @@
               >
                 <div class="row">
                   <div class="col-md-12 py-2">
-                    <label> Pagina</label><br />
+                    <label>  {{"paginator.page"|translate}}</label><br />
                     <input type="number" class="w-50" formControlName="page" />
                     <p
                       *ngIf="searchUnstartedTask.controls['page'].value < 0"
@@ -128,7 +128,7 @@
                     </p>
                   </div>
                   <div class="col-md-4 py-2">
-                    <label> Elementi</label><br />
+                    <label> {{"paginator.size"|translate}}</label><br />
                     <select formControlName="size">
                       <option value=""></option>
                       <option value="{{ e.value }}" *ngFor="let e of elements">
@@ -137,7 +137,7 @@
                     </select>
                   </div>
                   <div class="col-md-4 py-2">
-                    <label>Ordine</label><br />
+                    <label>{{"paginator.order"|translate}}</label><br />
                     <select formControlName="sort">
                       <option value=""></option>
                       <option
@@ -149,7 +149,7 @@
                     </select>
                   </div>
                   <div class="col-md-4 py-2">
-                    <label>Direzione</label><br />
+                    <label>{{"paginator.sort"|translate}}</label><br />
                     <select formControlName="order">
                       <option value=""></option>
                       <option
@@ -175,7 +175,7 @@
                       )
                     "
                   >
-                    Cerca
+                  {{"buttons.search"|translate}}
                   </button>
                 </div>
               </form>
@@ -191,7 +191,7 @@
     </div>
     <div class="col-md-4 p-2">
       <div class="border rounded shadow-sm">
-        <p class="fs-5 bg-warning p-2 fw-bold rounded-top">In Progress</p>
+        <p class="fs-5 bg-warning p-2 fw-bold rounded-top">{{"taskState.inProgress"|translate}}</p>
         <ul *ngIf="isLoading; else notLoadingInProgress" class="p-4">
           <app-skeleton-loader Cwidth="w-50" Cheight="30"></app-skeleton-loader>
           <app-skeleton-loader
@@ -202,7 +202,7 @@
             Cwidth="w-100"
             Cheight="100"
           ></app-skeleton-loader>
-          <p>Caricando...</p>
+          <p>{{"searching"|translate}}</p>
         </ul>
         <ng-template #notLoadingInProgress>
           <ul
@@ -224,9 +224,9 @@
               </p>
             </li>
             <li *ngIf="!tasksInProgress || tasksInProgress.length == 0">
-              Still no tasks
+              {{"taskForm.noTask"|translate}}
             </li>
-            <p class="pt-5">Want to search?</p>
+            <p class="pt-5">{{"taskForm.want"|translate}}</p>
             <hr />
             <div
               *ngIf="tasksInProgress && tasksInProgress.length > 0"
@@ -238,7 +238,7 @@
               >
                 <div class="row">
                   <div class="col-md-12 py-2">
-                    <label> Pagina</label><br />
+                    <label> {{"paginator.page"|translate}}</label><br />
                     <input type="number" class="w-50" formControlName="page" />
                     <p
                       *ngIf="searchInProgressTask.controls['page'].value < 0"
@@ -248,7 +248,7 @@
                     </p>
                   </div>
                   <div class="col-md-4 py-2">
-                    <label> Elementi</label><br />
+                    <label> {{"paginator.size"|translate}}</label><br />
                     <select formControlName="size">
                       <option value=""></option>
                       <option value="{{ e.value }}" *ngFor="let e of elements">
@@ -257,7 +257,7 @@
                     </select>
                   </div>
                   <div class="col-md-4 py-2">
-                    <label>Ordine</label><br />
+                    <label> {{"paginator.order"|translate}}</label><br />
                     <select formControlName="sort">
                       <option value=""></option>
                       <option
@@ -269,7 +269,7 @@
                     </select>
                   </div>
                   <div class="col-md-4 py-2">
-                    <label>Direzione</label><br />
+                    <label> {{"paginator.sort"|translate}}</label><br />
                     <select formControlName="order">
                       <option value=""></option>
                       <option
@@ -295,7 +295,7 @@
                       )
                     "
                   >
-                    Cerca
+                   {{"buttons.search"|translate}}
                   </button>
                 </div>
               </form>
@@ -311,7 +311,7 @@
     </div>
     <div class="col-md-4 p-2">
       <div class="border rounded shadow-sm">
-        <p class="fs-5 bg-danger p-2 fw-bold rounded-top">Completed</p>
+        <p class="fs-5 bg-danger p-2 fw-bold rounded-top">{{"taskState.completed"|translate}}</p>
         <ul *ngIf="isLoading; else notLoadingComplete" class="p-4">
           <app-skeleton-loader Cwidth="w-50" Cheight="30"></app-skeleton-loader>
           <app-skeleton-loader
@@ -322,7 +322,7 @@
             Cwidth="w-100"
             Cheight="100"
           ></app-skeleton-loader>
-          <p>Caricando...</p>
+          <p>{{"searching"|translate}}</p>
         </ul>
         <ng-template #notLoadingComplete>
           <ul
@@ -344,9 +344,10 @@
               </p>
             </li>
             <li *ngIf="!tasksCompleted || tasksCompleted.length == 0">
-              Still no tasks
-            </li>
-            <p class="pt-5">Want to search?</p>
+              <li *ngIf="!tasksInProgress || tasksInProgress.length == 0">
+                {{"taskForm.noTask"|translate}}
+              </li>
+              <p class="pt-5">{{"taskForm.want"|translate}}</p>
             <hr />
             <div
               *ngIf="tasksCompleted && tasksCompleted.length > 0"
@@ -358,7 +359,7 @@
               >
                 <div class="row">
                   <div class="col-md-12 py-2">
-                    <label> Pagina</label><br />
+                    <label>  {{"paginator.page"|translate}}</label><br />
                     <input type="number" formControlName="page" class="w-50" />
                     <p
                       *ngIf="searchCompletedTask.controls['page'].value < 0"
@@ -368,7 +369,7 @@
                     </p>
                   </div>
                   <div class="col-md-4 py-2">
-                    <label> Elementi</label><br />
+                    <label>  {{"paginator.size"|translate}}</label><br />
                     <select formControlName="size">
                       <option value=""></option>
                       <option value="{{ e.value }}" *ngFor="let e of elements">
@@ -377,7 +378,7 @@
                     </select>
                   </div>
                   <div class="col-md-4 py-2">
-                    <label>Ordine</label><br />
+                    <label> {{"paginator.order"|translate}}</label><br />
                     <select formControlName="sort">
                       <option value=""></option>
                       <option
@@ -389,7 +390,7 @@
                     </select>
                   </div>
                   <div class="col-md-4 py-2">
-                    <label>Direzione</label><br />
+                    <label> {{"paginator.sort"|translate}}</label><br />
                     <select formControlName="order">
                       <option value=""></option>
                       <option
@@ -415,7 +416,7 @@
                       )
                     "
                   >
-                    Cerca
+                  {{"buttons.search"|translate}}
                   </button>
                 </div>
               </form>

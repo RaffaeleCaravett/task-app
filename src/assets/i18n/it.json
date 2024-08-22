@@ -1,0 +1,47 @@
+{
+  "titleHome":"Benvenuto nella task application per",
+  "titleForms":"Scopri il rivoluzionario modo di tracciare i task.",
+  "titleOffice":"Uno sguardo veloce alle tue statistiche!",
+  "titleFooter":"A mani basse, la migliore applicazione di task di sempre.",
+  "titleTask":"Modifica la descrizione del tuo task.",
+  "titleNav":"La migliore app di task management",
+  "titleDeleteTask":"Vuoi davvero eliminare il task con id",
+  "rigths":"Tutti i diritti riservati®",
+  "secondTitleOffice":"Inserisci, Modifica, Completa o Elimina i tuoi task!",
+  "taskForm":{
+    "title":"titolo",
+    "status":"stato",
+    "description":"descrizione",
+    "noTask":"Non ci sono task.",
+    "want":"Vuoi ricercare?"
+  },
+  "taskState":{
+    "unstarted":"Da fare",
+    "inProgress":"In corso",
+    "completed":"Completato"
+  },
+  "buttons":{
+    "search":"cerca",
+    "addTask":"Aggiungi task",
+    "putTask":"Modifica task",
+    "deleteTask":"Cancella task",
+    "register":"registrati",
+    "delete":"elimina",
+    "Back":"annulla"
+  },
+  "or":"oppure",
+  "taskAdvice":"Ricordati che se lascerai anche solo un carattere nel WYSIWYG Editor la tua descrizione attuale verrà sostituita col testo del WYSIWYG Editor.",
+  "paginator":{
+    "page":"pagina",
+    "size":"elementi",
+    "order":"ordine",
+    "sort":"direzione"
+  },
+  "signup":{
+  "name":"nome",
+   "surname":"cognome",
+  "city":"città",
+  "region":"regione"
+  },
+  "searching":"Caricando.."
+}

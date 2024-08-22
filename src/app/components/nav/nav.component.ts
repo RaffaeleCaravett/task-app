@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { FormsService } from 'src/app/shared/services/forms.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { FormsService } from 'src/app/shared/services/forms.service';
 export class NavComponent {
   isUserAuthenticated: boolean = false;
 
-  constructor(private formsService: FormsService, private router: Router) {
+  constructor(private formsService: FormsService, private router: Router, private translate:TranslateService
+  ) {
     this.formsService.isAuthenticatedUser.subscribe((data: boolean) => {
       this.isUserAuthenticated = data;
     });
@@ -21,4 +23,8 @@ export class NavComponent {
     this.formsService.authenticateUser(false);
     this.router.navigate(['/']);
   }
+switchLanguage(lang:'it'|'en'){
+  this.translate.use(lang)
+}
+
 }

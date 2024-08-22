@@ -11,7 +11,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { provideQuillConfig, QuillModule } from 'ngx-quill';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+
+export function createTransLoader(http:HttpClient){
+    return new TranslateHttpLoader(http, '../../assets/i18n/','.json')
+}
 @NgModule({
   declarations: [OfficeComponent, TaskComponent, ConfirmDeleteComponent],
   imports: [
@@ -30,6 +37,15 @@ import { NgxEchartsModule } from 'ngx-echarts';
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     }),
+    TranslateModule.forChild({
+      defaultLanguage:'en',
+      useDefaultLang:true,
+      loader:{
+        provide:TranslateLoader,
+        useFactory:createTransLoader,
+        deps: [HttpClient]
+      }
+    })
   ],
   exports: [TaskComponent, ConfirmDeleteComponent],
   providers: [

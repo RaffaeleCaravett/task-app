@@ -1,7 +1,7 @@
 <div class="container text-center py-5">
   <div class="row">
     <div class="col-md-12 py-5">
-      <h1>Scopri il rivoluzionario modo di tracciare i task.</h1>
+      <h1>{{"titleForms"| translate}}</h1>
     </div>
     <div class="col-md-12">
       <div class="row" *ngIf="section == 'login'; else signup">
@@ -67,7 +67,7 @@
                   (click)="sectionChange('signup')"
                   type="button"
                 >
-                  Register
+                 {{"buttons.register"|translate}}
                 </button>
               </div>
             </div>
@@ -97,7 +97,7 @@
             <form [formGroup]="signupForm" class="w-75 m-auto">
               <div class="row border rounded p-3">
                 <div class="col-md-12">
-                  <label class="py-3">Nome</label>
+                  <label class="py-3">{{"signup.name"|translate}}</label>
                   <input
                     type="text"
                     class="form-control"
@@ -114,7 +114,7 @@
                   </p>
                 </div>
                 <div class="col-md-12">
-                  <label class="py-3">Cognome</label>
+                  <label class="py-3">{{"signup.surname"|translate}}</label>
                   <input
                     type="text"
                     class="form-control"
@@ -131,7 +131,7 @@
                   </p>
                 </div>
                 <div class="col-md-12">
-                  <label class="py-3">Città</label>
+                  <label class="py-3">{{"signup.city"|translate}}</label>
                   <select
                     type="text"
                     class="form-select"
@@ -158,7 +158,7 @@
                   </p>
                 </div>
                 <div class="col-md-6">
-                  <label class="py-3">Regione</label>
+                  <label class="py-3">{{"signup.region"|translate}}</label>
                   <input
                     type="text"
                     class="form-control"
@@ -270,7 +270,7 @@
                   (click)="register()"
                   type="button"
                 >
-                  Signup
+                {{"buttons.register"|translate}}
                 </button>
                 <p>or</p>
                 <hr />

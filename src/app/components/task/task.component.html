@@ -8,7 +8,7 @@
       <form [formGroup]="taskForm" class="w-75 m-auto">
         <div class="row">
           <div class="col-md-8">
-            <label class="p-4">Title</label>
+            <label class="p-4">{{"taskForm.title"|translate}}</label>
             <input
               type="text"
               class="form-control"
@@ -21,7 +21,7 @@
             </p>
           </div>
           <div class="col-md-4">
-            <label class="p-4">Status</label>
+            <label class="p-4">{{"taskForm.status"|translate}}</label>
             <select class="form-select" formControlName="status">
               <option value=""></option>
               <option value="{{ s.nome }}" *ngFor="let s of stati">
@@ -33,7 +33,7 @@
             </p>
           </div>
           <div class="col-md-12">
-            <label class="p-4">Description</label>
+            <label class="p-4">{{"taskForm.description"|translate}}</label>
             <textarea
               class="form-control"
               placeholder="Place some text"
@@ -48,24 +48,23 @@
           </div>
           <div class="col-md-12 py-4">
             <button class="btn" type="button" (click)="putTask()">
-              Modifica task
+              {{"buttons.putTask"|translate}}
             </button>
             <button
               class="btn btn-danger"
               type="button"
               (click)="deleteTask(task.id)"
             >
-              Cancella task
-            </button>
+            {{"buttons.deleteTask"|translate}}
+          </button>
           </div>
         </div>
       </form>
-      <p>Oppure</p>
+      <p>{{"or"|translate}}</p>
       <hr />
-      <h1>Modifica la descrizione del tuo task.</h1>
+      <h1>{{"titleTask"|translate}}</h1>
       <p>
-        *Ricordati che se lascerai anche solo un carattere nel WYSIWYG Editor la
-        tua descrizione attuale verrà sostituita col testo del WYSIWYG Editor.
+        *{{"taskAdvice"|translate}}
       </p>
       <quill-editor
         placeholder="Enter Text"

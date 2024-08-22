@@ -1,0 +1,48 @@
+{
+  "titleHome":"Welcome to the task application for",
+  "titleForms":"Discover the revolutionary way to track tasks",
+  "titleOffice":"A quick look at your statistics!",
+  "titleFooter":"Hands down, the best task application ever.",
+  "titleTask":"Edit your task description.",
+  "titleNav":"The best task management app",
+  "titleDeleteTask":"Do you really want to delete task with id",
+  "rigths":"All rights reserved®",
+  "secondTitleOffice":"Add, edit, do or delete your tasks!",
+  "taskForm":{
+    "title":"title",
+    "status":"status",
+    "description":"description",
+    "noTask":"Still no tasks.",
+    "want":"Want to search?"
+  },
+  "taskState":{
+    "unstarted":"Unstarted",
+    "inProgress":"In Progress",
+    "completed":"Completed"
+  },
+  "buttons":{
+    "search":"search",
+    "addTask":"add task",
+    "putTask":"edit task",
+    "deleteTask":"delete task",
+    "register":"signup",
+    "delete":"delete",
+    "Back":"back"
+  },
+  "or":"or",
+  "taskAdvice":"Remember to clean the WYSIWYG Editor content or your description will be updated with the WYSIWYG Editor content.",
+  "paginator":{
+    "page":"page",
+    "size":"elements",
+    "order":"order",
+    "sort":"direction"
+  },
+  "signup":{
+  "name":"name",
+   "surname":"surname",
+  "city":"city",
+  "region":"region"
+  },
+   "searching":"Loading.."
+}
+
