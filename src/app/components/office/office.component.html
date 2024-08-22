@@ -368,8 +368,7 @@
                 {{ formatCodeToHtml(t.description, "C", i) }}
               </p>
             </li>
-            <li *ngIf="!tasksCompleted || tasksCompleted.length == 0">
-              <li *ngIf="!tasksInProgress || tasksInProgress.length == 0">
+              <li *ngIf="!tasksCompleted || tasksCompleted.length == 0">
                 {{"taskForm.noTask"|translate}}
               </li>
               <p class="pt-5">{{"taskForm.want"|translate}}</p>
