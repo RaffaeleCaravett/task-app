@@ -4,141 +4,292 @@
       <h1>Scopri il rivoluzionario modo di tracciare i task.</h1>
     </div>
     <div class="col-md-12">
-      <div class="row" *ngIf="section=='login' else signup">
-<div class="col-md-6" >
-<p class="fs-3">
-  Login
-</p>
-<p class="fs-5">
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
-    </div>
-    <div class="col-md-6" *ngIf="!isLoading else spinner">
-<form [formGroup]="loginForm" class="w-75 m-auto">
-  <div class="row border rounded p-3">
-    <div class="col-md-12">
-      <label class="py-3">Email</label>
-  <input type="email" class="form-control" formControlName="email">
-  <p class="text-danger" *ngIf="submittedLogin==true&&loginForm.controls['email'].invalid">
-    Campo invalido, prova ad inserire un valore tipo 'a&#64;a.com'
-  </p>
+      <div class="row" *ngIf="section == 'login'; else signup">
+        <div class="col-md-6">
+          <p class="fs-3">Login</p>
+          <p class="fs-5">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </div>
+        <div class="col-md-6" *ngIf="!isLoading; else spinner">
+          <form [formGroup]="loginForm" class="w-75 m-auto">
+            <div class="row border rounded p-3">
+              <div class="col-md-12">
+                <label class="py-3">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  formControlName="email"
+                />
+                <p
+                  class="text-danger"
+                  *ngIf="
+                    submittedLogin == true &&
+                    loginForm.controls['email'].invalid
+                  "
+                >
+                  Campo invalido, prova ad inserire un valore tipo 'a&#64;a.com'
+                </p>
+              </div>
+              <div class="col-md-12">
+                <label class="py-3">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  formControlName="password"
+                />
+                <p
+                  class="text-danger"
+                  *ngIf="
+                    submittedLogin == true &&
+                    loginForm.controls['password'].invalid
+                  "
+                >
+                  Valore invalido, prova ad inserire almeno 6 caratteri.
+                </p>
+                <button
+                  class="btn btn-dark w-75 m-auto my-3"
+                  type="button"
+                  (click)="login()"
+                >
+                  Login
+                </button>
+                <p>or</p>
+                <hr />
+                <button
+                  class="btn"
+                  (click)="sectionChange('signup')"
+                  type="button"
+                >
+                  Register
+                </button>
+              </div>
             </div>
-            <div class="col-md-12">
-  <label class="py-3">Password</label>
-  <input type="password" class="form-control" formControlName="password">
-  <p class="text-danger" *ngIf="submittedLogin==true&&loginForm.controls['password'].invalid">
-    Valore invalido, prova ad inserire almeno 6 caratteri.
-  </p>
-  <button class="btn btn-dark w-75 m-auto my-3" type="button" (click)="login()">Login</button>
-  <p>or</p>
-  <hr>
-  <button class="btn" (click)="sectionChange('signup')" type="button">Register</button>
-  </div>
-  </div>
-</form>
-    </div>
-    <ng-template #spinner class="p-0 m-0">
-      <div class="col-md-6">
-        <mat-spinner class="m-auto"></mat-spinner>
-      </div>
-    </ng-template>
+          </form>
+        </div>
+        <ng-template #spinner class="p-0 m-0">
+          <div class="col-md-6">
+            <mat-spinner class="m-auto"></mat-spinner>
+          </div>
+        </ng-template>
       </div>
       <ng-template #signup>
-<div class="row">
-<div class="col-md-6" >
-  <p class="fs-3">
-    Signup
-  </p>
-<p class="fs-5">
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
-    </div>
-    <div class="col-md-6" *ngIf="!isLoading else spinner">
-<form [formGroup]="signupForm" class="w-75 m-auto">
-    <div class="row border rounded p-3">
-      <div class="col-md-12">
-        <label class="py-3">Nome</label>
-    <input type="text" class="form-control" formControlName="nome">
-    <p class="text-danger" *ngIf="submittedSignup==true&&signupForm.controls['nome'].invalid">
-      Campo invalido, inserisci un valore.
-    </p>
-              </div>
-              <div class="col-md-12">
-                <label class="py-3">Cognome</label>
-            <input type="text" class="form-control" formControlName="cognome">
-            <p class="text-danger" *ngIf="submittedSignup==true&&signupForm.controls['cognome'].invalid">
-              Campo invalido, inserisci un valore.
+        <div class="row">
+          <div class="col-md-6">
+            <p class="fs-3">Signup</p>
+            <p class="fs-5">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
             </p>
-                      </div>
-                      <div class="col-md-12">
-                        <label class="py-3">Città</label>
-                    <select type="text" class="form-select" formControlName="citta" (change)="getRegionAndCapByCityName(signupForm.controls['citta'].value)">
+          </div>
+          <div class="col-md-6" *ngIf="!isLoading; else spinner">
+            <form [formGroup]="signupForm" class="w-75 m-auto">
+              <div class="row border rounded p-3">
+                <div class="col-md-12">
+                  <label class="py-3">Nome</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="nome"
+                  />
+                  <p
+                    class="text-danger"
+                    *ngIf="
+                      submittedSignup == true &&
+                      signupForm.controls['nome'].invalid
+                    "
+                  >
+                    Campo invalido, inserisci un valore.
+                  </p>
+                </div>
+                <div class="col-md-12">
+                  <label class="py-3">Cognome</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="cognome"
+                  />
+                  <p
+                    class="text-danger"
+                    *ngIf="
+                      submittedSignup == true &&
+                      signupForm.controls['cognome'].invalid
+                    "
+                  >
+                    Campo invalido, inserisci un valore.
+                  </p>
+                </div>
+                <div class="col-md-12">
+                  <label class="py-3">Città</label>
+                  <select
+                    type="text"
+                    class="form-select"
+                    formControlName="citta"
+                    (change)="
+                      getRegionAndCapByCityName(
+                        signupForm.controls['citta'].value
+                      )
+                    "
+                  >
                     <option value=""></option>
-                    <option value="{{c.name}}" *ngFor="let c of cities">{{c.name}}</option>
-                    </select>
-                    <p class="text-danger" *ngIf="submittedSignup==true&&signupForm.controls['citta'].invalid">
-                      Campo invalido, seleziona un valore.
-                    </p>
-                              </div>
-                              <div class="col-md-6">
-                                <label class="py-3">Regione</label>
-                            <input type="text" class="form-control" formControlName="regione" readonly>
-                            <p class="text-danger" *ngIf="submittedSignup==true&&signupForm.controls['regione'].invalid">
-                              Campo invalido.
-                            </p>
-                                      </div>
-                                      <div class="col-md-6">
-                                        <label class="py-3">Cap</label>
-                                    <input type="text" class="form-control" formControlName="cap" readonly>
-                                    <p class="text-danger" *ngIf="submittedSignup==true&&signupForm.controls['cap'].invalid">
-                                      Campo invalido.
-                                    </p>
-                                              </div>
-      <div class="col-md-12">
-        <label class="py-3">Email</label>
-    <input type="email" class="form-control" formControlName="email">
-    <p class="text-danger" *ngIf="submittedSignup==true&&signupForm.controls['email'].invalid">
-      Campo invalido, prova ad inserire un valore tipo 'a&#64;a.com'
-    </p>
+                    <option value="{{ c.name }}" *ngFor="let c of cities">
+                      {{ c.name }}
+                    </option>
+                  </select>
+                  <p
+                    class="text-danger"
+                    *ngIf="
+                      submittedSignup == true &&
+                      signupForm.controls['citta'].invalid
+                    "
+                  >
+                    Campo invalido, seleziona un valore.
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <label class="py-3">Regione</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="regione"
+                    readonly
+                  />
+                  <p
+                    class="text-danger"
+                    *ngIf="
+                      submittedSignup == true &&
+                      signupForm.controls['regione'].invalid
+                    "
+                  >
+                    Campo invalido.
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <label class="py-3">Cap</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="cap"
+                    readonly
+                  />
+                  <p
+                    class="text-danger"
+                    *ngIf="
+                      submittedSignup == true &&
+                      signupForm.controls['cap'].invalid
+                    "
+                  >
+                    Campo invalido.
+                  </p>
+                </div>
+                <div class="col-md-12">
+                  <label class="py-3">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    formControlName="email"
+                  />
+                  <p
+                    class="text-danger"
+                    *ngIf="
+                      submittedSignup == true &&
+                      signupForm.controls['email'].invalid
+                    "
+                  >
+                    Campo invalido, prova ad inserire un valore tipo
+                    'a&#64;a.com'
+                  </p>
+                </div>
+                <div class="col-md-12">
+                  <label class="py-3">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    formControlName="password"
+                  />
+                  <p
+                    class="text-danger"
+                    *ngIf="
+                      submittedSignup == true &&
+                      signupForm.controls['password'].invalid
+                    "
+                  >
+                    Valore invalido, prova ad inserire almeno 6 caratteri.
+                  </p>
+                </div>
+                <div class="col-md-6 py-4">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="sex"
+                    id="flexRadioDefault1"
+                    value="M"
+                    formControlName="sex"
+                  />
+                  <label class="form-check-label px-3" for="flexRadioDefault1">
+                    M
+                  </label>
+                </div>
+                <div class="col-md-6 py-4">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="sex"
+                    id="flexRadioDefault2"
+                    value="F"
+                    formControlName="sex"
+                  />
+                  <label class="form-check-label px-3" for="flexRadioDefault2">
+                    F
+                  </label>
+                </div>
+                <div class="col-md-12">
+                  <p
+                    class="text-danger"
+                    *ngIf="
+                      submittedSignup == true &&
+                      signupForm.controls['sex'].invalid
+                    "
+                  >
+                    Campo invalido, seleziona un valore.
+                  </p>
+                </div>
+                <button
+                  class="btn btn-dark w-75 m-auto my-3"
+                  (click)="register()"
+                  type="button"
+                >
+                  Signup
+                </button>
+                <p>or</p>
+                <hr />
+                <button
+                  class="btn"
+                  (click)="sectionChange('login')"
+                  type="button"
+                >
+                  Login
+                </button>
               </div>
-              <div class="col-md-12">
-    <label class="py-3">Password</label>
-    <input type="password" class="form-control" formControlName="password">
-    <p class="text-danger" *ngIf="submittedSignup==true&&signupForm.controls['password'].invalid">
-      Valore invalido, prova ad inserire almeno 6 caratteri.
-    </p>
-    </div>
-    <div class="col-md-6 py-4">
-      <input class="form-check-input" type="radio" name="sex" id="flexRadioDefault1" value="M" formControlName="sex">
-      <label class="form-check-label px-3" for="flexRadioDefault1">
-        M
-      </label>
-    </div>
-    <div class="col-md-6 py-4">
-      <input class="form-check-input" type="radio" name="sex" id="flexRadioDefault2" value="F" formControlName="sex">
-      <label class="form-check-label px-3" for="flexRadioDefault2">
-        F
-      </label>
-    </div>
-    <div class="col-md-12">
-      <p class="text-danger" *ngIf="submittedSignup==true&&signupForm.controls['sex'].invalid">
-        Campo invalido, seleziona un valore.
-      </p>
-    </div>
-    <button class="btn btn-dark w-75 m-auto my-3" (click)="register()" type="button">Signup</button>
-    <p>or</p>
-    <hr>
-    <button class="btn" (click)="sectionChange('login')" type="button">Login</button>
-
-    </div>
-  </form>
-    </div>
-    <ng-template #spinner class="p-0 m-0">
-      <div class="col-md-6">
-        <mat-spinner class="m-auto"></mat-spinner>
-      </div>
-    </ng-template>
-</div>
+            </form>
+          </div>
+          <ng-template #spinner class="p-0 m-0">
+            <div class="col-md-6">
+              <mat-spinner class="m-auto"></mat-spinner>
+            </div>
+          </ng-template>
+        </div>
       </ng-template>
     </div>
   </div>

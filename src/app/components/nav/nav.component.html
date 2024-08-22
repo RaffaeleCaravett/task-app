@@ -5,29 +5,21 @@
         <h1>The best task management application</h1>
       </div>
       <div class="col-md-4">
-        <a routerLink="/" >
-          Home
-        </a>
+        <a routerLink="/"> Home </a>
       </div>
-      <div class="col-md-4" *ngIf="isUserAuthenticated else emptyCol4">
-        <a routerLink="/office" >
-          Office
-        </a>
+      <div class="col-md-4" *ngIf="isUserAuthenticated; else emptyCol4">
+        <a routerLink="/office"> Office </a>
       </div>
       <ng-template #emptyCol4>
         <div class="col-md-4"></div>
       </ng-template>
-      <div class="col-md-4" *ngIf="!isUserAuthenticated else logout">
-        <a routerLink="/forms" >
-          Login / Signup
-        </a>
+      <div class="col-md-4" *ngIf="!isUserAuthenticated; else logout">
+        <a routerLink="/forms"> Login / Signup </a>
       </div>
       <ng-template #logout>
-        <div class="col-md-4" *ngIf="isUserAuthenticated else logout">
-          <a routerLink="/forms" >
-            <button class="btn" (click)="logOut()">
-              Logout
-            </button>
+        <div class="col-md-4" *ngIf="isUserAuthenticated; else logout">
+          <a routerLink="/forms">
+            <button class="btn" (click)="logOut()">Logout</button>
           </a>
         </div>
       </ng-template>

@@ -7,48 +7,48 @@ import { HomeService } from 'src/app/shared/services/home.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit{
-firstImages:firstImages[]=[]
-slider:slider[]=[]
+export class HomeComponent implements OnInit {
+  firstImages: firstImages[] = [];
+  slider: slider[] = [];
 
-constructor(private homeService:HomeService,private toastr :ToastrService){}
+  constructor(
+    private homeService: HomeService,
+    private toastr: ToastrService
+  ) {}
 
-ngOnInit(): void {
+  ngOnInit(): void {
+    localStorage.setItem('location', '/');
+    this.getElements();
+  }
 
-  localStorage.setItem('location','/')
-this.getElements()
-}
-
-getElements(){
-  this.homeService.getFirstImages().subscribe({
-    next:(data:any)=>{
-if(data&&data[0]){
-  this.firstImages=data
-}else{
-  this.toastr.error(environment.COMMON_ERROR)
-}
-    },
-    error:(error)=>{
-      this.toastr.error(error.message||environment.COMMON_ERROR)
-
-    },
-    complete:()=>{}
-  })
-  this.homeService.getSlider().subscribe({
-    next:(data:any)=>{
-if(data&&data[0]){
-  this.slider=data
-}else{
-  this.toastr.error(environment.COMMON_ERROR)
-}
-    },
-    error:(error)=>{
-      this.toastr.error(error.message||environment.COMMON_ERROR)
-
-    },
-    complete:()=>{}
-  })
-}
+  getElements() {
+    this.homeService.getFirstImages().subscribe({
+      next: (data: any) => {
+        if (data && data[0]) {
+          this.firstImages = data;
+        } else {
+          this.toastr.error(environment.COMMON_ERROR);
+        }
+      },
+      error: (error) => {
+        this.toastr.error(error.message || environment.COMMON_ERROR);
+      },
+      complete: () => {},
+    });
+    this.homeService.getSlider().subscribe({
+      next: (data: any) => {
+        if (data && data[0]) {
+          this.slider = data;
+        } else {
+          this.toastr.error(environment.COMMON_ERROR);
+        }
+      },
+      error: (error) => {
+        this.toastr.error(error.message || environment.COMMON_ERROR);
+      },
+      complete: () => {},
+    });
+  }
 }
