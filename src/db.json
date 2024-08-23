@@ -200,14 +200,14 @@
     {
       "title": "title",
       "description": "<p>a <strong>description</strong></p>",
-      "status": "Completed",
+      "status": "Unstarted",
       "user": "-EYsLwq",
       "id": "D0IxHuk"
     },
     {
       "title": "new title 1",
       "description": "some text",
-      "status": "Completed",
+      "status": "Unstarted",
       "user": "-EYsLwq",
       "id": "gY4pH9F"
     },

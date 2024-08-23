@@ -37,7 +37,7 @@ export class FormsComponent implements OnInit {
   cap!: cap[];
   isLoading: boolean = false;
   background!:boolean
-
+  loremIpsumDesc:string=''
   /*Dependency injection */
   constructor(
     private toastr: ToastrService,
@@ -53,6 +53,7 @@ export class FormsComponent implements OnInit {
   /*OnInit lifecycle */
   /*Reactive Forms, Validators, Validators.pattern */
   ngOnInit(): void {
+    this.loremIpsumDesc=environment.LOREM_IPSUM_DESC
     this.section = 'login';
     this.loginForm = new FormGroup({
       email: new FormControl('', [

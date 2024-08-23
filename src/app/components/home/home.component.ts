@@ -19,6 +19,8 @@ export class HomeComponent implements OnInit {
   firstImages: firstImages[] = [];
   slider: slider[] = [];
   background!:boolean
+  loremIpsumDesc:string=''
+  loremIpsumTitle:string=''
   /*dependency injection*/
   constructor(
     private homeService: HomeService,
@@ -31,6 +33,8 @@ export class HomeComponent implements OnInit {
   }
   /*On Init lifecicle*/
   ngOnInit(): void {
+    this.loremIpsumDesc=environment.LOREM_IPSUM_DESC
+    this.loremIpsumTitle=environment.LOREM_IPSUM_TITLE
     localStorage.setItem('location', '/');
     this.getElements();
   }
