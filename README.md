@@ -25,3 +25,8 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## App structure and infos
+
+I've used Angular 16 to do this application. I've opted for a classic structure. Defining some classic routes and some that load component in 'lazy loading'. This to make the app lighter. I've also created some reusable components and used the parent&child tool to pass
+data between components with a relation.
