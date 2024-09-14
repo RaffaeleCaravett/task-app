@@ -29,4 +29,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## App structure and infos
 
 I've used Angular 16 to do this application. I've opted for a classic structure. Defining some classic routes and some that load component in 'lazy loading'. This to make the app lighter. I've also created some reusable components and used the parent&child tool to pass
-data between components with a relation.
+data between components with a relation. I wrote the business logic in servers, each server has a specified component and with d.i. is possible to use its methods.
+I made some reactiveforms too, and handled http requests with observables. Some times i've needed to use BehaviorSubjects too. There's a logic of authentication, the possibility to turn on and off the light mode, the translation of the entire application, the skeleton component, quill component, spinner and so on.
